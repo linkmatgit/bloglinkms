@@ -24,8 +24,6 @@ body {
     font-family: $font;
     font-size: 16px;
     scroll-margin: 100px 0 0 0;
-    line-height: 1.6;
-
 }
 
 @import "modules/header";
@@ -33,6 +31,4 @@ body {
 @import "modules/btn";
 @import "modules/form";
 @import "modules/card";
-
-
-@import "pages/profil";
+@import "pages/auth";

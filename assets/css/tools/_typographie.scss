@@ -2,3 +2,12 @@ $font: 'open-sans', sans-serif;
 $font-alt: 'Roboto', sans-serif;
 
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&family=Roboto:wght@400;500;700&display=swap');
+
+%h1,
+.h1 {
+  font-size: 30px;
+}
+
+.user__tabs  {
+  display: flex;
+}
