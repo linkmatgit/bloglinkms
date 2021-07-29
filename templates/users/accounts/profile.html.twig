@@ -2,7 +2,32 @@
 
 {% block body %}
             <div class="header__profil">
-                <div class="container">798</div>
+                <div class="container pt3">
+                  <div class="profil__main">
+                    <div class="profil__header__avatar">
+                      <img src="{{ user | avatar }}" alt="">
+                    </div>
+                  <div class="profil-header__body">
+                    <h1 class="h1">Mon Compte</h1>
+                    <p>{{ user.createdAt | date("M-d-Y") }}</p>
+
+                  </div>
+
+                  </div>
+                </div>
+                  <div class="user__tabs">
+                    <div  class="container">
+                    <ul class="tabs_profils">
+                      <li><a href="#">General</a></li>
+                      <li><a href="#">Edition</a></li>
+                      <li><a href="#">Vos Work in Progress</a></li>
+                      <li><a href="#">Vos Mods</a></li>
+                      <li><a href="#">Administration</a></li>
+                      <li><a href="#">Communauty Manager</a></li>
+                    </ul>
+                    </div>
+                  </div>
+
 
             </div>
 {% endblock %}

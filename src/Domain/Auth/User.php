@@ -2,7 +2,7 @@
 
 namespace App\Domain\Auth;
 
-use App\Repository\UserRepository;
+use App\Domain\Auth\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
