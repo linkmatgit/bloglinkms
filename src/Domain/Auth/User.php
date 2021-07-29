@@ -10,7 +10,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-#[UniqueEntity(fields: "username", message: 'Un autre persone utilise deja ce pseudonyme')]
+#[UniqueEntity(fields: "name", message: 'Un autre persone utilise deja ce pseudonyme')]
 #[UniqueEntity(fields: "email", message: 'Un autre persone utilise deja cette Email')]
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: "`user`")]
