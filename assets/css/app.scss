@@ -1,5 +1,9 @@
 :root {
-    --background: #FFFFFF;
+    --background: #f7fafb;
+    --background-light: #ffffff;
+    --shadow: rgba(0, 0, 0, 0.2);
+    --card-footer: #f7fafd;
+    --card-padding: 16px;
     --space: 8px;
     --border: #d5e3ec;
     --primary: #3870E0;
@@ -11,6 +15,7 @@
 @import "tools/reset";
 @import "tools/functions";
 @import "tools/mixins";
+@import "tools/tools";
 @import "tools/layout";
 @import "tools/typographie";
 
@@ -27,3 +32,4 @@ body {
 @import "modules/login";
 @import "modules/btn";
 @import "modules/form";
+@import "modules/card";

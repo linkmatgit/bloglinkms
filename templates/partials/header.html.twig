@@ -5,13 +5,22 @@
             <li><a href="#">{{ icon('lines') }} Forum</a> </li>
             <li><a href="#">{{ icon('pen') }} Blog</a> </li>
             <li><a href="#">{{ icon('cog') }} WIP</a> </li>
-            <li><a href="#">{{ icon('cloud') }}Category</a> </li>
-            <li><a href="#">{{ icon('video') }}Tutoriel</a> </li>
+            <li><a href="#">{{ icon('cloud') }} Category</a> </li>
+            <li><a href="#">{{ icon('video') }} Tutoriel</a> </li>
 
         </ul>
         <ul class="header-side">
-            <li><a href="#">Se Connectée</a> </li>
-            <li><a href="#">S'inscrire</a> </li>
-        </ul>
+            {% if app.user %}
+            <li class="header__account"><a href="#">{{ icon('user') }}
+                    <span>{{ app.user.name }}</span></a> </li>
+
+            <li class="header__logout"><a href="{{ path('app_logout') }}">
+                    {{ icon('logout') }} <span>Se déconnecter</span>
+                </a> </li>
+
+            {% else %}
+            <li><a href="{{ path('app_login') }}">Se Connectée</a> </li>
+            <li><a href="{{ path('register') }}">S'inscrire</a> </li>
+        {% endif %}</ul>
     </nav>
 </header>

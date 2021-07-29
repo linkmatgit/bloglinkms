@@ -30,6 +30,18 @@
   }
 
 }
+%grid3,
+.grid3 {
+  width: 100%;
+  display: grid !important;
+  --gap: 2;
+  grid-gap: calc(var(--gap) * var(--space));
+  grid-template-columns: 1fr;
+
+  @include up(730) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
 
 %stack,
 .stack,
