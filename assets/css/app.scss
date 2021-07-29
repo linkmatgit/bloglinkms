@@ -2,6 +2,10 @@
     --background: #FFFFFF;
     --space: 8px;
     --border: #d5e3ec;
+    --primary: #3870E0;
+    --color: #121c42;
+    --color-light: #121c4299;
+    --color-inversed: #effbec;
 }
 
 @import "tools/reset";
@@ -14,7 +18,12 @@ body {
     background-color: var(--background);
     font-family: $font;
     font-size: 16px;
+    scroll-margin: 100px 0 0 0;
+    line-height: 1.6;
+
 }
 
 @import "modules/header";
 @import "modules/login";
+@import "modules/btn";
+@import "modules/form";

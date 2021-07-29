@@ -31,4 +31,17 @@
 
 }
 
+%stack,
+.stack,
+.stack-large {
+  --gap: 2;
+  display: grid !important;
+  grid-template-columns: 1fr;
+  align-content: flex-start;
+  grid-gap: calc(var(--gap) * var(--space));
+
+  & > * {
+    min-width: 0;
+  }
+}
 

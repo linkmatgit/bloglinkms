@@ -1,0 +1,66 @@
+
+label {
+  text-transform: uppercase;
+  font-weight: 300;
+  font-size: 0.85em;
+}
+input:disabled {
+  opacity: 0.7;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select,
+%input {
+  border: 1px solid var(--border);
+  background: var(--background);
+  border-radius: 3px;
+  color: var(--color);
+  padding: space(1.5) space(1);
+  display: block;
+  width: 100%;
+  outline: none;
+  min-height: 28px;
+}
+.form-group textarea {
+  min-height: 150px;
+}
+.form-group label {
+  display: block;
+  margin-bottom: space(1);
+}
+
+
+/**
+  FORM CHECK
+ */
+.form-checkboxes {
+  grid-column: 1 / -1;
+}
+
+.form-check {
+  cursor: pointer;
+  position: relative;
+}
+.form-check input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.form-check label {
+  cursor: pointer;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+.form-check label::before {
+  content: '';
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  margin-top: -3px;
+  border: 1px solid var(--border);
+  background: var(--background);
+  margin-right: space(1);
+}

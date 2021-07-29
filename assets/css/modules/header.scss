@@ -1,17 +1,26 @@
 :root {
   --border-header: var(--border);
 }
-
-.header  {
-  @extend %container;
+.header-nav li {
   display: flex;
   align-items: center;
+  height: 26px;
+  white-space: nowrap;
+}
+.header  {
+  @extend %container;
+  position: relative;
+  font-family: $font-alt;
   font-weight: 500;
   line-height: 1;
-  padding-top: calc(var(--space) * 6);
-  padding-bottom: calc(var(--space) * 3);
-
+  padding-top: space(6);
+  padding-bottom: space(3);
+  z-index: 5;
+  display: flex;
+  align-items: center;
   justify-content: space-between;
+  --border-header: var(--border);
+
 
   &::after {
     content: '';
@@ -27,19 +36,47 @@
     height: 1px;
   }
 }
-nav.header ul{
+.header ul {
   display: flex;
-  font-size: 22px;
-  margin-top: calc(var(--space) * 2);
+  align-items: center;
+}
+nav ul.header-side {
+  height: 26px;
+  margin-top: -5px;
+  margin-bottom: -5px;
+  flex-wrap: wrap;
+  overflow: hidden;
+}
+.header-nav > * + * {
+  margin-left: space(6);
+}
+.header svg {
+  width: 12px;
+  height: 12px;
+  margin-right: space(1);
+}
+.header__home svg {
+  width: 14px;
+}
+.header .header__home {
+  display: flex;
+  align-items: center;
+  height: 16px;
+  justify-content: flex-start;
+  border-right: 1px solid var(--border-header);
+  margin-right: space(2);
+  padding-right: space(1);
+  margin-top: 5px;
+  margin-bottom: 5px;
 
-  li {
-    margin-left: calc(var(--space) * 4);
+  // On rend le lien plus grand que le container pour le rendre plus facilement clickable
+  a {
+    height: 26px;
+    display: flex;
+    align-items: center;
   }
 }
 
-nav ul.header-side {
-  position: relative;
-  justify-content: flex-end;
-  text-align: left;
-  width: 100%;
+.header__home + li {
+  margin-left: 0;
 }

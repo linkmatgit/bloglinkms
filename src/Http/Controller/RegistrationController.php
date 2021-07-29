@@ -3,7 +3,7 @@
 namespace App\Http\Controller;
 
 use App\Domain\Auth\User;
-use App\Form\RegistrationFormType;
+use App\Http\Form\RegistrationFormType;
 use App\Repository\UserRepository;
 use App\Security\EmailVerifier;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
