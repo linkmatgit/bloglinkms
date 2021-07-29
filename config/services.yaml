@@ -31,3 +31,15 @@ services:
         tags: ['controller.service_arguments']
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+    App\Http\Admin\Firewall\AdminRequestListener:
+        arguments: ['%admin_prefix%']
+
+    Knp\Bundle\PaginatorBundle\Helper\Processor: ~
+
+    App\Http\Helper\Paginator\PaginatorInterface:
+        class: App\Http\Helper\Paginator\Paginator
+
+    App\Http\Twig\TwigAssetExtension:
+        arguments:
+            $assetPath: '%kernel.project_dir%/public/assets'
+            $env: '%kernel.environment%'
