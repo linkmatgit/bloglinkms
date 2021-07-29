@@ -1,0 +1,14 @@
+.register__page {
+ @extend %container;
+  @extend %grid2;
+}
+
+.form__register {
+
+
+}
+
+.form__register h1 {
+  font-size: 45px;
+  font-weight: 700;
+}

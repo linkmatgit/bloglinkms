@@ -1,0 +1,20 @@
+:root {
+    --background: #FFFFFF;
+    --space: 8px;
+    --border: #d5e3ec;
+}
+
+@import "tools/reset";
+@import "tools/functions";
+@import "tools/mixins";
+@import "tools/layout";
+@import "tools/typographie";
+
+body {
+    background-color: var(--background);
+    font-family: $font;
+    font-size: 16px;
+}
+
+@import "modules/header";
+@import "modules/login";
