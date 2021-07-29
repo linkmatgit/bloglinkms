@@ -12,7 +12,7 @@ doctrine:
         mappings:
             App\Domain:
                 is_bundle: false
-                type: annotation
+                type: attribute
                 dir: '%kernel.project_dir%/src/Domain'
                 prefix: 'App\Domain'
                 alias: Domain

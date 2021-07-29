@@ -3,49 +3,53 @@
 namespace App\Domain\Auth;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-/**
- * @ORM\Entity(repositoryClass=UserRepository::class)
- * @ORM\Table(name="`user`")
- * @UniqueEntity(fields={"name"}, message="There is already an account with this name")
- */
+#[UniqueEntity(fields: "username", message: 'Un autre persone utilise deja ce pseudonyme')]
+#[UniqueEntity(fields: "email", message: 'Un autre persone utilise deja cette Email')]
+#[ORM\Entity(repositoryClass: UserRepository::class)]
+#[ORM\Table(name: "`user`")]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
-    private $id;
 
-    /**
-     * @ORM\Column(type="string", length=180, unique=true)
-     */
-    private $name;
-    /**
-     * @ORM\Column(type="string", length=180, unique=true)
-     */
-    private $email;
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: Types::INTEGER)]
+    private ?int $id = null;
 
-    /**
-     * @ORM\Column(type="json")
-     */
-    private $roles = [];
+    #[ORM\Column(type: Types::STRING, length: 180, unique: true)]
+    private string $name;
 
-    /**
-     * @var string The hashed password
-     * @ORM\Column(type="string")
-     */
-    private $password;
+    #[ORM\Column(type: Types::STRING, length: 180, unique: true)]
+    private string $email;
 
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $isVerified = false;
+    #[ORM\Column(type: Types::JSON)]
+    private array $roles = ['ROLE_USER'];
+
+    #[ORM\Column(type: 'datetime', nullable: true)]
+    private ?\DateTimeInterface $createdAt = null;
+
+    #[ORM\Column(type: 'datetime', nullable: true)]
+    private ?\DateTimeInterface $updatedAt = null;
+
+    #[ORM\Column(type: Types::STRING)]
+    private string $password;
+
+
+
+    public function __construct()
+    {
+
+        $this->info = new ArrayCollection();
+    }
+
+    #[ORM\Column(type: Types::BOOLEAN)]
+    private bool $isVerified = false;
 
     public function getId(): ?int
     {
@@ -83,20 +87,62 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getEmail()
+    public function getEmail(): string
     {
         return $this->email;
     }
 
     /**
-     * @param mixed $email
+     * @param string $email
+     * @return User
      */
-    public function setEmail($email): void
+    public function setEmail(string $email): User
     {
         $this->email = $email;
+        return $this;
     }
+
+
+
+    /**
+     * @return \DateTimeInterface|null
+     */
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * @param \DateTimeInterface|null $createdAt
+     * @return User
+     */
+    public function setCreatedAt(?\DateTimeInterface $createdAt): User
+    {
+        $this->createdAt = $createdAt;
+        return $this;
+    }
+
+    /**
+     * @return \DateTimeInterface|null
+     */
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * @param \DateTimeInterface|null $updatedAt
+     * @return User
+     */
+    public function setUpdatedAt(?\DateTimeInterface $updatedAt): User
+    {
+        $this->updatedAt = $updatedAt;
+        return $this;
+    }
+
+
 
     /**
      * @see UserInterface
@@ -163,4 +209,5 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
 }
