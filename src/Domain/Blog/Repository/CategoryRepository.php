@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domain\Blog\Repository;
 
 use App\Domain\Blog\Entity\Category;
