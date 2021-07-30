@@ -1012,6 +1012,11 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
+"@orchidjs/sifter@^0.7.4":
+  version "0.7.5"
+  resolved "https://registry.yarnpkg.com/@orchidjs/sifter/-/sifter-0.7.5.tgz#9e9e584e8c68b944fae1333c3d4024685a126875"
+  integrity sha512-Now0sJCIv/PC0RHpWRvKkr/n0vn7sMs7S+Dq58hv2PWSfCNu6d6SufAWDo04C6w9EX43xp7o43W1fxdFPqG+ng==
+
 "@prefresh/babel-plugin@0.4.1":
   version "0.4.1"
   resolved "https://registry.yarnpkg.com/@prefresh/babel-plugin/-/babel-plugin-0.4.1.tgz#c4e843f7c5e56c15f1185979a8559c893ffb4a35"
@@ -4141,6 +4146,13 @@ to-regex-range@^5.0.1:
   integrity sha512-65P7iz6X5yEr1cwcgvQxbbIw7Uk3gOy5dIdtZ4rDveLqhrdJP+Li/Hx6tyK0NEb+2GCyneCMJiGqrADCSNk8sQ==
   dependencies:
     is-number "^7.0.0"
+
+tom-select@^1.7.7:
+  version "1.7.7"
+  resolved "https://registry.yarnpkg.com/tom-select/-/tom-select-1.7.7.tgz#acd6933ded61b5c90db4af50236035f1aa2065e5"
+  integrity sha512-JDm+iHpOtU9q1JgE3CtrHMT+qytVazPXzcXUnpRkwbULJ4Cn/AUjY2AtsJOgcmvDJj97rldEO/Rd74gtcHnaGQ==
+  dependencies:
+    "@orchidjs/sifter" "^0.7.4"
 
 trim-trailing-lines@^1.0.0, trim-trailing-lines@^1.1.0:
   version "1.1.4"

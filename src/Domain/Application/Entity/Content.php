@@ -32,11 +32,11 @@ abstract class Content
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $content = null;
 
-    #[ORM\Column(type: 'datetime', nullable: false)]
-    private \DateTimeInterface $createdAt;
+    #[ORM\Column(type: 'datetime')]
+    private ?\DateTimeInterface $createdAt = null;
 
-    #[ORM\Column(type: 'datetime', nullable: false)]
-    private \DateTimeInterface $updatedAt;
+    #[ORM\Column(type: 'datetime')]
+    private ?\DateTimeInterface $updatedAt = null;
 
     #[ORM\Column(type: Types::BOOLEAN, options: ['default' => false])]
     private bool $online = false;
@@ -119,37 +119,37 @@ abstract class Content
         return $this;
     }
 
-    /**
-     * @return \DateTimeInterface
-     */
-    public function getCreatedAt(): \DateTimeInterface
+  /**
+   * @return \DateTimeInterface|null
+   */
+    public function getCreatedAt(): ?\DateTimeInterface
     {
         return $this->createdAt;
     }
 
-    /**
-     * @param \DateTimeInterface $createdAt
-     * @return Content
-     */
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
+  /**
+   * @param \DateTimeInterface|null $createdAt
+   * @return Content
+   */
+    public function setCreatedAt(?\DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
         return $this;
     }
 
-    /**
-     * @return \DateTimeInterface
-     */
-    public function getUpdatedAt(): \DateTimeInterface
+  /**
+   * @return \DateTimeInterface|null
+   */
+    public function getUpdatedAt(): ?\DateTimeInterface
     {
         return $this->updatedAt;
     }
 
-    /**
-     * @param \DateTimeInterface $updatedAt
-     * @return Content
-     */
-    public function setUpdatedAt(\DateTimeInterface $updatedAt): self
+  /**
+   * @param \DateTimeInterface|null $updatedAt
+   * @return Content
+   */
+    public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
         return $this;

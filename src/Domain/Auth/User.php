@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[UniqueEntity(fields: "name", message: 'Un autre persone utilise deja ce pseudonyme')]
 #[UniqueEntity(fields: "email", message: 'Un autre persone utilise deja cette Email')]
@@ -18,14 +19,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
 
     #[ORM\Id]
-    #[ORM\GeneratedValue]
+    #[ORM\GeneratedValue(strategy: 'IDENTITY')]
     #[ORM\Column(type: Types::INTEGER)]
     private ?int $id = null;
 
     #[ORM\Column(type: Types::STRING, length: 180, unique: true)]
+    #[Assert\NotBlank()]
     private string $name;
 
     #[ORM\Column(type: Types::STRING, length: 180, unique: true)]
+    #[Assert\Email()]
     private string $email;
 
     #[ORM\Column(type: Types::JSON)]

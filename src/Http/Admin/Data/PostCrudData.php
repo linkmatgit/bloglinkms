@@ -1,25 +1,62 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\Http\Admin\Data;
 
+use App\Domain\Auth\User;
+use App\Domain\Blog\Entity\Category;
+use App\Domain\Blog\Entity\Post;
+use App\Http\Form\AutomaticForm;
 use Doctrine\ORM\EntityManagerInterface;
 
 class PostCrudData implements CrudDataInterface
 {
 
+    private ?EntityManagerInterface $em = null;
+    private Post $entity;
+    public ?string $title;
+    public ?string $slug;
+    public ?Category $category;
+    public ?string $content;
+    public bool $online;
+    public ?\DateTimeInterface $createdAt;
+    public User $author;
 
-    public function getEntity(): object
+
+    public function __construct(Post $row)
     {
-        // TODO: Implement getEntity() method.
+
+        $this->entity = $row;
+        $this->title = $row->getTitle();
+        $this->category = $row->getCategory();
+        $this->content = $row->getContent();
+        $this->online = $row->isOnline();
+        $this->createdAt = $row->getCreatedAt();
+        $this->slug = $row->getSlug();
+        $this->author = $row->getAuthor();
+    }
+    public function hydrate(): void
+    {
+
+        $this->entity->setAuthor($this->author);
     }
 
     public function getFormClass(): string
     {
-        // TODO: Implement getFormClass() method.
+        return AutomaticForm::class;
     }
 
-    public function hydrate(): void
+
+    public function setEntityManager(EntityManagerInterface $em): self
     {
-        // TODO: Implement hydrate() method.
+        $this->em = $em;
+
+        return $this;
+    }
+
+    public function getEntity(): Post
+    {
+        return $this->entity;
     }
 }

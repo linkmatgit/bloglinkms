@@ -3,6 +3,9 @@
 namespace App\Http\Admin\Controller;
 
 use App\Domain\Application\Entity\Content;
+use App\Domain\Application\Event\ContentCreatedEvent;
+use App\Domain\Application\Event\ContentDeletedEvent;
+use App\Domain\Application\Event\ContentUpdatedEvent;
 use App\Http\Admin\Data\CrudDataInterface;
 use App\Http\Helper\Paginator\PaginatorInterface;
 use Doctrine\ORM\EntityManagerInterface;
@@ -30,9 +33,9 @@ abstract class CrudController extends BaseController
     protected string $routePrefix = '';
     protected string $searchField = 'title';
     protected array $events = [
-        'update' => null,
-        'delete' => null,
-        'create' => null,
+        'update' => ContentUpdatedEvent::class,
+        'delete' => ContentDeletedEvent::class,
+        'create' => ContentCreatedEvent::class,
     ];
     protected EntityManagerInterface $em;
     protected PaginatorInterface $paginator;

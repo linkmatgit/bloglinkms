@@ -136,6 +136,7 @@ TOPBAR
   border-radius: 3px;
   transition: 0.3s;
   padding: calc(var(--space) * 2);
+  min-height: 50vh;
 }
 .dashboard-title {
     font-size: 1.5rem;

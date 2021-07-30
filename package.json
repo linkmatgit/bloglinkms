@@ -21,11 +21,12 @@
         "test": "jest"
     },
     "dependencies": {
-        "turbolinks": "^5.2.0",
+        "htm": "^3.0.4",
         "markdown-to-jsx": "^7.1.1",
         "preact": "^10.5.10",
         "react-diff-viewer": "^3.1.1",
-        "htm": "^3.0.4"
+        "tom-select": "^1.7.7",
+        "turbolinks": "^5.2.0"
     },
     "eslintConfig": {
         "extends": "preact",
