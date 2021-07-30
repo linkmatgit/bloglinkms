@@ -3,29 +3,45 @@
 
 
     <ul class="dashboard__nav">
-      <li><a href="#">Admin</a> </li>
-      <li class="title"><a href="#">Admin</a> </li>
-      <li><a href="#">Admin</a> </li>
-      <li><a href="#">Admin</a> </li>
-      <li class="title"><a href="#">Admin</a> </li>
-      <li><a href="#">Admin</a> </li>
-      <li><a href="#">Admin</a> </li>
-      <li><a href="#">Admin</a> </li>
-      <li><a href="#">Admin</a> </li>
-      <li class="title"><a href="#">Admin</a> </li>
-      <li><a href="#">Admin</a> </li>
-      <li><a href="#">Admin</a> </li>
-      <li><a href="#">Admin</a> </li>
-      <li><a href="#">Admin</a> </li>
+      <li><a href="#">{{ icon('home') }} Dashboard</a> </li>
+      <li class="title"><a href="#">Communauté</a> </li>
+      <li><a href="#">{{ icon('pen') }}Blog</a> </li>
+      <li><a href="#">{{ icon('lines') }} Category</a> </li>
+      <li class="title"><a href="#">Mods</a> </li>
+      <li><a href="#">{{ icon('cloud') }} Mods</a> </li>
+      <li><a href="#">{{ icon('cog') }} Category</a> </li>
+      <li><a href="#">{{ icon('lines') }} Marque</a> </li>
+
+      <li class="title"><a href="#">Utilisateur & Team</a> </li>
+      <li><a href="#">{{ icon('user') }} Utilisateur</a> </li>
+      <li><a href="#">{{ icon('user') }} Equipe</a> </li>
+
+      <li class="title"><a href="#">Work In Progress</a> </li>
+      <li><a href="#">{{ icon('user') }} WIP Public</a> </li>
+      <li><a href="#">{{ icon('check') }} WIP | Action</a> </li>
+      <li><a href="#">{{ icon('delete') }} WIP | Refusée</a> </li>
+      <li><a href="#">{{ icon('cross') }} WIP | Fermée</a> </li>
+
+      <li class="title"><a href="#">Forums</a> </li>
+      <li><a href="#">{{ icon('lines') }} Tags</a> </li>
+      <li><a href="#">{{ icon('cross') }} Spam</a> </li>
     </ul>
 
   </div>
 
 </div>
 <div class="dashboard__topbar">
-   <input value="{{ 'q' }}" />
-  <div class="nav__board"><ul>
-      <li>{{ icon('logout') }}</li>
+  {% if searchable is defined and searchable %}
+    <form>
+      <label>
+        <input name="q" type="text" placeholder="Rechercher" value="{{ app.request.get('q') }}">
+      </label>
+    </form>
+  {% endif %}
+
+  <div class="nav__board"><ul class="admin__tabs">
+      <li><a href="{{ path('app_profil') }}">{{ icon('user') }}<span>Linkmat</span></a> </li>
+      <li><a href="{{ path('app_home') }}">{{ icon('logout') }}</a> </li>
     </ul></div>
 
 </div>
