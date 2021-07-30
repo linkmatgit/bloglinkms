@@ -45,14 +45,14 @@ class BlogController extends CrudController
     #[Route('/new', name: 'new', methods: ['POST', 'GET'])]
     public function new(): Response
     {
-        $entity = (new Post())->setAuthor($this->getUser());
+        $entity = (new Post())->setCreatedAt(new \DateTime())->setAuthor($this->getUser());
         $data = new PostCrudData($entity);
 
         return $this->crudNew($data);
     }
 
 
-    #[Route('/{id<\d+>}"', name: 'edit', methods: ['POST', 'GET'])]
+    #[Route('/{id<\d+>}', name: 'edit', methods: ['POST', 'GET'])]
     public function edit(Post $row): Response
     {
         $data = (new PostCrudData($row))->setEntityManager($this->em);

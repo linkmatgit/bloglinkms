@@ -23,7 +23,6 @@ class PostCrudData implements CrudDataInterface
     public ?\DateTimeInterface $createdAt;
     public User $author;
 
-
     public function __construct(Post $row)
     {
         $this->entity = $row;
@@ -34,6 +33,7 @@ class PostCrudData implements CrudDataInterface
         $this->createdAt = $row->getCreatedAt();
         $this->slug = $row->getSlug();
         $this->author = $row->getAuthor();
+        $this->updatedAt = $row->getUpdatedAt();
     }
     public function hydrate(): void
     {
@@ -43,6 +43,8 @@ class PostCrudData implements CrudDataInterface
         $this->entity->setContent($this->content);
         $this->entity->setCategory($this->category);
         $this->entity->setCreatedAt($this->createdAt);
+        $this->entity->setUpdatedAt(new \DateTime());
+        $this->entity->setOnline($this->online);
     }
 
     public function getFormClass(): string
