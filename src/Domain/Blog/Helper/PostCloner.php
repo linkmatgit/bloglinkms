@@ -12,12 +12,17 @@ class PostCloner
     public static function clone(Post $rows): Post
     {
         $clone = new Post();
+        $clone->setTitle($rows->getTitle());
         $clone->setSlug($rows->getSlug());
         $clone->setAuthor($rows->getAuthor());
         $clone->setOnline($rows->isOnline());
         $clone->setContent($rows->getContent());
         $clone->setCategory($rows->getCategory());
-
+        $clone->setCreatedAt(
+            (new \DateTime(
+                '@'.$rows->getCreatedAt()->getTimestamp().' +3 day'
+            ))->setTimezone($rows->getCreatedAt()->getTimezone())
+        );
         return $clone;
     }
 }

@@ -5,13 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Admin\Controller;
 
 use App\Domain\Blog\Entity\Category;
-use App\Domain\Blog\Entity\Post;
-use App\Domain\Blog\Event\PostCreatedEvent;
-use App\Domain\Blog\Event\PostDeletedEvent;
-use App\Domain\Blog\Event\PostUpdatedEvent;
-use App\Domain\Blog\Helper\PostCloner;
 use App\Http\Admin\Data\CategoryCrudData;
-use App\Http\Admin\Data\PostCrudData;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;

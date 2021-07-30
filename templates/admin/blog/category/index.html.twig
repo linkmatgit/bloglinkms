@@ -18,7 +18,7 @@
     </thead>
     <tbody>
     {% for row in rows %}
-      {% set link = path('admin_blog_edit', {id: row.id}) %}
+      {% set link = path('admin_category_edit', {id: row.id}) %}
       <tr>
         <td class="dashboard-id">
           <a href="{{ link }}">{{ row.id }}</a>

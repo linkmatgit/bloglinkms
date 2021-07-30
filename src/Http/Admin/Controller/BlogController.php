@@ -64,8 +64,7 @@ class BlogController extends CrudController
     public function clone(Post $rows): Response
     {
         $row = PostCloner::clone($rows);
-        $data = new Post($row);
-
+        $data = new PostCrudData($row);
         return $this->crudNew($data);
     }
 

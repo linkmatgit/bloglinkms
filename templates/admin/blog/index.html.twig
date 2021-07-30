@@ -29,6 +29,8 @@
         <td><span class="bullet {% if row.online == false %}bullet--danger{% endif %}"></span></td>
         <td>
           <div class="dashboard-actions">
+
+            <a href="{{ path('admin_blog_clone', {id: row.id}) }}">{{ icon('clone') }}</a>
             <a href="{{ link }}">{{ icon('edit') }}</a>
             <form action="{{ path('admin_blog_edit', {id: row.id}) }}" method="post" onsubmit="return confirm('Voulez-vous vraiment supprimer ce contenu')">
               <input type="hidden" name="_method" value="DELETE" />
