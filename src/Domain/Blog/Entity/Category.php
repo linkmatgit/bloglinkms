@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CategoryRepository::class)]
 #[ORM\Table('blog_category')]
-final class Category
+class Category
 {
 
     #[ORM\Id]
@@ -40,10 +40,10 @@ final class Category
     #[ORM\JoinColumn(name: 'user_id', referencedColumnName: 'id')]
     private User $author;
 
-    #[ORM\Column(type: 'datetime', nullable: false)]
+    #[ORM\Column(type: 'datetime', nullable: true)]
     private \DateTimeInterface $createdAt;
 
-    #[ORM\Column(type: 'datetime', nullable: false)]
+    #[ORM\Column(type: 'datetime', nullable: true)]
     private \DateTimeInterface $updatedAt;
 
     #[ORM\OneToMany(mappedBy: 'category', targetEntity: Post::class)]

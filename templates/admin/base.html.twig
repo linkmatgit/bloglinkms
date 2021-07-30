@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -20,9 +19,10 @@
   <aside class="dashboard-sidebar">
     <div class="dashboard-sidebar__wrapper">
       <ul class="dashboard-sidebar__main">
-        <li><a href="#" {{ menu_active('home') }}>{{ icon('home') }} Dashboard</a></li>
-        <li class="title">Tutoriels</li>
-        <li><a href="#" {{ menu_active('course') }}>{{ icon('video') }} Tutoriels</a>
+        <li><a href="{{ path('admin_home')}}" {{ menu_active('home') }}>{{ icon('dashboard') }} Dashboard</a></li>
+        <li class="title">Communauté</li>
+        <li><a href="{{ path('admin_blog_index') }}" {{ menu_active('blog') }}>{{ icon('pen') }} Blog</a>
+        <li><a href="{{ path('admin_category_index') }}" {{ menu_active('category') }}>{{ icon('brand') }} Category</a>
         </li>
 
       </ul>
