@@ -4,14 +4,18 @@ declare(strict_types=1);
 
 namespace App\Domain\Application\Entity;
 
+use App\Domain\Application\Repository\ContentRepository;
 use App\Domain\Auth\User;
+use App\Domain\Blog\Entity\Post;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity]
+#[ORM\Entity(repositoryClass: ContentRepository::class)]
 #[ORM\InheritanceType("JOINED")]
 #[ORM\DiscriminatorColumn(name: 'type', type: Types::STRING)]
-#[ORM\DiscriminatorMap([])]
+#[ORM\DiscriminatorMap([
+    'posts' => Post::class
+])]
 abstract class Content
 {
     #[ORM\Id]
@@ -21,6 +25,9 @@ abstract class Content
 
     #[ORM\Column(type: Types::STRING, nullable: true)]
     private ?string $title = null;
+
+    #[ORM\Column(type: Types::STRING, nullable: true)]
+    private ?string $slug = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $content = null;
@@ -39,6 +46,7 @@ abstract class Content
     private User $author;
 
     private string $type = '';
+
     /**
      * @return int|null
      */
@@ -72,6 +80,24 @@ abstract class Content
     public function setTitle(?string $title): self
     {
         $this->title = $title;
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    /**
+     * @param string|null $slug
+     * @return Content
+     */
+    public function setSlug(?string $slug): self
+    {
+        $this->slug = $slug;
         return $this;
     }
 
