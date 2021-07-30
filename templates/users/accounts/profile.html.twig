@@ -18,12 +18,13 @@
                   <div class="user__tabs">
                     <div  class="container">
                     <ul class="tabs_profils">
-                      <li><a href="#">General</a></li>
-                      <li><a href="#">Edition</a></li>
-                      <li><a href="#">Vos Work in Progress</a></li>
-                      <li><a href="#">Vos Mods</a></li>
-                      <li><a href="{{ path('admin_home') }}">Administration</a></li>
-                      <li><a href="#">Communauty Manager</a></li>
+                      <li><a href="#"> {{ icon('lines') }} General</a></li>
+                      <li><a href="#"> {{ icon('edit') }} Edition</a></li>
+                      <li><a href="#"> {{ icon('cog') }} Vos WIP</a></li>
+                      <li><a href="#"> {{ icon('cloud') }} Vos Mods</a></li>
+                      <li><a href="{{ path('admin_home') }}" class="mla"> {{ icon('locka') }} Administration</a></li>
+                      <li><a href="{{ path('admin_home') }}" class="mla"> {{ icon('team') }} Manager</a></li>
+
                     </ul>
                     </div>
                   </div>

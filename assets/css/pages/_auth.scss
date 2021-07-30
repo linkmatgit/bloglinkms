@@ -61,10 +61,15 @@
   width: 100%;
 }
 .user__tabs ul li {
+  display: flex;
   font-size: 20px;
   padding: space(1) space(5) space(1) space(1);
 }
 
 .user__tabs ul li:first-child {
   border-left: none;
+}
+.tabs_profils li a svg {
+  width: 16px;
+  height: 16px;
 }
