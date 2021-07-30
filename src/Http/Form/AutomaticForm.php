@@ -2,9 +2,13 @@
 
 namespace App\Http\Form;
 
-
 use App\Domain\Auth\User;
+use App\Domain\Blog\Entity\Category;
+use App\Http\Admin\Type\CategoryType;
 use App\Http\Admin\Type\UserChoiceType;
+use App\Http\Type\DateTimeType;
+use App\Http\Type\EditorType;
+use App\Http\Type\SwitchType;
 use DateTimeInterface;
 use ReflectionClass;
 use Symfony\Component\Form\AbstractType;
@@ -24,7 +28,9 @@ class AutomaticForm extends AbstractType
     'bool' => SwitchType::class,
     'int' => NumberType::class,
     'float' => NumberType::class,
-      User::class => UserChoiceType::class
+      User::class => UserChoiceType::class,
+      Category::class => CategoryType::class,
+      DateTimeInterface::class => DateTimeType::class
     ];
 
     const NAMES = [
@@ -32,9 +38,9 @@ class AutomaticForm extends AbstractType
     'short' => TextareaType::class,
     'color' => ColorType::class,
     'links' => TextareaType::class,
+      'content' => EditorType::class
 
     ];
-
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $data = $options['data'];
@@ -47,17 +53,19 @@ class AutomaticForm extends AbstractType
             if (null === $type) {
                 return;
             }
-          // Input spécifique au nom du champs
-        } if (array_key_exists($name, self::NAMES)) {
-            $builder->add($name, self::NAMES[$name], [
-            'required' => false,
-            ]);
-        } elseif (array_key_exists($type->getName(), self::TYPES)) {
-            $builder->add($name, self::TYPES[$type->getName()], [
-            'required' => !$type->allowsNull() && 'bool' !== $type->getName(),
-            ]);
-        } else {
-            throw new \RuntimeException(sprintf('Impossible de trouver le champs associé au type %s dans %s::%s', $type->getName(), get_class($data), $name));
+
+          // Input spécifique au niveau
+            if (array_key_exists($name, self::NAMES)) {
+                $builder->add($name, self::NAMES[$name], [
+                'required' => false,
+                ]);
+            } elseif (array_key_exists($type->getName(), self::TYPES)) {
+                $builder->add($name, self::TYPES[$type->getName()], [
+                'required' => !$type->allowsNull() && 'bool' !== $type->getName(),
+                ]);
+            } else {
+                throw new \RuntimeException(sprintf('Impossible de trouver le champs associé au type %s dans %s::%s', $type->getName(), get_class($data), $name));
+            }
         }
     }
 }

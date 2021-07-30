@@ -1,4 +1,4 @@
-import { flash } from '/elements/Alert.js'
+import { flash } from '/Elements/Alert.js'
 
 export const HTTP_UNPROCESSABLE_ENTITY = 422
 export const HTTP_NOT_FOUND = 404

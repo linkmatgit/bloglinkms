@@ -21,10 +21,16 @@
         "test": "jest"
     },
     "dependencies": {
+        "@grafikart/spinning-dots-element": "^1.1.0",
+        "@sb-elements/all": "^0.3.4",
+        "codemirror": "^5.62.2",
+        "flatpickr": "^4.6.9",
         "htm": "^3.0.4",
         "markdown-to-jsx": "^7.1.1",
         "preact": "^10.5.10",
         "react-diff-viewer": "^3.1.1",
+        "scriptjs": "^2.5.9",
+        "sortablejs": "^1.10.2",
         "tom-select": "^1.7.7",
         "turbolinks": "^5.2.0"
     },

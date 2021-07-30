@@ -1,3 +1,4 @@
+
 .card,
 %card {
   background: var(--card-bg, var(--background-light));
@@ -5,6 +6,21 @@
   box-shadow: 0 2px 4px var(--shadow);
   border-radius: 3px;
   transition: 0.3s;
+}
+
+.card-big,
+%card-big {
+  background: var(--card-bg, var(--background-light));
+  border: 1px solid var(--border);
+  box-shadow: 0 2px 20px var(--shadow);
+  border-radius: 4px;
+}
+
+%card-hoverable {
+  &:hover {
+    border-color: var(--contrast);
+    box-shadow: 0 3px 8px var(--shadow);
+  }
 }
 
 .card {

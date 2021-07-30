@@ -1,38 +1,59 @@
+
 <!DOCTYPE html>
 <html lang="fr">
-    <head>
-        <meta charset="UTF-8">
-      <title>{% apply striptags %}{% block title '' %}{% endapply %} | Linkmat.COM</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="turbolinks-cache-control" content="no-cache"/>
-        {% block stylesheets %}
-            {{- encore_entry_link_tags('app') }}
-            {{- encore_entry_script_tags('admin') }}
+<head>
+  <meta charset="UTF-8">
+  <title>{% apply striptags %}{% block title '' %}{% endapply %} | Grafikart</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimal-ui"/>
+  {% block stylesheets %}
+    {{ encore_entry_link_tags('app', {media: 'screen'}) }}
+    {{ encore_entry_link_tags('admin', {media: 'screen'}) }}
+  {% endblock %}
+  {% block javascripts %}
+    {{ encore_entry_script_tags('app') }}
+    {{ encore_entry_script_tags('admin') }}
+  {% endblock %}
+  <meta name="turbolinks-cache-control" content="no-cache"/>
+</head>
+<body class="admin">
+<div class="dashboard-page">
+  <aside class="dashboard-sidebar">
+    <div class="dashboard-sidebar__wrapper">
+      <ul class="dashboard-sidebar__main">
+        <li><a href="#" {{ menu_active('home') }}>{{ icon('home') }} Dashboard</a></li>
+        <li class="title">Tutoriels</li>
+        <li><a href="#" {{ menu_active('course') }}>{{ icon('video') }} Tutoriels</a>
+        </li>
 
-        {% endblock %}
-        {% block javascripts %}
-          {{- encore_entry_script_tags('app') }}
-          {{- encore_entry_script_tags('admin') }}
-        {% endblock %}
-    </head>
-    <body class="{{ bodyClass is defined ? bodyClass : '' }} admin__dashboard">
-    <div class="dashboard__wrapper">
-
-
-     {% include 'admin/partials/header.html.twig' %}
-
-      <main class="dashboard-body">
-        {% include 'partials/flash.html.twig' with {floating: true, duration: 2} %}
-        {% block body '' %}
-      </main>
+      </ul>
     </div>
+  </aside>
+  <aside class="dashboard-topbar">
+    <div class="dashboard-topbar__search">
+      {% if searchable is defined and searchable %}
+        <form>
+          <input name="q" type="text" placeholder="Rechercher" value="{{ app.request.get('q') }}">
+        </form>
+      {% endif %}
+    </div>
+    <ul class="dashboard-topbar__nav">
+      <li class="header__logout"><a href="/">{{ icon('logout') }}</a></li>
+    </ul>
+  </aside>
+  <main class="dashboard-body">
+    {% include 'partials/flash.html.twig' with {floating: true, duration: 2} %}
+    {% block body '' %}
+  </main>
+</div>
 
-    <script>
-        window.linkmat = {
-            ...(window.linkmat || {}),
-            ADMIN: {{ is_granted('SUPERADMIN') ? 'true' : 'false' }},
-            USER: {{ app.user ? app.user.id : 'null' }},
-        }
-    </script>
-    </body>
+
+
+<script>
+  window.grafikart = {
+    ADMIN: {{ is_granted('SUPERADMIN') ? 'true' : 'false' }},
+    USER: {{ app.user ? app.user.id : 'null' }},
+
+  }
+</script>
+</body>
 </html>

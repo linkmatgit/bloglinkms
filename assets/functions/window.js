@@ -3,8 +3,7 @@
  *
  * @return {number}
  */
-export function windowHeight()
-{
+export function windowHeight () {
     return window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight
 }
 
@@ -13,8 +12,7 @@ export function windowHeight()
  *
  * @return {number}
  */
-export function windowWidth()
-{
+export function windowWidth () {
     return window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth
 }
 
@@ -29,8 +27,7 @@ if (localStorage) {
 /**
  * Renvoie true si la fenêtre est active ou si elle a été la dernière fenêtre active
  */
-export function isActiveWindow()
-{
+export function isActiveWindow () {
     if (localStorage) {
         return uuid === localStorage.getItem('windowId')
     } else {

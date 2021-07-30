@@ -34,7 +34,7 @@ class UserChoiceType extends AbstractType implements DataTransformerInterface
         $choices = [];
         $user = $form->getData();
         if ($user instanceof User) {
-            $choices = [new ChoiceView($user, (string)$user->getId(), $user->getUsername())];
+            $choices = [new ChoiceView($user, (string)$user->getId(), $user->getName())];
         }
         $view->vars['choice_translation_domain'] = false;
         $view->vars['expanded'] = false;

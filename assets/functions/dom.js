@@ -6,8 +6,7 @@ import htm from "htm/mini";
  * @param {HTMLElement} element
  * @param {HTMLElement|null} parent
  */
-export function offsetTop(element, parent = null)
-{
+export function offsetTop(element, parent = null) {
     let top = element.offsetTop;
     while ((element = element.offsetParent)) {
         if (parent === element) {
@@ -28,19 +27,18 @@ export function offsetTop(element, parent = null)
  * @param {...HTMLElement|string} children
  * @return HTMLElement
  */
-export function createElement(tagName, attributes = {}, ...children)
-{
+export function createElement(tagName, attributes = {}, ...children) {
     if (typeof tagName === "function") {
         return tagName(attributes);
     }
 
     const svgTags = ["svg", "use", "path", "circle", "g"];
-  // On construit l'élément
+    // On construit l'élément
     const e = !svgTags.includes(tagName)
-    ? document.createElement(tagName)
-    : document.createElementNS("http://www.w3.org/2000/svg", tagName);
+        ? document.createElement(tagName)
+        : document.createElementNS("http://www.w3.org/2000/svg", tagName);
 
-  // On lui associe les bons attributs
+    // On lui associe les bons attributs
     for (const k of Object.keys(attributes || {})) {
         if (typeof attributes[k] === "function" && k.startsWith("on")) {
             e.addEventListener(k.substr(2).toLowerCase(), attributes[k]);
@@ -51,12 +49,12 @@ export function createElement(tagName, attributes = {}, ...children)
         }
     }
 
-  // On aplatit les enfants
+    // On aplatit les enfants
     children = children.reduce((acc, child) => {
         return Array.isArray(child) ? [...acc, ...child] : [...acc, child];
     }, []);
 
-  // On ajoute les enfants à l'élément
+    // On ajoute les enfants à l'élément
     for (const child of children) {
         if (typeof child === "string" || typeof child === "number") {
             e.appendChild(document.createTextNode(child));
@@ -80,8 +78,7 @@ export const html = htm.bind(createElement);
  * @param {string} str
  * @return {DocumentFragment}
  */
-export function strToDom(str)
-{
+export function strToDom(str) {
     return document.createRange().createContextualFragment(str).firstChild;
 }
 
@@ -91,12 +88,9 @@ export function strToDom(str)
  * @param {string} selector
  * @return {null|HTMLElement}
  */
-export function closest(element, selector)
-{
+export function closest(element, selector) {
     for (; element && element !== document; element = element.parentNode) {
-        if (element.matches(selector)) {
-            return element;
-        }
+        if (element.matches(selector)) return element;
     }
     return null;
 }
@@ -105,8 +99,7 @@ export function closest(element, selector)
  * @param {string} selector
  * @return {HTMLElement}
  */
-export function $(selector)
-{
+export function $(selector) {
     return document.querySelector(selector);
 }
 
@@ -114,8 +107,7 @@ export function $(selector)
  * @param {string} selector
  * @return {HTMLElement[]}
  */
-export function $$(selector)
-{
+export function $$(selector) {
     return Array.from(document.querySelectorAll(selector));
 }
 
@@ -124,8 +116,7 @@ export function $$(selector)
  *
  * @param  {...string|null} classnames
  */
-export function classNames(...classnames)
-{
+export function classNames(...classnames) {
     return classnames.filter((classname) => classname !== null && classname !== false).join(" ");
 }
 
@@ -135,7 +126,6 @@ export function classNames(...classnames)
  * @param {HTMLFormElement} form
  * @return {{[p: string]: string}}
  */
-export function formDataToObj(form)
-{
+export function formDataToObj(form) {
     return Object.fromEntries(new FormData(form));
 }

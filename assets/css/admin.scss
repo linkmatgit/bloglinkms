@@ -1,29 +1,9 @@
 :root {
-  --background: #f7fafb;
-  --background-light: #ffffff;
-  --shadow: rgba(0, 0, 0, 0.2);
-  --card-footer: #f7fafd;
-  --card-padding: 16px;
-  --space: 8px;
-  --border: #d5e3ec;
-  --primary: #3870E0;
-  --color: #121c42;
-  --color-light: #121c4299;
-  --color-inversed: #effbec;
+  --background-light: #fff;
 }
-
-@import "tools/reset";
-@import "tools/functions";
-@import "tools/mixins";
-@import "tools/tools";
-@import "tools/layout";
-@import "tools/typographie";
-
-body {
-  background-color: var(--background);
-  font-family: $font;
-  font-size: 16px;
-  scroll-margin: 100px 0 0 0;
+body.admin::after {
+  display: none;
 }
-
-@import "modules/admin/dashboard";
+@import "modules/attachments";
+@import "modules/modal";
+@import "admin/dashboard";

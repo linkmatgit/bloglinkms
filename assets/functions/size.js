@@ -1,7 +1,6 @@
 const ko = Math.pow(2, 10)
 
-function ceil(n, decimals)
-{
+function ceil (n, decimals) {
     return Math.ceil(n * Math.pow(10, decimals)) / Math.pow(10, decimals)
 }
 
@@ -9,8 +8,7 @@ function ceil(n, decimals)
  * Convertit une taille de fichier en valeur humaine
  * @param {string} size
  */
-export function human(size)
-{
+export function human (size) {
     let k = size / ko
     let unit = 'k'
     if (k > ko) {

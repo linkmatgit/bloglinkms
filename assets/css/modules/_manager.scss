@@ -1,0 +1,20 @@
+.notice__manager {
+
+  strong {
+    color: var(--contrast);
+    font-weight: 700;
+  }
+  ul li {
+    list-style-type: circle;
+    margin-left: calc(var(--space) * 9);
+  }
+
+}
+.notice__manager h4 {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--red);
+}
+.notice__manager .signature {
+  font-weight: bold;
+}

@@ -4,8 +4,7 @@ import Turbolinks from 'turbolinks'
  * @param {object} obj
  * @return {URLSearchParams}
  */
-export function objToSearchParams(obj)
-{
+export function objToSearchParams (obj) {
     if (obj === undefined || obj === null) {
         return new URLSearchParams()
     }
@@ -19,8 +18,7 @@ export function objToSearchParams(obj)
 /**
  * Redirect to a specific url using turbolink
  */
-export function redirect(url)
-{
+export function redirect (url) {
     return new Promise((resolve) => {
         const onLoad = function () {
             resolve()

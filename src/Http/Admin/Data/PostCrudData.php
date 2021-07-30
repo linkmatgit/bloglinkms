@@ -26,7 +26,6 @@ class PostCrudData implements CrudDataInterface
 
     public function __construct(Post $row)
     {
-
         $this->entity = $row;
         $this->title = $row->getTitle();
         $this->category = $row->getCategory();
@@ -38,8 +37,12 @@ class PostCrudData implements CrudDataInterface
     }
     public function hydrate(): void
     {
-
         $this->entity->setAuthor($this->author);
+        $this->entity->setTitle($this->title);
+        $this->entity->setSlug($this->slug);
+        $this->entity->setContent($this->content);
+        $this->entity->setCategory($this->category);
+        $this->entity->setCreatedAt($this->createdAt);
     }
 
     public function getFormClass(): string

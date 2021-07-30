@@ -1,0 +1,65 @@
+
+// Variables
+// ==================
+$font: 'open-sans', sans-serif;
+$font-alt: 'open-sans', sans-serif;
+
+// Font face
+// ==================
+//@include font-face('open-sans', '/fonts/open', 400 500 700, null, woff2);
+
+
+%hero-title,
+.hero-title {
+  font-size: 52px;
+  font-family: $font-alt;
+  font-weight: 700;
+  line-height: 1.2;
+
+  strong {
+    color: var(--contrast);
+  }
+  %section-title,
+  .section-title {
+    font-family: $font-alt;
+    font-size: 18px;
+    font-weight: bold;
+    border-bottom: 1px solid var(--border-light);
+    padding-bottom: space(.5);
+    margin-bottom: space(2);
+  }
+
+  %card-title {
+    font-family: $font-alt;
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+}
+
+.page-title {
+  font-size: 30px;
+  font-weight: 700;
+  font-family: $font-alt;
+  line-height: 1.2;
+
+  strong {
+    color: var(--contrast);
+  }
+}
+%hero-text,
+.hero-text {
+  font-size: 16px;
+
+  strong {
+    font-weight: bold;
+  }
+
+  a {
+    text-decoration: underline;
+  }
+
+  @include up(600) {
+    font-size: 22px;
+  }
+}

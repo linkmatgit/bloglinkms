@@ -16,7 +16,7 @@ class CategoryType extends EntityType
         'class' => Category::class,
         'query_builder' => function (EntityRepository $er) {
             return $er->createQueryBuilder('c')
-            ->where('c.online IS true')
+            ->where('c.online = true')
             ->orderBy('c.name', 'ASC');
         },
         'choice_label' => 'name',
