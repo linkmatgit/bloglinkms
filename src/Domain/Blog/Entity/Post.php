@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Domain\Blog\Entity;
 
 use App\Domain\Application\Entity\Content;
-use App\Domain\Auth\User;
 use App\Domain\Blog\Repository\PostRepository;
 use Doctrine\ORM\Mapping as ORM;
 
