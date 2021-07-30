@@ -28,7 +28,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: Types::STRING, length: 180, unique: true)]
     private string $email;
 
-    #[ORM\Column(type: Types::JSON)]
+    #[ORM\Column(type: Types::JSON, options: ['default' => ['ROLE_USER']])]
     private array $roles = ['ROLE_USER'];
 
     #[ORM\Column(type: 'datetime', nullable: true)]
@@ -141,9 +141,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->updatedAt = $updatedAt;
         return $this;
     }
-
-
-
     /**
      * @see UserInterface
      */
