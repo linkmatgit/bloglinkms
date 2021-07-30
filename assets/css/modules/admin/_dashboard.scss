@@ -59,10 +59,53 @@ TOPBAR
  */
 .dashboard__topbar {
   grid-area: topbar;
-  padding: 0 calc(var(--space) * 6);
+
   display: flex;
   align-items: center;
   height: 60px;
   background: var(--background-light);
   border-bottom: 1px solid var(--border);
+}
+
+
+.dashboard__topbar input {
+  max-width: 300px;
+  background: url(/images/input-search.svg) right 16px center / 12px 12px no-repeat;
+  outline: none;
+
+  &:focus {
+    background-color: var(--background);
+  }
+}
+
+
+/***
+ BODY
+ */
+.dashboard-body {
+  position: relative;
+  padding: calc(var(--space) * 3) calc(var(--space) * 3);
+  grid-area: body;
+}
+.dashboard-card {
+  background: var(--background-light);
+  border: 1px solid var(--border);
+  box-shadow: 0 2px 4px var(--shadow);
+  border-radius: 3px;
+  transition: 0.3s;
+  padding: calc(var(--space) * 2);
+}
+.dashboard-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    font-family: $font-alt;
+}
+.dashboard-actions {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+
+  & > * + * {
+    margin-left: calc(var(--space) * 1);
+  }
 }
