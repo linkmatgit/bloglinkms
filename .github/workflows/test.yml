@@ -1,13 +1,6 @@
 name: Tests
 on: [push]
 jobs:
-  test:
-    name: Test
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@master
-      - name: test
-        run: make test
   container:
     name: Container
     runs-on: ubuntu-latest
@@ -22,3 +15,10 @@ jobs:
       - uses: actions/checkout@master
       - name: validate
         run: make validate
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: test
+        run: make test
