@@ -8,3 +8,10 @@ jobs:
       - uses: actions/checkout@master
       - name: test
         run: make test
+  validate:
+    name: Validate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: validate
+        run: make validate
