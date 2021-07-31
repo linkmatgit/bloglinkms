@@ -29,8 +29,10 @@ abstract class AutomaticCrudData implements CrudDataInterface
             $name = $property->getName();
             /** @var \ReflectionNamedType|null $type */
             $type = $property->getType();
-            if ($type &&
-                UploadedFile::class === $type->getName()) {
+            if (
+                $type &&
+                UploadedFile::class === $type->getName()
+            ) {
                 continue;
             }
             $accessor->setValue($this, $name, $accessor->getValue($entity, $name));

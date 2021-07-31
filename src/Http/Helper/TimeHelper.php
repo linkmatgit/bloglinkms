@@ -11,7 +11,7 @@ class TimeHelper
     {
         $minutes = round($duration / 60);
         if ($minutes < 60) {
-            return $minutes.' min';
+            return $minutes . ' min';
         }
         $hours = floor($minutes / 60);
         $minutes = str_pad((string) ($minutes - ($hours * 60)), 2, '0', STR_PAD_LEFT);

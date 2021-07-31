@@ -18,8 +18,7 @@ class AuthSubscriber implements EventSubscriberInterface
 
     public function __construct(
         private EmailVerifier $emailVerifier,
-    )
-    {
+    ) {
     }
 
     public static function getSubscribedEvents()
@@ -30,7 +29,9 @@ class AuthSubscriber implements EventSubscriberInterface
     }
     public function onRegister(UserCreatedEvent $event): void
     {
-        $this->emailVerifier->sendEmailConfirmation('verify_email', $event->getUser(),
+        $this->emailVerifier->sendEmailConfirmation(
+            'verify_email',
+            $event->getUser(),
             (new TemplatedEmail())
                 ->from(new Address('no-reply@linkmat.com', 'Linkmat.Com'))
                 ->to($event->getUser()->getEmail())
@@ -38,5 +39,4 @@ class AuthSubscriber implements EventSubscriberInterface
                 ->htmlTemplate('registration/confirmation_email.html.twig')
         );
     }
-
 }

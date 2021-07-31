@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\Http\Type;
 
@@ -6,15 +8,15 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class DateTimeType extends \Symfony\Component\Form\Extension\Core\Type\DateTimeType
 {
-  public function configureOptions(OptionsResolver $resolver): void
-  {
-    parent::configureOptions($resolver);
-    $resolver->setDefaults([
-      'html5' => false,
-      'widget' => 'single_text',
-      'attr' => [
+    public function configureOptions(OptionsResolver $resolver): void
+    {
+        parent::configureOptions($resolver);
+        $resolver->setDefaults([
+        'html5' => false,
+        'widget' => 'single_text',
+        'attr' => [
         'is' => 'date-picker',
-      ],
-    ]);
-  }
+        ],
+        ]);
+    }
 }

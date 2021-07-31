@@ -22,6 +22,6 @@ class FailedJobRepository
 
     public function reject(string $id)
     {
-       $this->listableReceiver->reject($this->listableReceiver->find($id));
+        $this->listableReceiver->reject($this->listableReceiver->find($id));
     }
 }

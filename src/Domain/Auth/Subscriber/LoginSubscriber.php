@@ -41,7 +41,7 @@ class LoginSubscriber implements EventSubscriberInterface
         }
     }
 
-    public function onFailureLogin()
+    public function onFailureLogin():void
     {
     }
 }

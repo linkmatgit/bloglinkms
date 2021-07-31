@@ -26,8 +26,7 @@ class RegistrationController extends AbstractController
         private EmailVerifier $emailVerifier,
         private EventDispatcherInterface $dispatcher,
         private EntityManagerInterface $em
-    )
-    {
+    ) {
     }
 
     #[Route('/register', name: 'app_register')]

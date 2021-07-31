@@ -4,7 +4,6 @@ namespace App\Http\Admin\Data;
 
 use Doctrine\ORM\EntityManagerInterface;
 
-
 interface CrudDataInterface
 {
     public function getEntity(): object;
@@ -12,6 +11,4 @@ interface CrudDataInterface
     public function getFormClass(): string;
 
     public function hydrate(): void;
-
-
 }

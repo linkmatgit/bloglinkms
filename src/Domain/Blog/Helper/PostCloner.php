@@ -20,7 +20,7 @@ class PostCloner
         $clone->setCategory($rows->getCategory());
         $clone->setCreatedAt(
             (new \DateTime(
-                '@'.$rows->getCreatedAt()->getTimestamp().' +3 day'
+                '@' . $rows->getCreatedAt()->getTimestamp() . ' +3 day'
             ))->setTimezone($rows->getCreatedAt()->getTimezone())
         );
         return $clone;

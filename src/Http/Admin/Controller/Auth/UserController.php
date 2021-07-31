@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace App\Http\Admin\Controller\Auth;
 
 use App\Domain\Auth\Repository\UserRepository;
+use App\Domain\Auth\User;
 use App\Http\Admin\Controller\BaseController;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -14,7 +16,9 @@ use Symfony\Component\Routing\Annotation\Route;
 class UserController extends BaseController
 {
 
-
+public function __construct(private EntityManagerInterface $em)
+{
+}
 
     #[Route('/search', name: 'autocomplete')]
     public function search(Request $request): JsonResponse

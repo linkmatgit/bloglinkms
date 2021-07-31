@@ -19,6 +19,15 @@
     "beberlei/doctrineextensions": {
         "version": "v1.3.0"
     },
+    "clue/stdio-react": {
+        "version": "v2.4.0"
+    },
+    "clue/term-react": {
+        "version": "v1.3.0"
+    },
+    "clue/utf8-react": {
+        "version": "v1.2.0"
+    },
     "composer/package-versions-deprecated": {
         "version": "1.11.99.2"
     },
@@ -132,6 +141,9 @@
     "egulias/email-validator": {
         "version": "3.1.1"
     },
+    "evenement/evenement": {
+        "version": "v3.0.1"
+    },
     "fakerphp/faker": {
         "version": "v1.15.0"
     },
@@ -157,6 +169,9 @@
     },
     "jms/metadata": {
         "version": "2.5.0"
+    },
+    "jolicode/jolinotif": {
+        "version": "v2.3.0"
     },
     "knplabs/knp-components": {
         "version": "v3.1.0"
@@ -287,6 +302,12 @@
     "psr/log": {
         "version": "1.1.4"
     },
+    "react/event-loop": {
+        "version": "v1.2.0"
+    },
+    "react/stream": {
+        "version": "v1.2.0"
+    },
     "sebastian/cli-parser": {
         "version": "1.0.1"
     },
@@ -346,6 +367,9 @@
         "files": [
             "config/packages/sensio_framework_extra.yaml"
         ]
+    },
+    "spatie/phpunit-watcher": {
+        "version": "1.23.2"
     },
     "squizlabs/php_codesniffer": {
         "version": "3.6",
@@ -815,5 +839,8 @@
     },
     "willdurand/negotiation": {
         "version": "3.0.0"
+    },
+    "yosymfony/resource-watcher": {
+        "version": "v2.0.1"
     }
 }

@@ -41,6 +41,7 @@ seed: vendor/autoload.php ## Génère des données dans la base de données (doc
 
 .PHONY: migration
 migration: vendor/autoload.php ## Génère les migrations
+	$(sy) doctrine:schema:validate
 	$(sy) make:migration
 
 .PHONY: migrate
@@ -64,6 +65,26 @@ tt: vendor/autoload.php ## Lance le watcher phpunit
 security-check: vendor/autoload.php ## Check pour les vulnérabilités des dependencies
 	$(de) php local-php-security-checker --path=/var/www
 
+.PHONY: validate
+validate: vendor/autoload.php ## Génère les migrations
+	$(sy) doctrine:schema:validate
+
+.PHONY: drop
+drop: vendor/autoload.php ## Génère les migrations
+	$(sy) doctrine:database:drop --force
+.PHONY: create
+create: vendor/autoload.php ## Génère les migrations
+	$(sy) doctrine:database:create
+
+.PHONY: lint
+lint: vendor/autoload.php ## Analyse le code
+	docker run -v $(PWD):/app -w /app -t --rm php:8.0-cli-alpine php -d memory_limit=-1 bin/console lint:container
+	docker run -v $(PWD):/app -w /app -t --rm php:8.0-cli-alpine php -d memory_limit=-1 ./vendor/bin/phpstan analyse
+.PHONY: format
+format: ## Formate le code
+	npx prettier-standard --lint --changed "assets/**/*.{js,css,jsx}"
+	docker run -v $(PWD):/app -w /app -t --rm php:8.0-cli-alpine php -d memory_limit=-1 ./vendor/bin/phpcbf
+	docker run -v $(PWD):/app -w /app -t --rm php:8.0-cli-alpine php -d memory_limit=-1 ./vendor/bin/php-cs-fixer fix
 
 # -----------------------------------
 # Dépendances

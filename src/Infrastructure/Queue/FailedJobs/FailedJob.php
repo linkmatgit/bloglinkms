@@ -2,6 +2,7 @@
 
 namespace App\Infrastructure\Queue\FailedJobs;
 
+use Symfony\Component\ErrorHandler\Exception\FlattenException;
 use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\Stamp\ErrorDetailsStamp;
 use Symfony\Component\Messenger\Stamp\RedeliveryStamp;
@@ -26,10 +27,10 @@ class FailedJob
         $stamps = $this->envelope->all(ErrorDetailsStamp::class);
         return $stamps[0]->getExceptionMessage();
     }
-    public function getFlattenMessage(): string
+    public function getFlattenMessage(): FlattenException
     {
         /** @var ErrorDetailsStamp[] $stamps */
         $stamps = $this->envelope->all(ErrorDetailsStamp::class);
-        return $stamps[0]->getFlattenException()->getTraceAsString();
+        return $stamps[0]->getFlattenException();
     }
 }

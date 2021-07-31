@@ -15,11 +15,11 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class UserChecker implements UserCheckerInterface
 {
 
-    public function checkPreAuth(UserInterface $user)
+    public function checkPreAuth(UserInterface $user):void
     {
     }
 
-    public function checkPostAuth(UserInterface $user)
+    public function checkPostAuth(UserInterface $user):void
     {
         if ($user instanceof  User && $user->isBanned()) {
             throw  new UserBannedException();
