@@ -1,3 +1,4 @@
+[![Tests](https://github.com/linkmatgit/bloglinkms/actions/workflows/test.yml/badge.svg)](https://github.com/linkmatgit/bloglinkms/actions/workflows/test.yml)
  # Site de Test
  
  Je fait ce site pour simplement m'amuser et n'as aucune,

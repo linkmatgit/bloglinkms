@@ -33,7 +33,6 @@ class PostCrudData implements CrudDataInterface
         $this->createdAt = $row->getCreatedAt();
         $this->slug = $row->getSlug();
         $this->author = $row->getAuthor();
-        $this->updatedAt = $row->getUpdatedAt();
     }
     public function hydrate(): void
     {

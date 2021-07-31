@@ -2,7 +2,7 @@
 
 namespace App\Infrastructure\Queue\FailedJobs;
 
-use Symfony\Component\Mailer\Envelope;
+use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\Transport\Receiver\ListableReceiverInterface;
 
 class FailedJobRepository

@@ -10,7 +10,7 @@ use App\Infrastructure\Orm\AbstractRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends AbstractRepository<Category>
+ * @extends AbstractRepository<Group>
  */
 class GroupRepository extends AbstractRepository
 {

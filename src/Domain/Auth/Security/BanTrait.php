@@ -2,6 +2,7 @@
 
 namespace App\Domain\Auth\Security;
 
+use App\Domain\Auth\User;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -23,9 +24,8 @@ trait BanTrait
 
   /**
    * @param bool $banned
-   * @return BanTrait
    */
-    public function setBanned(bool $banned): BanTrait
+    public function setBanned(bool $banned): self
     {
         $this->banned = $banned;
         return $this;
@@ -41,9 +41,9 @@ trait BanTrait
 
   /**
    * @param \DateTimeInterface|null $bannedAt
-   * @return BanTrait
+
    */
-    public function setBannedAt(?\DateTimeInterface $bannedAt): BanTrait
+    public function setBannedAt(?\DateTimeInterface $bannedAt): self
     {
         $this->bannedAt = $bannedAt;
         return $this;
