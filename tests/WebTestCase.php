@@ -16,6 +16,7 @@ class WebTestCase extends \Symfony\Bundle\FrameworkBundle\Test\WebTestCase
     protected function setUp(): void
     {
         parent::setUp();
+
         $this->client = self::createClient();
         /** @var EntityManagerInterface $em */
         self::$container = $this->client->getContainer();
@@ -91,7 +92,7 @@ class WebTestCase extends \Symfony\Bundle\FrameworkBundle\Test\WebTestCase
     {
         $crawler = $this->client->getCrawler();
         $this->assertEquals(
-            $title.' | Grafikart',
+            $title.' | Linkmat',
             $crawler->filter('title')->text(),
             '<title> missmatch',
         );

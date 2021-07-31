@@ -33,6 +33,9 @@ class RegistrationController extends AbstractController
     #[Route('/register', name: 'app_register')]
     public function register(Request $request, UserPasswordHasherInterface $passwordEncoder): Response
     {
+        if($this->getUser() !== null) {
+            return $this->redirectToRoute('app_home');
+        }
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
@@ -50,11 +53,12 @@ class RegistrationController extends AbstractController
 
             $this->em->persist($user);
             $this->em->flush();
-            $this->dispatcher->dispatch(new UserCreatedEvent($user));
             $this->addFlash(
                 'success',
                 'Un message avec un lien de confirmation vous a été envoyé par mail. Veuillez suivre ce lien pour activer votre compte.'
             );
+            $this->dispatcher->dispatch(new UserCreatedEvent($user));
+
             // generate a signed url and email it to the user
 
             // do anything else you need here, like send an email

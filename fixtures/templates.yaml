@@ -18,7 +18,8 @@ App\Domain\Blog\Category:
 
 App\Domain\Auth\User:
   user (template):
-    username: John<current()>
+    name: John<current()>
     email: john<current()>\@doe.fr
     password: <password('0000')>
     createdAt: <dateTimeThisYear()>
+    isverified: true

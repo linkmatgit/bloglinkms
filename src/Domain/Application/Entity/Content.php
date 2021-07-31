@@ -9,6 +9,7 @@ use App\Domain\Auth\User;
 use App\Domain\Blog\Entity\Post;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ContentRepository::class)]
 #[ORM\InheritanceType("JOINED")]
@@ -24,12 +25,16 @@ abstract class Content
     private ?int $id = null;
 
     #[ORM\Column(type: Types::STRING, nullable: true)]
+    #[Assert\NotBlank]
     private ?string $title = null;
 
     #[ORM\Column(type: Types::STRING, nullable: true)]
+    #[Assert\NotBlank]
     private ?string $slug = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
+    #[Assert\NotBlank]
+    #[Assert\Length(min: 5)]
     private ?string $content = null;
 
     #[ORM\Column(type: 'datetime')]
