@@ -59,11 +59,7 @@ class RegistrationController extends AbstractController
             );
             $this->dispatcher->dispatch(new UserCreatedEvent($user));
 
-            // generate a signed url and email it to the user
-
-            // do anything else you need here, like send an email
-
-            return $this->redirectToRoute('app_home');
+            return $this->redirectToRoute('app_register');
         }
 
         return $this->render('registration/register.html.twig', [

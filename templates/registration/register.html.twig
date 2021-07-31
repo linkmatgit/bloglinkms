@@ -3,9 +3,7 @@
 {% block title %}Inscription{% endblock %}
 
 {% block body %}
-    {% for flashError in app.flashes('verify_email_error') %}
-        <div class="alert alert-danger" role="alert">{{ flashError }}</div>
-    {% endfor %}
+    {% include 'partials/flash.html.twig' %}
 
     <div class="register__page">
         <div class="form__register">
