@@ -1,8 +1,13 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\Http\Admin\Controller;
 
 use App\Domain\Application\Entity\Content;
+use App\Domain\Application\Event\ContentCreatedEvent;
+use App\Domain\Application\Event\ContentDeletedEvent;
+use App\Domain\Application\Event\ContentUpdatedEvent;
 use App\Http\Admin\Data\CrudDataInterface;
 use App\Http\Helper\Paginator\PaginatorInterface;
 use Doctrine\ORM\EntityManagerInterface;
@@ -30,9 +35,9 @@ abstract class CrudController extends BaseController
     protected string $routePrefix = '';
     protected string $searchField = 'title';
     protected array $events = [
-        'update' => null,
-        'delete' => null,
-        'create' => null,
+        'update' => ContentUpdatedEvent::class,
+        'delete' => ContentDeletedEvent::class,
+        'create' => ContentCreatedEvent::class,
     ];
     protected EntityManagerInterface $em;
     protected PaginatorInterface $paginator;
@@ -89,7 +94,7 @@ abstract class CrudController extends BaseController
             }
             $this->addFlash('success', 'Le contenu a bien été modifié');
 
-            return $this->redirectToRoute($this->routePrefix.'_edit', ['id' => $entity->getId()]);
+            return $this->redirectToRoute($this->routePrefix . '_edit', ['id' => $entity->getId()]);
         }
 
         return $this->render("admin/{$this->templatePath}/edit.html.twig", [
@@ -116,7 +121,7 @@ abstract class CrudController extends BaseController
             }
             $this->addFlash('success', 'Le contenu a bien été créé');
 
-            return $this->redirectToRoute($this->routePrefix.'_edit', ['id' => $entity->getId()]);
+            return $this->redirectToRoute($this->routePrefix . '_edit', ['id' => $entity->getId()]);
         }
 
         return $this->render("admin/{$this->templatePath}/new.html.twig", [
@@ -135,7 +140,7 @@ abstract class CrudController extends BaseController
         $this->em->flush();
         $this->addFlash('success', 'Le contenu a bien été supprimé');
 
-        return $this->redirectToRoute($redirectRoute ?: ($this->routePrefix.'_index'));
+        return $this->redirectToRoute($redirectRoute ?: ($this->routePrefix . '_index'));
     }
 
     public function getRepository(): EntityRepository
@@ -150,6 +155,6 @@ abstract class CrudController extends BaseController
     {
         return $query
             ->where("LOWER(row.{$this->searchField}) LIKE :search")
-            ->setParameter('search', '%'.strtolower($search).'%');
+            ->setParameter('search', '%' . strtolower($search) . '%');
     }
 }
