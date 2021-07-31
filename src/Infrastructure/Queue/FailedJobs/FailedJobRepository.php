@@ -20,8 +20,9 @@ class FailedJobRepository
         );
     }
 
-    public function reject(string $id)
+    public function reject(string $id):void
     {
+
         $this->listableReceiver->reject($this->listableReceiver->find($id));
     }
 }

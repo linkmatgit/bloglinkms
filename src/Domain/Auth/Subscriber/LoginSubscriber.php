@@ -2,6 +2,7 @@
 
 namespace App\Domain\Auth\Subscriber;
 
+use App\Domain\Auth\Event\UserVerifiedEvent;
 use App\Domain\Auth\User;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;

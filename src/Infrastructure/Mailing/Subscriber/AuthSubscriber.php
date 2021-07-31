@@ -2,9 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Infrastructure\Mailing;
+namespace App\Infrastructure\Mailing\Subscriber;
 
 use App\Domain\Auth\Event\UserCreatedEvent;
+use App\Domain\Auth\Event\UserVerifiedEvent;
 use App\Domain\Auth\User;
 use App\Security\EmailVerifier;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
@@ -21,10 +22,11 @@ class AuthSubscriber implements EventSubscriberInterface
     ) {
     }
 
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
-            UserCreatedEvent::class => 'onRegister'
+            UserCreatedEvent::class => 'onRegister',
+            UserVerifiedEvent::class => 'onVerified'
         ];
     }
     public function onRegister(UserCreatedEvent $event): void
@@ -36,6 +38,18 @@ class AuthSubscriber implements EventSubscriberInterface
                 ->from(new Address('no-reply@linkmat.com', 'Linkmat.Com'))
                 ->to($event->getUser()->getEmail())
                 ->subject('Linkmat | Confirmation du compte')
+                ->htmlTemplate('registration/confirmation_email.html.twig')
+        );
+    }
+
+    public function onVerified(UserVerifiedEvent $event):void {
+        $this->emailVerifier->sendEmailConfirmation(
+            'verify_email',
+            $event->getUser(),
+            (new TemplatedEmail())
+                ->from(new Address('no-reply@linkmat.com', 'Linkmat.Com'))
+                ->to($event->getUser()->getEmail())
+                ->subject('Linkmat | Votre Compte a été confirmée')
                 ->htmlTemplate('registration/confirmation_email.html.twig')
         );
     }

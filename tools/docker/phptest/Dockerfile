@@ -15,6 +15,9 @@ RUN pecl install apcu && docker-php-ext-enable apcu
 # Support de redis
 RUN pecl install redis && docker-php-ext-enable redis
 
+#insallation de Xdebug
+RUN pecl install xdebug-2.8.1 && docker-php-ext-enable xdebug php-xdebug
+
 # Support de Postgre
 RUN apt-get update && apt-get install -y libpq-dev && docker-php-ext-install pdo_pgsql
 

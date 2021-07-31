@@ -4,5 +4,7 @@
 {% endblock %}
 {% block content %}
 
-
+    <form action="{{ path('admin_cache_clean') }}" method="post">
+        <button class="btn btn-small btn-danger">{{ icon('trash') }} Vider le cache</button>
+    </form>
 {% endblock %}

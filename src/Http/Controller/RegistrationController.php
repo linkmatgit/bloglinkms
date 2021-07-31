@@ -3,6 +3,7 @@
 namespace App\Http\Controller;
 
 use App\Domain\Auth\Event\UserCreatedEvent;
+use App\Domain\Auth\Event\UserVerifiedEvent;
 use App\Domain\Auth\Repository\UserRepository;
 use App\Domain\Auth\User;
 use App\Http\Form\RegistrationFormType;
@@ -89,9 +90,9 @@ class RegistrationController extends AbstractController
 
             return $this->redirectToRoute('app_register');
         }
-
+        $this->dispatcher->dispatch(new UserVerifiedEvent($user));
         $this->addFlash('success', 'Your email address has been verified.');
 
-        return $this->redirectToRoute('app_register');
+        return $this->redirectToRoute('app_home');
     }
 }

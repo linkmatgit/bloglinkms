@@ -2,7 +2,7 @@ version: '3.3'
 services:
   phptest:
     build:
-      context: ./tools/docker/php
+      context: ./tools/docker/phptest
     volumes:
       - .:/var/www:delegated
     links:

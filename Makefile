@@ -41,7 +41,6 @@ seed: vendor/autoload.php ## Génère des données dans la base de données (doc
 
 .PHONY: migration
 migration: vendor/autoload.php ## Génère les migrations
-	$(sy) doctrine:schema:validate
 	$(sy) make:migration
 
 .PHONY: migrate
@@ -55,6 +54,9 @@ rollback:
 .PHONY: test
 test: vendor/autoload.php node_modules/time ## Execute les tests
 	$(drtest) phptest vendor/bin/phpunit
+.PHONY: cov
+cov: vendor/autoload.php node_modules/time ## Execute les tests
+	$(drtest) phptest vendor/bin/phpunit --coverage-html html
 
 .PHONY: tt
 tt: vendor/autoload.php ## Lance le watcher phpunit
@@ -67,7 +69,7 @@ security-check: vendor/autoload.php ## Check pour les vulnérabilités des depen
 
 .PHONY: validate
 validate: vendor/autoload.php ## Génère les migrations
-	$(sy) doctrine:schema:validate
+	$(sy) doctrine:schema:validate --skip-sync
 
 .PHONY: drop
 drop: vendor/autoload.php ## Génère les migrations
@@ -105,3 +107,4 @@ var/dump:
 public/assets/manifest.json: package.json
 	$(node) yarn
 	$(node) yarn run build
+

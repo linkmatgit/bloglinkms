@@ -20,7 +20,7 @@ class Brand
     private ?string $name = null;
 
     #[ORM\Column(type: Types::BOOLEAN, options: ['default' => false])]
-    private ?string $online;
+    private bool $online = false;
 
     #[ORM\ManyToOne(targetEntity: User::class)]
     #[ORM\JoinColumn(name: 'user_id', referencedColumnName: 'id')]
@@ -31,6 +31,8 @@ class Brand
 
     #[ORM\Column(type: 'datetime', nullable: true)]
     private \DateTimeInterface $updatedAt;
+
+
 
     /**
      * @return int|null
@@ -69,22 +71,23 @@ class Brand
     }
 
     /**
-     * @return string|null
+     * @return bool
      */
-    public function getOnline(): ?string
+    public function isOnline(): bool
     {
         return $this->online;
     }
 
     /**
-     * @param string|null $online
+     * @param bool $online
      * @return Brand
      */
-    public function setOnline(?string $online): self
+    public function setOnline(bool $online): Brand
     {
         $this->online = $online;
         return $this;
     }
+
 
     /**
      * @return User
