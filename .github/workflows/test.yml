@@ -8,3 +8,17 @@ jobs:
       - uses: actions/checkout@master
       - name: test
         run: make test
+  container:
+    name: Container
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: container
+        run: make container
+  validate:
+    name: Validate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: validate
+        run: make validate

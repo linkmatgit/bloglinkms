@@ -74,9 +74,14 @@ validate: vendor/autoload.php ## Génère les migrations
 .PHONY: drop
 drop: vendor/autoload.php ## Génère les migrations
 	$(sy) doctrine:database:drop --force
+
 .PHONY: create
 create: vendor/autoload.php ## Génère les migrations
 	$(sy) doctrine:database:create
+
+.PHONY: container
+container: vendor/autoload.php ## Génère les migrations
+	docker run -v $(PWD):/app -w /app -t --rm php:8.0-cli-alpine php -d memory_limit=-1 bin/console lint:container
 
 .PHONY: lint
 lint: vendor/autoload.php ## Analyse le code
