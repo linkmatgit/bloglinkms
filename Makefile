@@ -69,7 +69,7 @@ security-check: vendor/autoload.php ## Check pour les vulnérabilités des depen
 
 .PHONY: validate
 validate: vendor/autoload.php ## Génère les migrations
-	$(sy) doctrine:schema:validate --skip-sync
+	docker run -v $(PWD):/app -w /app -t --rm php:8.0-cli-alpine php -d memory_limit=-1 bin/console doctrine:schema:validate --skip-sync
 
 .PHONY: drop
 drop: vendor/autoload.php ## Génère les migrations
