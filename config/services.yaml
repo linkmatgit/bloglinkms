@@ -43,3 +43,5 @@ services:
         arguments:
             $assetPath: '%kernel.project_dir%/public/assets'
             $env: '%kernel.environment%'
+    App\Infrastructure\Queue\FailedJobsService:
+        arguments: ['@messenger.transport.failed']

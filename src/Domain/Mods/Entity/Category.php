@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 namespace App\Domain\Mods\Entity;
+
 use App\Domain\Auth\User;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -28,13 +29,12 @@ class Category
     #[ORM\Column(type: Types::STRING)]
     private string $description;
 
-
     #[ORM\Column(type: Types::INTEGER, nullable: true)]
     private ?int $position = null;
 
     #[ORM\ManyToOne(targetEntity: User::class)]
     #[ORM\JoinColumn(nullable: true, onDelete: 'CASCADE')]
-    private ?User $author = null;
+    private User $author;
 
     #[ORM\Column(type: 'datetime', nullable: true)]
     private ?\DateTimeInterface $createdAt = null;
@@ -138,17 +138,17 @@ class Category
     }
 
     /**
-     * @return User|null
+     * @return User
      */
-    public function getAuthor(): ?User
+    public function getAuthor(): User
     {
         return $this->author;
     }
 
     /**
-     * @param User|null $author
+     * @param User $author
      */
-    public function setAuthor(?User $author): void
+    public function setAuthor(User $author): void
     {
         $this->author = $author;
     }
