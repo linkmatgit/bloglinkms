@@ -2,10 +2,13 @@
 
 namespace App\Http\Controller;
 
+use App\Domain\Auth\Event\UserCreatedEvent;
 use App\Domain\Auth\Repository\UserRepository;
 use App\Domain\Auth\User;
 use App\Http\Form\RegistrationFormType;
 use App\Security\EmailVerifier;
+use Doctrine\ORM\EntityManagerInterface;
+use Psr\EventDispatcher\EventDispatcherInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,13 +23,14 @@ class RegistrationController extends AbstractController
 
 
     public function __construct(
-        private EmailVerifier $emailVerifier
+        private EmailVerifier $emailVerifier,
+        private EventDispatcherInterface $dispatcher,
+        private EntityManagerInterface $em
     )
     {
-
     }
 
-    #[Route('/register', name: 'register')]
+    #[Route('/register', name: 'app_register')]
     public function register(Request $request, UserPasswordHasherInterface $passwordEncoder): Response
     {
         $user = new User();
@@ -41,19 +45,18 @@ class RegistrationController extends AbstractController
                     $form->get('plainPassword')->getData()
                 )
             );
+            $user->setCreatedAt(new \DateTime());
 
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($user);
-            $entityManager->flush();
 
-            // generate a signed url and email it to the user
-            $this->emailVerifier->sendEmailConfirmation('verify_email', $user,
-                (new TemplatedEmail())
-                    ->from(new Address('no-reply@linkmat.com', 'Linkmat.Com'))
-                    ->to($user->getEmail())
-                    ->subject('Please Confirm your Email')
-                    ->htmlTemplate('registration/confirmation_email.html.twig')
+            $this->em->persist($user);
+            $this->em->flush();
+            $this->dispatcher->dispatch(new UserCreatedEvent($user));
+            $this->addFlash(
+                'success',
+                'Un message avec un lien de confirmation vous a été envoyé par mail. Veuillez suivre ce lien pour activer votre compte.'
             );
+            // generate a signed url and email it to the user
+
             // do anything else you need here, like send an email
 
             return $this->redirectToRoute('app_home');
@@ -88,7 +91,6 @@ class RegistrationController extends AbstractController
             return $this->redirectToRoute('app_register');
         }
 
-        // @TODO Change the redirect on success and handle or remove the flash message in your templates
         $this->addFlash('success', 'Your email address has been verified.');
 
         return $this->redirectToRoute('app_register');

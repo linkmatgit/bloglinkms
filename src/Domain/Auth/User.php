@@ -45,16 +45,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: Types::STRING)]
     private string $password;
 
-
-
-    public function __construct()
-    {
-
-        $this->info = new ArrayCollection();
-    }
-
     #[ORM\Column(type: Types::BOOLEAN)]
     private bool $isVerified = false;
+
+    #[ORM\Column(type: Types::STRING, length: 180, nullable: true)]
+    private ?string $lastLoginIP = null;
+
+    #[ORM\Column(type: 'datetime', nullable: true)]
+    private ?\DateTimeInterface $lastLoginAt = null;
 
     public function getId(): ?int
     {
@@ -211,4 +209,42 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    /**
+     * @return string|null
+     */
+    public function getLastLoginIP(): ?string
+    {
+        return $this->lastLoginIP;
+    }
+
+    /**
+     * @param string|null $lastLoginIP
+     * @return User
+     */
+    public function setLastLoginIP(?string $lastLoginIP): User
+    {
+        $this->lastLoginIP = $lastLoginIP;
+        return $this;
+    }
+
+    /**
+     * @return \DateTimeInterface|null
+     */
+    public function getLastLoginAt(): ?\DateTimeInterface
+    {
+        return $this->lastLoginAt;
+    }
+
+    /**
+     * @param \DateTimeInterface|null $lastLoginAt
+     * @return User
+     */
+    public function setLastLoginAt(?\DateTimeInterface $lastLoginAt): User
+    {
+        $this->lastLoginAt = $lastLoginAt;
+        return $this;
+    }
+
+
 }
