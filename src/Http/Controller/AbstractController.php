@@ -3,10 +3,12 @@
 namespace App\Http\Controller;
 
 use App\Domain\Auth\User;
+use App\Infrastructure\Queue\Message\ServiceMethodMessage;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 abstract class AbstractController extends \Symfony\Bundle\FrameworkBundle\Controller\AbstractController
@@ -29,7 +31,10 @@ abstract class AbstractController extends \Symfony\Bundle\FrameworkBundle\Contro
     /**
      * Lance la méthode d'un service de manière asynchrone.
      */
-
+    protected function dispatchMethod(string $service, string $method, array $params = []): Envelope
+    {
+        return $this->dispatchMessage(new ServiceMethodMessage($service, $method, $params));
+    }
 
     protected function getUserOrThrow(): User
     {

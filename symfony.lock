@@ -141,6 +141,9 @@
     "egulias/email-validator": {
         "version": "3.1.1"
     },
+    "erusev/parsedown": {
+        "version": "1.7.4"
+    },
     "evenement/evenement": {
         "version": "v3.0.1"
     },
@@ -809,6 +812,12 @@
     },
     "theseer/tokenizer": {
         "version": "1.2.1"
+    },
+    "tijsverkoyen/css-to-inline-styles": {
+        "version": "2.2.3"
+    },
+    "twig/cssinliner-extra": {
+        "version": "v3.3.0"
     },
     "twig/extra-bundle": {
         "version": "v3.3.1"

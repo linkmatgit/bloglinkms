@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Tests\Http\Admin\Controller;
+namespace App\Tests\Http\Controller;
 
 use App\Tests\FixturesTrait;
 use App\Tests\WebTestCase;
@@ -56,7 +56,7 @@ class RegistrationControllerTest extends WebTestCase
         $this->assertEmailCount(1);
         $this->assertResponseRedirects();
         $this->client->followRedirect();
-        // $this->expectAlert('success');
+         $this->expectAlert('success');
     }
 
     public function testRegisterWithValueExisting(): void

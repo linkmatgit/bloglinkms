@@ -54,6 +54,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'datetime', nullable: true)]
     private ?\DateTimeInterface $lastLoginAt = null;
 
+    #[ORM\Column(type: Types::STRING, length: 250, nullable: true)]
+    private ?string $confirmationToken = null;
+
+
     public function getId(): ?int
     {
         return $this->id;
@@ -244,4 +248,25 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->lastLoginAt = $lastLoginAt;
         return $this;
     }
+
+    /**
+     * @return string|null
+     */
+    public function getConfirmationToken(): ?string
+    {
+        return $this->confirmationToken;
+    }
+
+    /**
+     * @param string|null $confirmationToken
+     * @return User
+     */
+    public function setConfirmationToken(?string $confirmationToken): self
+    {
+        $this->confirmationToken = $confirmationToken;
+        return $this;
+    }
+
+
+
 }

@@ -6,19 +6,19 @@ namespace App\Infrastructure\Mailing\Subscriber;
 
 use App\Domain\Auth\Event\UserCreatedEvent;
 use App\Domain\Auth\Event\UserVerifiedEvent;
-use App\Domain\Auth\User;
+use App\Infrastructure\Mailing\Mailer;
 use App\Security\EmailVerifier;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\Mailer\Mailer;
 use Symfony\Component\Mime\Address;
-use Symfony\Component\Mime\Message;
+
 
 class AuthSubscriber implements EventSubscriberInterface
 {
 
     public function __construct(
         private EmailVerifier $emailVerifier,
+        private Mailer $mailer
     ) {
     }
 
@@ -31,18 +31,16 @@ class AuthSubscriber implements EventSubscriberInterface
     }
     public function onRegister(UserCreatedEvent $event): void
     {
-        $this->emailVerifier->sendEmailConfirmation(
-            'verify_email',
-            $event->getUser(),
-            (new TemplatedEmail())
-                ->from(new Address('no-reply@linkmat.com', 'Linkmat.Com'))
-                ->to($event->getUser()->getEmail())
-                ->subject('Linkmat | Confirmation du compte')
-                ->htmlTemplate('registration/confirmation_email.html.twig')
-        );
+        $email = $this->mailer->createEmail('mails/auth/register.twig', [
+            'user' => $event->getUser(),
+        ])
+            ->to($event->getUser()->getEmail())
+            ->subject('Linkmat | Confirmation du compte');
+            $this->mailer->send($email);
     }
 
-    public function onVerified(UserVerifiedEvent $event):void {
+    public function onVerified(UserVerifiedEvent $event):void
+    {
         $this->emailVerifier->sendEmailConfirmation(
             'verify_email',
             $event->getUser(),
