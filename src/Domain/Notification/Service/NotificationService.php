@@ -45,8 +45,6 @@ class NotificationService
         $url = $this->serializer->serialize($entity, PathEncoder::FORMAT);
         /** @var NotificationRepository $repository */
         $repository = $this->em->getRepository(Notification::class);
-
-        // Si on notifie à propos d'un message du forum, la cible devient le topic
         $notification = (new Notification())
             ->setMessage($message)
             ->setUrl($url)
@@ -59,6 +57,24 @@ class NotificationService
 
         return $notification;
     }
+
+    public function notifyChannel(string $channel, string $message, mixed $entity = null): Notification
+    {
+        /** @var string $url */
+        $url = $entity ? $this->serializer->serialize($entity, PathEncoder::FORMAT) : null;
+        $notification = (new Notification())
+            ->setMessage($message)
+            ->setUrl($url)
+            ->setTarget($entity ? $this->getHashForEntity($entity) : null)
+            ->setCreatedAt(new \DateTime())
+            ->setChanel($channel);
+        $this->em->persist($notification);
+        $this->em->flush();
+        $this->dispatcher->dispatch(new NotificationCreatedEvent($notification));
+
+        return $notification;
+    }
+
 
     private function getHashForEntity(object $entity): string
     {
