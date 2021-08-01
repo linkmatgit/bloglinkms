@@ -9,6 +9,7 @@ use App\Domain\Manager\Manageable;
 use App\Domain\Mods\Repository\ModRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints\Regex;
 
 #[ORM\Entity(repositoryClass: ModRepository::class)]
 class Mod
@@ -27,7 +28,11 @@ class Mod
     private ?string $description = null;
 
     #[ORM\Column(type: Types::STRING, nullable: true)]
+    #[Regex('^(\d+\.)?(\d+\.)?(\*|\d+)$')]
     private ?string $version = null;
+
+    #[ORM\Column(type: Types::STRING, nullable: true)]
+    private ?string $url = null;
 
     #[ORM\Column(type: 'datetime', nullable: true)]
     private \DateTimeInterface $createdAt;
@@ -48,7 +53,7 @@ class Mod
 
     #[ORM\ManyToOne(targetEntity: Category::class)]
     #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')]
-    private ?Category $category;
+    private ?Category $category = null;
 
 
     public function getId(): ?int
@@ -164,6 +169,22 @@ class Mod
     {
         $this->category = $category;
         return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getUrl(): ?string
+    {
+        return $this->url;
+    }
+
+    /**
+     * @param string|null $url
+     */
+    public function setUrl(?string $url): void
+    {
+        $this->url = $url;
     }
 
 

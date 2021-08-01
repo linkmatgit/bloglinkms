@@ -24,7 +24,7 @@ class BlogSubcriber implements EventSubscriberInterface
     const  ADMIN_EMAIL = 'noreply@linkmat.conm';
 
     public function __construct(
-        private MailerInterface $mailer
+        private \App\Infrastructure\Mailing\Mailer $mailer
     ) {
     }
 
@@ -35,20 +35,13 @@ class BlogSubcriber implements EventSubscriberInterface
         ];
     }
     public function onCreate(PostCreatedEvent $event): void
-    {       $message = <<<TEXT
-Voici le Contenu:
- 
- {$event->getPost()->getContent()}
- 
- 
-Crée par: {$event->getPost()->getAuthor()->getName()}
-TEXT;
-        $email = new Email();
-        $email->from(self::ADMIN_EMAIL);
-        $email->to(self::ADMIN_EMAIL);
-        $email->subject("L'article {$event->getPost()->getTitle()} est pret pour la publication ");
-        $email->text($message);
-
+    {
+        $email = $this->mailer->createEmail('mails/auth/register.twig', [
+            'user' => $event->getPost()->getAuthor(),
+        ])
+            ->to($event->getPost()->getAuthor()->getEmail())
+            ->subject('Linkmat | Votre Mod a ete soumis')
+        ;
         $this->mailer->send($email);
     }
 

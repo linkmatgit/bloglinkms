@@ -3,7 +3,7 @@
 {% block title %}{{ icon('brand') }} Gestion des Marques
 {% endblock %}
 {% block actions %}
-  <a href="{{ path('admin_mod_brand_new') }}" class="btn-primary">{{ icon('check') }}Ajouter une Marque</a>
+  <a href="{{ path('admin_mod_new') }}" class="btn-primary">{{ icon('check') }}Ajouter une Marque</a>
 {% endblock %}
 
 {% block content %}
@@ -18,7 +18,7 @@
     </thead>
     <tbody>
     {% for row in rows %}
-      {% set link = path('admin_mod_brand_edit', {id: row.id}) %}
+      {% set link = path('admin_mod_edit', {id: row.id}) %}
       <tr>
         <td class="dashboard-id">
           <a href="{{ link }}">{{ row.id }}</a>
@@ -26,18 +26,20 @@
         <td>
           <a href="{{ link }}">{{ row.name }}</a>
         </td>
-        <td><span class="bullet {% if row.online == false %}bullet--danger{% endif %}"></span></td>
+        <td><span class="bullet {% if row.status == false %}bullet--danger{% endif %}"></span></td>
         <td>
           <div class="dashboard-actions">
 
             <a href="{{ path('admin_blog_clone', {id: row.id}) }}">{{ icon('clone') }}</a>
             <a href="{{ link }}">{{ icon('edit') }}</a>
-            <form action="{{ path('admin_mod_brand_edit', {id: row.id}) }}" method="post" onsubmit="return confirm('Voulez-vous vraiment supprimer ce contenu')">
+            <form action="{{ path('admin_mod_edit', {id: row.id}) }}" method="post" onsubmit="return confirm('Voulez-vous vraiment supprimer ce contenu')">
               <input type="hidden" name="_method" value="DELETE" />
               <button type="submit">
                 {{ icon('delete') }}
               </button>
             </form>
+            {{ row.approuve }}
+
           </div>
         </td>
       </tr>

@@ -32,14 +32,12 @@ trait Manageable
     #[ORM\JoinColumn(name: 'approuveby_id', referencedColumnName: 'id')]
     private ?User $approuveBy = null;
 
-    #[ORM\Column(type: Types::STRING)]
+    #[ORM\Column(type: Types::STRING, nullable: true)]
     #[Assert\Length(min: 3, minMessage: 'Le message doit un minimum de 3 character')]
-    #[Assert\NotBlank]
+
     private ?string $detail = null;
 
-    #[ORM\Column(type: Types::STRING)]
-    #[Assert\Url]
-    #[Assert\NotBlank]
+    #[ORM\Column(type: Types::STRING, nullable: true)]
     private ?string $urlOfMod = null;
 
 
@@ -74,7 +72,7 @@ trait Manageable
     /**
      * @return int
      */
-    public function getApproved(): int
+    public function getApprouve(): int
     {
         return $this->approuve;
     }
@@ -82,10 +80,11 @@ trait Manageable
     /**
      * @param int $approuve
      */
-    public function setApproved(int $approuve): void
+    public function setApprouve(int $approuve): void
     {
         $this->approuve = $approuve;
     }
+
 
     public function getApprouveName(): string
     {

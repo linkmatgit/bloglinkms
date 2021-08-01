@@ -12,6 +12,7 @@ use App\Domain\Mods\Event\ModRejectedEvent;
 use App\Domain\Mods\Event\ModUpdatedEvent;
 use App\Http\Admin\Controller\CrudController;
 use App\Http\Admin\Data\Mods\BrandsCrudData;
+use App\Http\Admin\Data\Mods\ModCrudData;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -20,7 +21,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class ModController extends CrudController
 {
     protected string $templatePath = 'mods/';
-    protected string $menuItem = 'mod';
+    protected string $menuItem = 'mods';
     protected string $entity = Mod::class;
     protected string $routePrefix = 'admin_mod';
     protected array $events = [
@@ -47,26 +48,26 @@ class ModController extends CrudController
     #[Route('/new', name: 'new', methods: ['POST', 'GET'])]
     public function new(): Response
     {
-        $entity = (new Brand());
+        $entity = (new Mod());
         $entity->setCreatedAt(new \DateTime());
         $entity->setAuthor($this->getUser());
-        $data = new BrandsCrudData($entity);
+        $data = new ModCrudData($entity);
 
         return $this->crudNew($data);
     }
 
 
     #[Route('/{id<\d+>}', name: 'edit', methods: ['POST', 'GET'])]
-    public function edit(Brand $row): Response
+    public function edit(Mod $row): Response
     {
-        $data = (new BrandsCrudData($row))->setEntityManager($this->em);
+        $data = (new ModCrudData($row))->setEntityManager($this->em);
 
         return $this->crudEdit($data);
     }
     
 
     #[Route('/{id<\d+>}', methods: ['DELETE'])]
-    public function delete(Brand $rows): Response
+    public function delete(Mod $rows): Response
     {
         return $this->crudDelete($rows);
     }

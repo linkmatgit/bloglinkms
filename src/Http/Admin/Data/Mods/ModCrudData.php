@@ -10,6 +10,7 @@ use App\Domain\Mods\Entity\Category;
 use App\Domain\Mods\Entity\Mod;
 use App\Http\Admin\Data\CrudDataInterface;
 use App\Http\Form\AutomaticForm;
+use App\Http\Form\ModsFormType;
 use Doctrine\ORM\EntityManagerInterface;
 
 class ModCrudData implements CrudDataInterface
@@ -17,38 +18,41 @@ class ModCrudData implements CrudDataInterface
 
     private ?EntityManagerInterface $em = null;
     private Mod $entity;
-    public ?string $title;
+    public ?string $name;
     public ?string $url;
-    public ?Category $category;
-    public ?Brand $brand;
-    public ?string $content;
+    public ?Category $category = null;
+    public ?string $description;
     public ?\DateTimeInterface $createdAt;
     public User $author;
     public ?User $creator;
+    public ?string $version;
+    public bool $console = false;
 
     public function __construct(Mod $row)
     {
         $this->entity = $row;
-        $this->title = $row->getName();
+        $this->name = $row->getName();
         $this->category = $row->getCategory();
-        $this->content = $row->getDescription();
+        $this->description = $row->getDescription();
         $this->createdAt = $row->getCreatedAt();
         $this->author = $row->getAuthor();
-        $this->url = $row->getUrlOfMod();
+        $this->url = $row->getUrl();
+        $this->version = $row->getVersion();
     }
     public function hydrate(): void
     {
         $this->entity->setAuthor($this->author);
-        $this->entity->setName($this->title);
-        $this->entity->setDescription($this->content);
+        $this->entity->setName($this->name);
+        $this->entity->setDescription($this->description);
         $this->entity->setCategory($this->category);
         $this->entity->setCreatedAt($this->createdAt);
-        $this->entity->setUrlOfMod($this->url);
+        $this->entity->setUrl($this->url);
+        $this->entity->setVersion($this->version);
     }
 
     public function getFormClass(): string
     {
-        return AutomaticForm::class;
+        return ModsFormType::class;
     }
 
 

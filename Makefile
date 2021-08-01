@@ -92,7 +92,9 @@ format: ## Formate le code
 	npx prettier-standard --lint --changed "assets/**/*.{js,css,jsx}"
 	docker run -v $(PWD):/app -w /app -t --rm php:8.0-cli-alpine php -d memory_limit=-1 ./vendor/bin/phpcbf
 	docker run -v $(PWD):/app -w /app -t --rm php:8.0-cli-alpine php -d memory_limit=-1 ./vendor/bin/php-cs-fixer fix
-
+.PHONY: de
+de:
+	$(de) php fish
 # -----------------------------------
 # Dépendances
 # -----------------------------------
