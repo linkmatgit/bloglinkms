@@ -22,6 +22,7 @@ class ModDto {
     public bool $console;
     public ?Category $category;
     public ?Brand $brand;
+
     public function __construct(Mod $mod)
     {
         $this->name = $mod->getName();

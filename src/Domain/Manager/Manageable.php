@@ -95,12 +95,23 @@ trait Manageable
     }
 
     /**
-     * @param \DateTimeInterface|null $approuveAt
+     * @return \DateTimeInterface|null
      */
-    public function setApprouveAt(?\DateTimeInterface $approuveAt): void
+    public function getApprouveAt(): ?\DateTimeInterface
+    {
+        return $this->approuveAt;
+    }
+
+    /**
+     * @param \DateTimeInterface|null $approuveAt
+     * @return Manageable
+     */
+    public function setApprouveAt(?\DateTimeInterface $approuveAt): Manageable
     {
         $this->approuveAt = $approuveAt;
+        return $this;
     }
+
 
     /**
      * @return User|null
@@ -161,7 +172,7 @@ trait Manageable
      * @param int|null $rejetTime
      * @return Manageable
      */
-    public function setRejetTime(?int $rejetTime): Manageable
+    public function setRejetTime(?int $rejetTime): self
     {
         $this->rejetTime = $rejetTime;
         return $this;
