@@ -1,0 +1,26 @@
+{% extends layout %}
+
+{% import "mails/macros.twig" as e %}
+
+{% block body %}
+
+    {% apply markdown_email %}
+
+        Bienvenue sur Linkmat.com
+        ===============================
+
+        Merci d'avoir soumis votre mod sur notre site. il est en attente d'etre validée par un Communautée Manager ou Admin.
+        Il peut y a avoir un delais de 12h a 24h avant que votre mod soit approuvée en cas de rejet vous avez jusqu'a 3 fois pour revisez
+        selon les norme du site.
+
+        Attention toute les lien d'avoir etre les ###lien original !!
+
+    {% endapply %}
+
+    {{ e.button('Voir mon mod', url('mod_submit', {id: mods.id})) }}
+
+    {% apply markdown_email %}
+        Si vous n'êtes pas à l'origine de la création de ce compte ne tenez pas compte de cet email, le compte sera automatiquement supprimé.
+    {% endapply %}
+
+{% endblock %}

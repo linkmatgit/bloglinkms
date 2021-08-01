@@ -12,6 +12,7 @@ use App\Http\Admin\Data\CrudDataInterface;
 use App\Http\Form\AutomaticForm;
 use App\Http\Form\ModsFormType;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 class ModCrudData implements CrudDataInterface
 {
@@ -19,6 +20,8 @@ class ModCrudData implements CrudDataInterface
     private ?EntityManagerInterface $em = null;
     private Mod $entity;
     public ?string $name;
+
+    #[Assert\Url]
     public ?string $url;
     public ?Category $category = null;
     public ?string $description;

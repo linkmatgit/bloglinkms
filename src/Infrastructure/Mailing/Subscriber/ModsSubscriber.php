@@ -24,8 +24,8 @@ class ModsSubscriber implements EventSubscriberInterface
 
     public function onCreate(ModCreatedEvent $event) {
 
-        $email = $this->mailer->createEmail('mails/auth/register.twig', [
-            'user' => $event->getMod()->getAuthor(),
+        $email = $this->mailer->createEmail('mails/mods/create.twig', [
+            'mods' => $event->getMod(),
         ])
             ->to($event->getMod()->getAuthor()->getEmail())
             ->subject('Linkmat | Votre Mod a ete soumis')

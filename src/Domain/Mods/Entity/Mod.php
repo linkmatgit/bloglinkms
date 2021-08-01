@@ -51,7 +51,7 @@ class Mod
     #[ORM\Column(type: Types::BOOLEAN, options: ['default' => false])]
     private bool $console = false;
 
-    #[ORM\ManyToOne(targetEntity: Category::class)]
+    #[ORM\ManyToOne(targetEntity: Category::class, inversedBy: 'mods')]
     #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')]
     private ?Category $category = null;
 
@@ -186,6 +186,7 @@ class Mod
     {
         $this->url = $url;
     }
+
 
 
 }

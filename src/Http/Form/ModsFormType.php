@@ -43,7 +43,7 @@ class ModsFormType extends AbstractType
                 },
                 'choice_label' => 'name',
             ])*/
-           // ->add('category', CategoryModType::class)
+            ->add('category', CategoryModType::class)
            // ->add('creator', UserChoiceType::class)
         ;
     }

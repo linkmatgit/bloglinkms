@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Domain\Mods\Entity;
 
 use App\Domain\Auth\User;
+use App\Domain\Blog\Entity\Post;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\DBAL\Types\Types;
@@ -52,9 +53,13 @@ class Category
     #[ORM\Column(type: Types::BOOLEAN, options: ['default' =>  false])]
     private bool $online = false;
 
+    #[ORM\OneToMany(mappedBy: 'category', targetEntity: Mod::class)]
+    private Collection $mods;
+
     public function __construct()
     {
         $this->children = new ArrayCollection();
+        $this->mods = new ArrayCollection();
     }
 
     /**
@@ -138,7 +143,7 @@ class Category
     }
 
     /**
-     * @return User
+     * @return User|null
      */
     public function getAuthor(): ?User
     {
@@ -203,9 +208,6 @@ class Category
         return $this;
     }
 
-
-
-
     /**
      * @return bool
      */
@@ -234,7 +236,7 @@ class Category
     {
         if (!$this->children->contains($child)) {
             $this->children[] = $child;
-            $child->setParentcat($this);
+            $child->setParent($this);
         }
 
         return $this;
@@ -244,9 +246,49 @@ class Category
     {
         if ($this->children->contains($child)) {
             $this->children->removeElement($child);
-            // set the owning side to null (unless already changed)
             if ($child->getParent() === $this) {
                 $child->setParent(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return ArrayCollection|Collection
+     */
+    public function getMods(): ArrayCollection|Collection
+    {
+        return $this->mods;
+    }
+
+    /**
+     * @param ArrayCollection|Collection $mods
+     * @return Category
+     */
+    public function setMods(ArrayCollection|Collection $mods): Category
+    {
+        $this->mods = $mods;
+        return $this;
+    }
+
+
+    public function addMod(Mod $mods): self
+    {
+        if (!$this->mods->contains($mods)) {
+            $this->mods[] = $mods;
+            $mods->setCategory($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMod(Mod $mods): self
+    {
+        if ($this->mods->contains($mods)) {
+            $this->mods->removeElement($mods);
+            if ($mods->getCategory() === $this) {
+                $mods->setCategory(null);
             }
         }
 

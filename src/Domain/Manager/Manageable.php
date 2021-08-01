@@ -5,6 +5,7 @@ namespace App\Domain\Manager;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Domain\Auth\User;
+use phpDocumentor\Reflection\Types\Integer;
 use Symfony\Component\Validator\Constraints as Assert;
 
 const OUVERT = 1;
@@ -40,6 +41,8 @@ trait Manageable
     #[ORM\Column(type: Types::STRING, nullable: true)]
     private ?string $urlOfMod = null;
 
+    #[ORM\Column(type: Types::INTEGER, nullable: true)]
+    private ?int $rejetTime = null;
 
     public static array $status = [
         OUVERT => 'Ouvert',
@@ -146,22 +149,24 @@ trait Manageable
     {
         $this->urlOfMod = $urlOfMod;
     }
-
-    /**
-     * @return array|string[]
+        /**
+     * @return int|null
      */
-    public static function getStatus(): array
+    public function getRejetTime(): ?int
     {
-        return self::$status;
+        return $this->rejetTime;
     }
 
     /**
-     * @param array|string[] $status
+     * @param int|null $rejetTime
+     * @return Manageable
      */
-    public static function setStatus(array $status): void
+    public function setRejetTime(?int $rejetTime): Manageable
     {
-        self::$status = $status;
+        $this->rejetTime = $rejetTime;
+        return $this;
     }
+
 
 
 }

@@ -1,9 +1,9 @@
 {% extends 'admin/layout/card.html.twig' %}
 
-{% block title %}{{ icon('brand') }} Gestion des Marques
+{% block title %}{{ icon('brand') }} Gestion des Mods
 {% endblock %}
 {% block actions %}
-  <a href="{{ path('admin_mod_new') }}" class="btn-primary">{{ icon('check') }}Ajouter une Marque</a>
+  <a href="{{ path('admin_mod_new') }}" class="btn-primary">{{ icon('check') }}Ajouter un Mods</a>
 {% endblock %}
 
 {% block content %}
@@ -26,7 +26,7 @@
         <td>
           <a href="{{ link }}">{{ row.name }}</a>
         </td>
-        <td><span class="bullet {% if row.status == false %}bullet--danger{% endif %}"></span></td>
+        <td><span class="bullet {% if row.approuve == false %}bullet--danger{% endif %}"></span></td>
         <td>
           <div class="dashboard-actions">
 
@@ -38,7 +38,6 @@
                 {{ icon('delete') }}
               </button>
             </form>
-            {{ row.approuve }}
 
           </div>
         </td>

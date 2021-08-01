@@ -18,7 +18,7 @@ class CategoryModType extends EntityType
             'class' => Category::class,
             'query_builder' => function (EntityRepository $er) {
                 return $er->createQueryBuilder('c')
-                    ->where('c.parent IS NULL')
+                    ->where('c.online = true')
                     ->orderBy('c.name', 'ASC');
             },
             'choice_label' => 'name',
