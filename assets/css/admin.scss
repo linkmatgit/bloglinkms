@@ -4,6 +4,5 @@
 body.admin::after {
   display: none;
 }
-@import "modules/attachments";
-@import "modules/modal";
+
 @import "admin/dashboard";

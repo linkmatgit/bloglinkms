@@ -34,9 +34,9 @@ public function __construct(private EntityManagerInterface $em)
         }
         $users = $repository
         ->createQueryBuilder('u')
-        ->select('u.id', 'u.username')
-        ->where('LOWER(u.username) LIKE :username')
-        ->setParameter('username', "%$q%")
+        ->select('u.id', 'u.name')
+        ->where('LOWER(u.name) LIKE :name')
+        ->setParameter('name', "%$q%")
         ->setMaxResults(25)
         ->getQuery()
         ->getResult();

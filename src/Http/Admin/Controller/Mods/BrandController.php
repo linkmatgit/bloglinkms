@@ -3,20 +3,20 @@
 
 namespace App\Http\Admin\Controller\Mods;
 
-use App\Domain\Mods\Entity\Category;
+use App\Domain\Mods\Entity\Brand;
 use App\Http\Admin\Controller\CrudController;
-use App\Http\Admin\Data\Mods\CategoryCrudData;
+use App\Http\Admin\Data\Mods\BrandsCrudData;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/mods/category', name: 'mod_category_')]
-class CategoryController extends CrudController
+#[Route('/mods/brand', name: 'mod_brand_')]
+class BrandController extends CrudController
 {
-    protected string $templatePath = 'mods/category';
-    protected string $menuItem = 'mod_category';
-    protected string $entity = Category::class;
-    protected string $routePrefix = 'admin_mod_category';
+    protected string $templatePath = 'mods/brand';
+    protected string $menuItem = 'brand';
+    protected string $entity = Brand::class;
+    protected string $routePrefix = 'admin_mod_brand';
     protected array $events = [
         'update' => null,
         'delete' =>  null,
@@ -39,19 +39,19 @@ class CategoryController extends CrudController
     #[Route('/new', name: 'new', methods: ['POST', 'GET'])]
     public function new(): Response
     {
-        $entity = (new Category());
+        $entity = (new Brand());
         $entity->setCreatedAt(new \DateTime());
         $entity->setAuthor($this->getUser());
-        $data = new CategoryCrudData($entity);
+        $data = new BrandsCrudData($entity);
 
         return $this->crudNew($data);
     }
 
 
     #[Route('/{id<\d+>}', name: 'edit', methods: ['POST', 'GET'])]
-    public function edit(Category $row): Response
+    public function edit(Brand $row): Response
     {
-        $data = (new CategoryCrudData($row))->setEntityManager($this->em);
+        $data = (new BrandsCrudData($row))->setEntityManager($this->em);
 
         return $this->crudEdit($data);
     }
@@ -66,7 +66,7 @@ class CategoryController extends CrudController
 */
 
     #[Route('/{id<\d+>}', methods: ['DELETE'])]
-    public function delete(Category $rows): Response
+    public function delete(Brand $rows): Response
     {
         return $this->crudDelete($rows);
     }

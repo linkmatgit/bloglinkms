@@ -54,7 +54,7 @@ class UserChoiceType extends AbstractType implements DataTransformerInterface
         'is' => 'select-choices',
         'data-remote' => $this->url->generate('admin_user_autocomplete'),
         'data-value' => 'id',
-        'data-label' => 'username',
+        'data-label' => 'name',
         ],
         ]);
     }

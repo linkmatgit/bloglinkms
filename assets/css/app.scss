@@ -47,7 +47,7 @@ body {
     word-break: break-word;
 }
 
-
+@import "modules/alert";
 @import "modules/header";
 @import "modules/button";
 @import "modules/form";
@@ -55,9 +55,8 @@ body {
 @import "modules/select";
 @import "modules/card";
 @import "modules/tables";
-@import "modules/bullet";
-@import "modules/alert";
-@import "modules/search";
+
+
 
 
 

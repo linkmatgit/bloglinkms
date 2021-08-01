@@ -19,6 +19,9 @@ class Brand
     #[ORM\Column(type: Types::STRING, nullable: true)]
     private ?string $name = null;
 
+    #[ORM\Column(type: Types::STRING, nullable: true)]
+    private ?string $slug = null;
+
     #[ORM\Column(type: Types::BOOLEAN, options: ['default' => false])]
     private bool $online = false;
 
@@ -30,7 +33,7 @@ class Brand
     private \DateTimeInterface $createdAt;
 
     #[ORM\Column(type: 'datetime', nullable: true)]
-    private \DateTimeInterface $updatedAt;
+    private ?\DateTimeInterface $updatedAt = null;
 
 
 
@@ -67,6 +70,24 @@ class Brand
     public function setName(?string $name): self
     {
         $this->name = $name;
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    /**
+     * @param string|null $slug
+     * @return Brand
+     */
+    public function setSlug(?string $slug): Brand
+    {
+        $this->slug = $slug;
         return $this;
     }
 
@@ -128,7 +149,7 @@ class Brand
     /**
      * @return \DateTimeInterface
      */
-    public function getUpdatedAt(): \DateTimeInterface
+    public function getUpdatedAt(): ?\DateTimeInterface
     {
         return $this->updatedAt;
     }
@@ -137,7 +158,7 @@ class Brand
      * @param \DateTimeInterface $updatedAt
      * @return Brand
      */
-    public function setUpdatedAt(\DateTimeInterface $updatedAt): self
+    public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
         return $this;

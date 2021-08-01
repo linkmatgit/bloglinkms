@@ -21,20 +21,20 @@ class Category
     private ?int $id = null;
 
     #[ORM\Column(type: Types::STRING)]
-    private string $name;
+    private string $name = '';
 
     #[ORM\Column(type: Types::STRING)]
-    private string $slug;
+    private string $slug = '';
 
     #[ORM\Column(type: Types::STRING)]
-    private string $description;
+    private string $description = '';
 
     #[ORM\Column(type: Types::INTEGER, nullable: true)]
     private ?int $position = null;
 
     #[ORM\ManyToOne(targetEntity: User::class)]
     #[ORM\JoinColumn(nullable: true, onDelete: 'CASCADE')]
-    private User $author;
+    private ?User $author = null;
 
     #[ORM\Column(type: 'datetime', nullable: true)]
     private ?\DateTimeInterface $createdAt = null;
@@ -140,7 +140,7 @@ class Category
     /**
      * @return User
      */
-    public function getAuthor(): User
+    public function getAuthor(): ?User
     {
         return $this->author;
     }
@@ -148,7 +148,7 @@ class Category
     /**
      * @param User $author
      */
-    public function setAuthor(User $author): void
+    public function setAuthor(?User $author): void
     {
         $this->author = $author;
     }
@@ -195,11 +195,16 @@ class Category
 
     /**
      * @param Category|null $parent
+     * @return Category
      */
-    public function setParent(?Category $parent): void
+    public function setParent(?Category $parent): Category
     {
         $this->parent = $parent;
+        return $this;
     }
+
+
+
 
     /**
      * @return bool
@@ -229,7 +234,7 @@ class Category
     {
         if (!$this->children->contains($child)) {
             $this->children[] = $child;
-            $child->setParent($this);
+            $child->setParentcat($this);
         }
 
         return $this;

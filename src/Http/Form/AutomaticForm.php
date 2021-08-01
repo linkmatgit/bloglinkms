@@ -4,6 +4,8 @@ namespace App\Http\Form;
 
 use App\Domain\Auth\User;
 use App\Domain\Blog\Entity\Category;
+use App\Http\Admin\Data\Mods\CategoryCrudData;
+use App\Http\Admin\Type\CategoryModType;
 use App\Http\Admin\Type\CategoryType;
 use App\Http\Admin\Type\UserChoiceType;
 use App\Http\Type\DateTimeType;
@@ -30,16 +32,15 @@ class AutomaticForm extends AbstractType
     'float' => NumberType::class,
       User::class => UserChoiceType::class,
       Category::class => CategoryType::class,
-      DateTimeInterface::class => DateTimeType::class
+      DateTimeInterface::class => DateTimeType::class,
     ];
 
     const NAMES = [
-    'description' => TextareaType::class,
-    'short' => TextareaType::class,
-    'color' => ColorType::class,
-    'links' => TextareaType::class,
-      'content' => EditorType::class
-
+        'description' => TextareaType::class,
+        'short' => TextareaType::class,
+        'color' => ColorType::class,
+        'links' => TextareaType::class,
+        'content' => EditorType::class,
     ];
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -48,7 +49,7 @@ class AutomaticForm extends AbstractType
         $classProperties = $refClass->getProperties(\ReflectionProperty::IS_PUBLIC);
         foreach ($classProperties as $property) {
             $name = $property->getName();
-          /** @var \ReflectionNamedType|null $type */
+            /** @var \ReflectionNamedType|null $type */
             $type = $property->getType();
             if (null === $type) {
                 return;
@@ -64,7 +65,12 @@ class AutomaticForm extends AbstractType
                 'required' => !$type->allowsNull() && 'bool' !== $type->getName(),
                 ]);
             } else {
-                throw new \RuntimeException(sprintf('Impossible de trouver le champs associé au type %s dans %s::%s', $type->getName(), get_class($data), $name));
+                throw new \RuntimeException(sprintf(
+                    'Impossible de trouver le champs associé au type %s dans %s::%s',
+                    $type->getName(),
+                    get_class($data),
+                    $name
+                ));
             }
         }
     }
