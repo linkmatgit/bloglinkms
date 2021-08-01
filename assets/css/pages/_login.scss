@@ -73,3 +73,16 @@
   width: 16px;
   height: 16px;
 }
+.login__form {
+  @extend %card;
+   width:500px;
+  margin: auto auto;
+  border: 1px solid var(--border);
+  padding: calc(var(--space) * 3);
+}
+.login__title {
+  font-size: 30px;
+  font-family: $font-alt;
+  font-weight: 700;
+  text-transform: uppercase;
+}
