@@ -32,4 +32,5 @@ class ModsSubscriber implements EventSubscriberInterface
         ;
         $this->mailer->send($email);
     }
+
 }

@@ -54,6 +54,17 @@
 .user__tabs {
   border-top: 1px solid var(--border);
   margin-top: space(3);
+
+  a:hover,
+  a[aria-current],
+  button:hover {
+    color: var(--contrast);
+    opacity: 1;
+  }
+
+  &::after {
+    opacity: 0.3;
+  }
 }
 .user__tabs ul{
   display: flex;

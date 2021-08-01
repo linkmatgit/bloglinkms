@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% include 'users/accounts/header.html.twig' %}
+    <div class="container">
+
+        {% include 'users/accounts/_privateCard.html.twig' %}
+    </div>
+{% endblock %}
+
+{% block title  'Mon Compte'%}
+
+{% set bodyClass = 'header-light' %}

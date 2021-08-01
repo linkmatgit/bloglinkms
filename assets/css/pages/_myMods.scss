@@ -1,0 +1,10 @@
+.mod__grid {
+  @extend %grid;
+}
+.container_spacing {
+  margin-top: calc(var(--space) * 4);
+}
+.mod__grid .card__description {
+  font-weight: 500;
+
+}

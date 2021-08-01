@@ -1,8 +1,10 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-  {% include 'users/accounts/header.html.twig' %}
-
+    {% include 'users/accounts/header.html.twig' %}
+    <div class="container">
+        {{ mods.name }}
+    </div>
 {% endblock %}
 
 {% block title  'Mon Compte'%}

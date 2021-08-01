@@ -19,6 +19,7 @@ $font-alt: 'open-sans', sans-serif;
   strong {
     color: var(--contrast);
   }
+}
   %section-title,
   .section-title {
     font-family: $font-alt;
@@ -29,13 +30,14 @@ $font-alt: 'open-sans', sans-serif;
     margin-bottom: space(2);
   }
 
-  %card-title {
+  %card-title,
+  .card-title{
     font-family: $font-alt;
     font-size: 20px;
     font-weight: bold;
   }
 
-}
+
 
 .page-title {
   font-size: 30px;

@@ -38,6 +38,8 @@ abstract class CrudController extends BaseController
         'update' => ContentUpdatedEvent::class,
         'delete' => ContentDeletedEvent::class,
         'create' => ContentCreatedEvent::class,
+        'approuve' => null,
+        'reject' => null
     ];
     protected EntityManagerInterface $em;
     protected PaginatorInterface $paginator;
@@ -143,6 +145,9 @@ abstract class CrudController extends BaseController
         return $this->redirectToRoute($redirectRoute ?: ($this->routePrefix . '_index'));
     }
 
+
+
+
     public function getRepository(): EntityRepository
     {
         /** @var EntityRepository $repository */
@@ -157,4 +162,5 @@ abstract class CrudController extends BaseController
             ->where("LOWER(row.{$this->searchField}) LIKE :search")
             ->setParameter('search', '%' . strtolower($search) . '%');
     }
+
 }

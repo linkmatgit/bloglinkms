@@ -1,0 +1,29 @@
+<div class="header__profil">
+    <div class="container pt3">
+        <div class="profil__main">
+            <div class="profil__header__avatar">
+                <img src="{{ user | avatar }}" alt="">
+            </div>
+            <div class="profil-header__body">
+                <h1 class="h1">Mon Compte</h1>
+                <p>{{ user.createdAt | date("M-d-Y") }}</p>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="user__tabs">
+        <div  class="container">
+            <ul class="tabs_profils">
+                <li><a href="#"> {{ icon('lines') }} General</a></li>
+                <li><a href="#"> {{ icon('edit') }} Edition</a></li>
+                <li><a href="#"> {{ icon('cog') }} Vos WIP</a></li>
+                <li><a href="#"  {{ menu_active('mods') }}> {{ icon('cloud') }} Vos Mods</a></li>
+                <li><a href="{{ path('admin_home') }}" class="mla"> {{ icon('locka') }} Administration</a></li>
+                <li><a href="{{ path('admin_home') }}" class="mla"> {{ icon('team') }} Manager</a></li>
+
+            </ul>
+        </div>
+    </div>
+
+</div>
