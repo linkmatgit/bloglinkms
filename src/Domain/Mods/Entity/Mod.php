@@ -28,7 +28,6 @@ class Mod
     private ?string $description = null;
 
     #[ORM\Column(type: Types::STRING, nullable: true)]
-    #[Regex('^(\d+\.)?(\d+\.)?(\*|\d+)$')]
     private ?string $version = null;
 
     #[ORM\Column(type: Types::STRING, nullable: true)]
@@ -55,6 +54,9 @@ class Mod
     #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')]
     private ?Category $category = null;
 
+    #[ORM\ManyToOne(targetEntity: Brand::class, inversedBy: 'target')]
+    #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')]
+    private ?Brand $brand = null;
 
     public function getId(): ?int
     {
@@ -185,6 +187,24 @@ class Mod
     public function setUrl(?string $url): void
     {
         $this->url = $url;
+    }
+
+    /**
+     * @return Brand|null
+     */
+    public function getBrand(): ?Brand
+    {
+        return $this->brand;
+    }
+
+    /**
+     * @param Brand|null $brand
+     * @return Mod
+     */
+    public function setBrand(?Brand $brand): Mod
+    {
+        $this->brand = $brand;
+        return $this;
     }
 
 

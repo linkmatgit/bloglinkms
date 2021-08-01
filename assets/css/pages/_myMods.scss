@@ -8,3 +8,14 @@
   font-weight: 500;
 
 }
+.mod__tabs{
+  display: flex;
+  justify-content: flex-end;
+
+}
+.mod__tabs li{
+    margin-left: var(--space);
+}
+.mod__header {
+  @extend %container;
+}

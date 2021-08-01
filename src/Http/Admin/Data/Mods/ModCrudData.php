@@ -30,6 +30,7 @@ class ModCrudData implements CrudDataInterface
     public ?User $creator;
     public ?string $version;
     public bool $console = false;
+    public ?Brand $brand ;
 
     public function __construct(Mod $row)
     {
@@ -41,6 +42,7 @@ class ModCrudData implements CrudDataInterface
         $this->author = $row->getAuthor();
         $this->url = $row->getUrl();
         $this->version = $row->getVersion();
+        $this->brand = $row->getBrand();
     }
     public function hydrate(): void
     {
@@ -51,6 +53,7 @@ class ModCrudData implements CrudDataInterface
         $this->entity->setCreatedAt($this->createdAt);
         $this->entity->setUrl($this->url);
         $this->entity->setVersion($this->version);
+        $this->entity->setBrand($this->brand);
     }
 
     public function getFormClass(): string

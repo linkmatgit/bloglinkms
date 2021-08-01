@@ -3,6 +3,9 @@
 namespace App\Domain\Mods\Entity;
 
 use App\Domain\Auth\User;
+use App\Domain\Blog\Entity\Post;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -35,8 +38,13 @@ class Brand
     #[ORM\Column(type: 'datetime', nullable: true)]
     private ?\DateTimeInterface $updatedAt = null;
 
+    #[ORM\OneToMany(mappedBy: 'brand', targetEntity: Mod::class)]
+    private Collection $target;
 
-
+    public function __construct()
+    {
+        $this->target = new ArrayCollection();
+    }
     /**
      * @return int|null
      */
@@ -161,6 +169,48 @@ class Brand
     public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
+        return $this;
+    }
+
+    /**
+     * @return ArrayCollection|Collection
+     */
+    public function getTarget(): ArrayCollection|Collection
+    {
+        return $this->target;
+    }
+
+    /**
+     * @param ArrayCollection|Collection $target
+     * @return Brand
+     */
+    public function setTarget(ArrayCollection|Collection $target): Brand
+    {
+        $this->target = $target;
+        return $this;
+    }
+
+
+    public function addPost(Mod $target): self
+    {
+        if (!$this->target->contains($target)) {
+            $this->target[] = $target;
+            $target->setBrand($this);
+        }
+
+        return $this;
+    }
+
+    public function removePost(Mod $target): self
+    {
+        if ($this->target->contains($target)) {
+            $this->target->removeElement($target);
+            // set the owning side to null (unless already changed)
+            if ($target->getBrand() === $this) {
+                $target->setBrand(null);
+            }
+        }
+
         return $this;
     }
 }

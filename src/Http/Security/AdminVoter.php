@@ -35,9 +35,9 @@ class AdminVoter extends Voter
         }
 
         if ('prod' === $this->appEnv) {
-            return 'Linkmat' === $user->getUsername() && 1 === $user->getId();
+            return 'Linkmat' === $user->getName() && 1 === $user->getId();
         }
 
-        return 'Linkmat' === $user->getUsername();
+        return 'Linkmat' === $user->getName();
     }
 }

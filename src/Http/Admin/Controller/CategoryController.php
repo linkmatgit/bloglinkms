@@ -41,9 +41,8 @@ class CategoryController extends CrudController
     #[Route('/new', name: 'new', methods: ['POST', 'GET'])]
     public function new(): Response
     {
-        $category = (new Category())->setCreatedAt(new \DateTime())->setAuthor($this->getUser());
+        $category = new Category();
         $data = new CategoryCrudData($category);
-
         return $this->crudNew($data);
     }
 

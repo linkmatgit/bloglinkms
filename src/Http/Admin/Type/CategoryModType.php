@@ -22,6 +22,7 @@ class CategoryModType extends EntityType
                     ->orderBy('c.name', 'ASC');
             },
             'choice_label' => 'name',
+            'placeholder' => 'Choisir une category'
         ]);
     }
 }

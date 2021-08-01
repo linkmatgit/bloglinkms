@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Domain\Mods\Entity;
 
 use App\Domain\Auth\User;
-use App\Domain\Blog\Entity\Post;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\DBAL\Types\Types;
@@ -43,13 +42,6 @@ class Category
     #[ORM\Column(type: 'datetime', nullable: true)]
     private ?\DateTimeInterface $updatedAt = null;
 
-    #[ORM\ManyToOne(targetEntity: Category::class, inversedBy: 'children')]
-    private ?Category $parent = null;
-
-    #[ORM\OneToMany(mappedBy: 'parent', targetEntity: Category::class)]
-    #[ORM\OrderBy(['position' => 'ASC'])]
-    private Collection $children;
-
     #[ORM\Column(type: Types::BOOLEAN, options: ['default' =>  false])]
     private bool $online = false;
 
@@ -58,7 +50,6 @@ class Category
 
     public function __construct()
     {
-        $this->children = new ArrayCollection();
         $this->mods = new ArrayCollection();
     }
 
@@ -223,37 +214,6 @@ class Category
     {
         $this->online = $online;
     }
-
-
-    /**
-     * @param Collection $children
-     */
-    public function setChildren(Collection $children): void
-    {
-        $this->children = $children;
-    }
-    public function addChildren(self $child): self
-    {
-        if (!$this->children->contains($child)) {
-            $this->children[] = $child;
-            $child->setParent($this);
-        }
-
-        return $this;
-    }
-
-    public function removeChildren(self $child): self
-    {
-        if ($this->children->contains($child)) {
-            $this->children->removeElement($child);
-            if ($child->getParent() === $this) {
-                $child->setParent(null);
-            }
-        }
-
-        return $this;
-    }
-
     /**
      * @return ArrayCollection|Collection
      */

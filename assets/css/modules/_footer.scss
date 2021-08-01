@@ -1,14 +1,13 @@
-footer {
-    position: relative;
-
-}
-.footer__container {
+// Footer
+// =============
+.footer {
+  @extend %container;
+  margin-top: space(9);
+  padding-top: space(6);
+  padding-bottom: space(6);
+  background: var(--contrast); // linear-gradient(#00000003, #00000003);
+  border-top: solid 4px var(--border-light);
+  grid-gap: space(4);
   position: absolute;
   bottom: 0;
-  left: 0;
-  right: 0;
-  width: 100%;
-  background: #2d3748;
-  height: 50px;
-  display: block;
 }

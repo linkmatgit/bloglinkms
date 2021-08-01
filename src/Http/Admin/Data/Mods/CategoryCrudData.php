@@ -15,38 +15,38 @@ class CategoryCrudData implements CrudDataInterface
 
     private ?EntityManagerInterface $em = null;
     private Category $entity;
-    public string $name;
-    public string $slug;
-    public string $description;
+    public ?string $name;
+    public ?string $description;
     public bool $online;
-    public ?\DateTimeInterface $createdAt;
-    public ?User $author;
-    private ?Category $parent;
+    public \DateTimeInterface $createdAt;
+    public ?string $slug;
     public ?int $position;
+    public User $author;
 
     public function __construct(Category $row)
     {
         $this->entity = $row;
-        $this->name = $row->getName();
-        $this->description = $row->getDescription();
-        $this->online = $row->isOnline();
+       $this->name = $row->getName();
+       $this->description = $row->getDescription();
+         $this->online = $row->isOnline();
         $this->createdAt = $row->getCreatedAt();
         $this->slug = $row->getSlug();
-        $this->author = $row->getAuthor();
-        $this->parent = $row->getParent();
         $this->position = $row->getPosition();
+        $this->author = $row->getAuthor();
+
+
     }
     public function hydrate(): void
     {
-        $this->entity->setAuthor($this->author);
         $this->entity->setName($this->name);
-        $this->entity->setSlug($this->slug);
         $this->entity->setDescription($this->description);
-        $this->entity->setCreatedAt($this->createdAt);
-        $this->entity->setUpdatedAt(new \DateTime());
         $this->entity->setOnline($this->online);
-        $this->entity->setParent($this->parent);
+        $this->entity->setCreatedAt($this->createdAt);
+        $this->entity->setSlug($this->slug);
+        $this->entity->setUpdatedAt(new \DateTime());
         $this->entity->setPosition($this->position);
+        $this->entity->setAuthor($this->author);
+
     }
 
     public function getFormClass(): string

@@ -36,11 +36,11 @@ class AutomaticForm extends AbstractType
     ];
 
     const NAMES = [
-        'description' => TextareaType::class,
         'short' => TextareaType::class,
         'color' => ColorType::class,
         'links' => TextareaType::class,
         'content' => EditorType::class,
+        'description' => EditorType::class
     ];
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {

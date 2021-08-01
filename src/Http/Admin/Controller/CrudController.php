@@ -38,8 +38,6 @@ abstract class CrudController extends BaseController
         'update' => ContentUpdatedEvent::class,
         'delete' => ContentDeletedEvent::class,
         'create' => ContentCreatedEvent::class,
-        'approuve' => null,
-        'reject' => null
     ];
     protected EntityManagerInterface $em;
     protected PaginatorInterface $paginator;
@@ -106,6 +104,7 @@ abstract class CrudController extends BaseController
         ]);
     }
 
+
     public function crudNew(CrudDataInterface $data): Response
     {
         /** @var Request $request */
@@ -123,8 +122,9 @@ abstract class CrudController extends BaseController
             }
             $this->addFlash('success', 'Le contenu a bien été créé');
 
-            return $this->redirectToRoute($this->routePrefix . '_edit', ['id' => $entity->getId()]);
+            return $this->redirectToRoute($this->routePrefix.'_edit', ['id' => $entity->getId()]);
         }
+
 
         return $this->render("admin/{$this->templatePath}/new.html.twig", [
             'form' => $form->createView(),
@@ -132,6 +132,8 @@ abstract class CrudController extends BaseController
             'menu' => $this->menuItem,
         ]);
     }
+
+
 
     public function crudDelete(object $entity, ?string $redirectRoute = null): RedirectResponse
     {

@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container my5">
+    <div class="mod__header"><h1 class="hero-title">Ajoutée un <span>Mod</span> </h1> </div>
+    {% include 'users/accounts/__modForm.html.twig' %}
+    </div>
+{% endblock %}
+
+{% block title  'Mon Compte'%}
+
+{% set bodyClass = 'header-light' %}
+

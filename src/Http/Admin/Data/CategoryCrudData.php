@@ -32,7 +32,7 @@ class CategoryCrudData implements CrudDataInterface
     public function __construct(Category $row)
     {
         $this->entity = $row;
-        $this->name =  $row->getName();
+       $this->name =  $row->getName();
         $this->description = $row->getDescription();
         $this->online = $row->isOnline();
         $this->createdAt = $row->getCreatedAt();
@@ -52,6 +52,12 @@ class CategoryCrudData implements CrudDataInterface
         $this->entity->setColor($this->color);
     }
 
+    public function setEntityManager(EntityManagerInterface $em): self
+    {
+        $this->em = $em;
+
+        return $this;
+    }
     public function getEntity(): object
     {
         return  $this->entity;

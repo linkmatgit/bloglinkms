@@ -2,9 +2,24 @@
 
 {% block body %}
     {% include 'users/accounts/header.html.twig' %}
-    <div class="container">
 
-        {% include 'users/accounts/_privateCard.html.twig' %}
+    <div class="container mt2">
+            <div class="">
+                <ul class="mod__tabs">
+                    {% if submits | length is not empty %}
+                        <li><a href="{{ path('mod_submit') }}" class="btn-primary-outlined">{{ icon('check') }}Mod en Attente</a></li>
+                        <li><a href="{% if is_granted('ROLE_AMIN') %}{{ path('admin_mod_new') }}{% else %}{{ path('mod_new') }}{% endif %}" class="btn-primary-outlined">{{ icon('check') }}Proposer un mods</a></li>
+                    {% endif %}
+                </ul>
+
+
+                </div>
+        {% if privates | length is empty %}
+            <h1>Vous n'avez aucun Mods</h1>
+        {% else %}
+            {% include 'users/accounts/_privateCard.html.twig' %}
+        {% endif %}
+
     </div>
 {% endblock %}
 

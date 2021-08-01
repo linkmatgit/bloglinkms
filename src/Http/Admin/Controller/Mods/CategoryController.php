@@ -35,15 +35,16 @@ class CategoryController extends CrudController
         return $this->crudIndex($query);
     }
 
-    #[Route('/new', name: 'new', methods: ['POST', 'GET'])]
+    #[Route('/new', name: 'new')]
     public function new(): Response
     {
-        $entity = (new Category());
+        $entity = new Category();
         $entity->setCreatedAt(new \DateTime());
         $entity->setAuthor($this->getUser());
+        $entity->setPosition(1);
         $data = new CategoryCrudData($entity);
 
-        return $this->crudNew($data);
+       return $this->crudNew($data);
     }
 
 
@@ -55,14 +56,7 @@ class CategoryController extends CrudController
         return $this->crudEdit($data);
     }
 
-  /*  #[Route('/{id<\d+>}/clone', name: 'clone', methods: ['GET', 'POST'])]
-    public function clone(Post $rows): Response
-    {
-        $row = PostCloner::clone($rows);
-        $data = new PostCrudData($row);
-        return $this->crudNew($data);
-    }
-*/
+
 
     #[Route('/{id<\d+>}', methods: ['DELETE'])]
     public function delete(Category $rows): Response

@@ -23,6 +23,7 @@
   flex-direction: column;
   width: 100%;
   overflow: hidden;
+  position: relative;
 }
 
 
@@ -58,6 +59,10 @@
     min-width: 0;
   }
 }
+.flex-end {
+  justify-content: flex-end;
+}
+
 %stack,
 .stack,
 .stack-large,
@@ -252,4 +257,11 @@
 }
 .none {
   display: none;
+}
+.relative {
+  position: relative;
+  display: block;
+}
+.block {
+  display: block;
 }

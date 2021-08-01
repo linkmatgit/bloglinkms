@@ -15,9 +15,9 @@ class CategoryType extends EntityType
         $resolver->setDefaults([
         'class' => Category::class,
         'query_builder' => function (EntityRepository $er) {
-            return $er->createQueryBuilder('c')
-            ->where('c.online = true')
-            ->orderBy('c.name', 'ASC');
+            return $er->createQueryBuilder('c');
+           // ->where('c.online = true')
+           // ->orderBy('c.name', 'ASC');
         },
         'choice_label' => 'name',
         ]);

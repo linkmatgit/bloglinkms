@@ -23,10 +23,10 @@ class ModRepository extends AbstractRepository
 
         $query = $this->createQueryBuilder('m')
             ->where('m.author = :user')
-            ->orderBy('m.id', 'DESC')
+            ->orderBy('m.createdAt', 'ASC')
             ->andWhere('m.approuve = 0')
             ->andWhere('m.rejetTime < 4')
-            ->setMaxResults(4)
+            ->setMaxResults(8)
             ->setParameter('user', $user)
             ->getQuery();
         return  $query;
