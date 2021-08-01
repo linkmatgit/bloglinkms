@@ -4,6 +4,7 @@ namespace App\Domain\Auth;
 
 use App\Domain\Auth\Repository\UserRepository;
 use App\Domain\Auth\Security\BanTrait;
+use App\Domain\Notification\Entity\Notifiable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -19,6 +20,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     use BanTrait;
+    use Notifiable;
 
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: 'IDENTITY')]

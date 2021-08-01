@@ -16,6 +16,7 @@
         "doctrine/orm": "^2.9",
         "erusev/parsedown": "^1.7",
         "knplabs/knp-paginator-bundle": "^5.6",
+        "lcobucci/jwt": "^4.1",
         "nelmio/cors-bundle": "^2.1",
         "phpdocumentor/reflection-docblock": "^5.2",
         "predis/predis": "^1.1",
@@ -31,6 +32,7 @@
         "symfony/http-client": "5.3.*",
         "symfony/intl": "5.3.*",
         "symfony/mailer": "5.3.*",
+
         "symfony/mercure-bundle": "^0.3.2",
         "symfony/messenger": "5.3.*",
         "symfony/mime": "5.3.*",

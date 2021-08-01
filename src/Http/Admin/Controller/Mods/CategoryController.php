@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Http\Admin\Controller\Mods;
 
 use App\Domain\Mods\Entity\Category;
