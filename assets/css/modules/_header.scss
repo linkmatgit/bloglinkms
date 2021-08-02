@@ -1,6 +1,4 @@
-.home .icon{
-  color: #000;
-}
+
 .header {
   @extend %container;
   position: relative;
@@ -46,10 +44,12 @@
   a:hover,
   a[aria-current],
   button:hover {
-    color: var(--color-inversed);
+    color: var(--contrast);
     opacity: 1;
   }
-
+  .home a[aria-current] {
+  color: var(--contrast);
+     }
   &::after {
     opacity: 0.3;
   }

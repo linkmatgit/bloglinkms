@@ -8,8 +8,10 @@
                 <ul class="mod__tabs">
                     {% if submits | length is not empty %}
                         <li><a href="{{ path('mod_submit') }}" class="btn-primary-outlined">{{ icon('check') }}Mod en Attente</a></li>
+                  {% endif%}
+
                         <li><a href="{% if is_granted('ROLE_AMIN') %}{{ path('admin_mod_new') }}{% else %}{{ path('mod_new') }}{% endif %}" class="btn-primary-outlined">{{ icon('check') }}Proposer un mods</a></li>
-                    {% endif %}
+
                 </ul>
 
 

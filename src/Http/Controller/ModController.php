@@ -65,7 +65,7 @@ class ModController extends BaseController
             'categories' => $categories,
             'page' => $page,
             'title' => $title,
-            'menu' => 'blog',
+            'menu' => 'mods',
         ], $params));
     }
 }

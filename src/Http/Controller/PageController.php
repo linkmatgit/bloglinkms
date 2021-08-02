@@ -13,6 +13,7 @@ final class PageController extends AbstractController
        #[Route('/', name: 'app_home')]
     public function home(): Response
     {
-        return $this->render('index.html.twig');
+        return $this->render('index.html.twig', [
+            'menu' => 'home']);
     }
 }

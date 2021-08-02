@@ -26,7 +26,6 @@ class PageControllerTest extends WebTestCase
         $this->client->request('GET', '/login');
         $this->expectH1('Se connecter');
         $this->assertResponseStatusCodeSame(Response::HTTP_OK);
-
     }
 
     public function testGetLoginWithRedirect():void
