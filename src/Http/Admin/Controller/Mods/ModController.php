@@ -3,15 +3,12 @@
 
 namespace App\Http\Admin\Controller\Mods;
 
-use App\Domain\Mods\Entity\Brand;
+use App\Domain\Mods\Helper\ModCloner;
 use App\Domain\Mods\Entity\Mod;
 use App\Domain\Mods\Event\ModAcceptedEvent;
 use App\Domain\Mods\Event\ModCreatedEvent;
-use App\Domain\Mods\Event\ModDeletedEvent;
-use App\Domain\Mods\Event\ModRejectedEvent;
 use App\Domain\Mods\Event\ModUpdatedEvent;
 use App\Http\Admin\Controller\CrudController;
-use App\Http\Admin\Data\Mods\BrandsCrudData;
 use App\Http\Admin\Data\Mods\ModCrudData;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -64,7 +61,13 @@ class ModController extends CrudController
 
         return $this->crudEdit($data);
     }
-    
+    #[Route('/{id<\d+>}/clone', name: 'clone', methods: ['GET', 'POST'])]
+    public function clone(Mod $rows): Response
+    {
+        $row = ModCloner::clone($rows);
+        $data = new ModCrudData($row);
+        return $this->crudNew($data);
+    }
 
     #[Route('/{id<\d+>}', methods: ['DELETE'])]
     public function delete(Mod $rows): Response

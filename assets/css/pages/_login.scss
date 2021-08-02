@@ -97,3 +97,16 @@
   font-weight: 700;
   text-transform: uppercase;
 }
+
+.register__page {
+  @extend %container;
+  @extend  %grid2;
+}
+.form__register,
+.right__register {
+  @extend %card;
+}
+.form__register h1 {
+  @extend %section-title;
+  font-size: 34px;
+}

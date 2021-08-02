@@ -48,6 +48,9 @@ class Category
     #[ORM\OneToMany(mappedBy: 'category', targetEntity: Mod::class)]
     private Collection $mods;
 
+    #[ORM\Column(type: Types::INTEGER, options: ['unsigned' => true, 'default'=> 0])]
+    private int $modsCount = 0;
+
     public function __construct()
     {
         $this->mods = new ArrayCollection();
@@ -253,6 +256,22 @@ class Category
         }
 
         return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getModsCount(): int
+    {
+        return $this->modsCount;
+    }
+
+    /**
+     * @param int $modsCount
+     */
+    public function setModsCount(int $modsCount): void
+    {
+        $this->modsCount = $modsCount;
     }
 
 

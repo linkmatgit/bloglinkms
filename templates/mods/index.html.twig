@@ -1,0 +1,23 @@
+
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container mt4">
+<div class="grid">
+
+        {% for mod in mods %}
+    <div class="card">
+         {{ mod.name }}
+        {{ mod.category.slug }}
+        {{ mod.author.name }}
+        {{ mod.brand.name }}
+    </div>
+        {% endfor %}
+
+</div>
+    </div>
+
+{% endblock %}
+
+{% block title  'Page d\'accueil'%}
+
