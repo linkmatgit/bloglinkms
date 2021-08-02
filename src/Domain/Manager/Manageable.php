@@ -8,8 +8,8 @@ use App\Domain\Auth\User;
 use phpDocumentor\Reflection\Types\Integer;
 use Symfony\Component\Validator\Constraints as Assert;
 
-const OUVERT = 1;
-const FERMER = 2;
+const OUVERT = 0;
+const FERMER = 1;
 
 const PENDING = 0;
 const APPROUVE = 1;
@@ -20,7 +20,7 @@ trait Manageable
 {
 
 
-    #[ORM\Column(type: Types::SMALLINT, options: ['default' => -1])]
+    #[ORM\Column(type: Types::SMALLINT, options: ['default' => 0])]
     private int $statut = 0;
 
     #[ORM\Column(type: Types::SMALLINT, options: ['default' => 0])]

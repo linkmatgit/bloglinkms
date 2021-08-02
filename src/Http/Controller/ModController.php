@@ -45,14 +45,7 @@ class ModController extends BaseController
         return $this->renderListing($title, $query, $request, ['category' => $category]);
     }
 
-    #[Route('/brand/{slug}', name: 'brand')]
-    public function brand(Brand $brand, Request $request): Response
-    {
-        $title = $brand->getName();
-        $query = $this->repository->findForCategory($brand);
 
-        return $this->renderListing($title, $query, $request, ['category' => $category]);
-    }
 
     private function renderListing(string $title, Query $query, Request $request, array $params = []): Response
     {

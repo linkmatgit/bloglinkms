@@ -4,7 +4,6 @@
 namespace App\Domain\Mods\Repository;
 
 use App\Domain\Auth\User;
-use App\Domain\Mods\Entity\Brand;
 use App\Domain\Mods\Entity\Category;
 use App\Domain\Mods\Entity\Mod;
 use App\Infrastructure\Orm\AbstractRepository;
@@ -27,7 +26,7 @@ class ModRepository extends AbstractRepository
             ->where('m.author = :user')
             ->orderBy('m.createdAt', 'ASC')
             ->andWhere('m.approuve = 0')
-            ->andWhere('m.rejetTime < 4')
+            ->andWhere('m.statut != 1')
             ->setMaxResults(8)
             ->setParameter('user', $user)
             ->getQuery();
