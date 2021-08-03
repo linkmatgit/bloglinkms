@@ -66,7 +66,7 @@ class ModRepository extends AbstractRepository
             ->leftJoin('m.author', 'author')
             ->leftJoin('m.brand', 'brand')
             ->select('m', 'category', 'author', 'brand')
-            ->where('m.approuve = 0 AND m.createdAt < NOW()')
+            ->where('m.approuve = 1 AND m.createdAt < NOW()')
             ->orderBy('m.createdAt', 'DESC');
 
         if ($category) {

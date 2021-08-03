@@ -46,4 +46,7 @@ services:
     App\Infrastructure\Queue\FailedJobsService:
         arguments: ['@messenger.transport.failed']
 
+    App\Infrastructure\Mercure\Service\CookieGenerator:
+        arguments:
+            $secret: '%env(resolve:MERCURE_SUBSCRIBER_KEY)%'
 

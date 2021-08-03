@@ -42,6 +42,8 @@ class CategoryController extends CrudController
     public function new(): Response
     {
         $category = new Category();
+        $category->setAuthor($this->getUser());
+        $category->setCreatedAt(new \DateTime());
         $data = new CategoryCrudData($category);
         return $this->crudNew($data);
     }

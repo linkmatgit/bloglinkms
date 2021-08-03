@@ -24,13 +24,13 @@ class ManagerService
     ) {
     }
 
-    public function approuveModManager(ManageableDto $data)
+    public function approuveModManager(Mod $data)
     {
-        $data->mod->setApprouve(1);
-        $data->mod->setStatut(0);
-        $data->mod->setApprouveAt(new \DateTime());
+        $data->setApprouve(1);
+        $data->setStatut(0);
+        $data->setApprouveAt(new \DateTime());
         $this->em->flush();
-        $this->dispatcher->dispatch(new ModAcceptedEvent($data->mod));
+        $this->dispatcher->dispatch(new ModAcceptedEvent($data));
     }
 
     public function rejectModManage(ManageableDto $data)

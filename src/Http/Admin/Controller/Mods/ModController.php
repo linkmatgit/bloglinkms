@@ -41,7 +41,7 @@ class ModController extends CrudController
         $this->paginator->allowSort('row.id', 'row.name');
         $query = $this->getRepository()
             ->createQueryBuilder('row')
-            ->orderby('row.createdAt', 'DESC')
+            ->orderby('row.createdAt', 'DESC')->where('row.approuve = 1')
         ;
 
         return $this->crudIndex($query);
@@ -98,7 +98,7 @@ class ModController extends CrudController
         $service->approuveModManager($data);
         $this->em->persist($data);
         $this->addFlash('success', 'Votre mod a ete mis a jours');
-        $this->redirectToRoute('admin_home');
+        return $this->redirectToRoute('admin_home');
     }
 
 }
