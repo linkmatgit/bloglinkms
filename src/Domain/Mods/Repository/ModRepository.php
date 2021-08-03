@@ -105,5 +105,4 @@ class ModRepository extends AbstractRepository
         return $query->getQuery();
     }
 
-
 }

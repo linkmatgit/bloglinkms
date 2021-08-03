@@ -1,0 +1,41 @@
+{% extends 'admin/layout/card.html.twig' %}
+
+{% block title %}{{ icon('brand') }} Gestion des Mods
+{% endblock %}
+{% block actions %}
+    <form action="{{ path('admin_mod_released_accept', {id: rows.id}) }}" method="post">
+        <button class="btn-primary  btn-block" type="submit">{{ icon('check') }} Approuvé</button>
+    </form>
+    <a href="#" class="btn-danger">Danger</a>
+    <a href="#" class="btn-danger">Revision</a>
+{% endblock %}
+
+{% block content %}
+    <h2 class="section-title">{{ rows.name }}</h2>
+
+    <p>Posté: {{ rows.createdAt | ago  }}</p>
+    <p>Version:{{ rows.version }}</p>
+    <p> Marque: {{ rows.brand.name }}</p>
+    <p>Category: {{ rows.category.name }}</p>
+    <p class="formatted">{{ rows.description }}</p>
+<div class="grid2">
+ <div class="about__author stack-large">
+     <h2 class="section-title">A propos de l'auteur</h2>
+    <p>{{ rows.author.name }}</p>
+    <p>{{ rows.author.lastLoginIP }}</p>
+    <p>{{ rows.author.lastLoginAt | date('Y-M-d h:m:s') }}</p>
+    <p>{{ rows.author.createdAt | ago }}</p></div>
+    <div class="check">
+        {% if rows.approuve > 1 %}
+            {{ rows.approuve }}
+            {{ rows.approuveBy.name }}
+            {{ rows.approuveAt | ago }}
+            {{ rows.detail }}
+            {{ rows.statut }}
+        {% endif %}
+    </div>
+</div>
+    {% for mod in mods %}
+    {{ mod.name }}
+    {% endfor %}
+{% endblock %}

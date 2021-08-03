@@ -109,6 +109,7 @@ class OwnModController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
+
             $this->createService->updateMod($data);
             $this->em->persist($data);
             $this->addFlash('success', 'Votre mod a ete mis a jours');

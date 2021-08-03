@@ -2,13 +2,13 @@
 
 namespace App\Domain\Profile\Dto;
 
-
 use App\Domain\Auth\User;
 use App\Domain\Mods\Entity\Brand;
 use App\Domain\Mods\Entity\Category;
 use App\Domain\Mods\Entity\Mod;
 
-class ModDto {
+class ModDto
+{
 
     public ?string $name;
 
@@ -34,12 +34,11 @@ class ModDto {
         $this->console = $mod->isConsole();
         $this->brand = $mod->getBrand();
         $this->category = $mod->getCategory();
-
-
     }
     public function getId(): int
     {
         return $this->mod->getId() ?: 0;
     }
+
 
 }

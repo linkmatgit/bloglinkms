@@ -16,11 +16,11 @@ class ModsCreateService
     public function __construct(
         private EventDispatcherInterface $dispatcher,
         private EntityManagerInterface $em
-)
-    {
+    ) {
     }
 
-    public function createMod(ModDto $data): void {
+    public function createMod(ModDto $data): void
+    {
         $data->mod->setName($data->name);
         $data->mod->setAuthor($data->author);
         $data->mod->setUrl($data->url);
@@ -32,12 +32,10 @@ class ModsCreateService
         $this->em->flush();
         $this->dispatcher->dispatch(new ModCreatedEvent($data->mod));
     }
-public function updateMod(Mod $mod) {
+    public function updateMod(Mod $mod)
+    {
         $mod->setUpdatedAt(new \DateTime());
         $this->em->flush();
         $this->dispatcher->dispatch(new ModUpdatedEvent($mod));
-
-}
-
-
+    }
 }

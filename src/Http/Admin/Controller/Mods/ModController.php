@@ -3,13 +3,19 @@
 
 namespace App\Http\Admin\Controller\Mods;
 
+use App\Domain\Manager\Dto\ManageableDto;
+use App\Domain\Manager\Service\ManagerService;
 use App\Domain\Mods\Helper\ModCloner;
 use App\Domain\Mods\Entity\Mod;
 use App\Domain\Mods\Event\ModAcceptedEvent;
 use App\Domain\Mods\Event\ModCreatedEvent;
 use App\Domain\Mods\Event\ModUpdatedEvent;
+use App\Domain\Mods\Repository\ModRepository;
+use App\Domain\Profile\Dto\ModDto;
 use App\Http\Admin\Controller\CrudController;
 use App\Http\Admin\Data\Mods\ModCrudData;
+use App\Http\Form\ModPublicFormType;
+use App\Http\Security\ModVoter;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -28,7 +34,6 @@ class ModController extends CrudController
         'accepted' => ModAcceptedEvent::class,
         'rejected' => ModRejectedEvent::class
     ];
-
 
     #[Route('/', name: 'index')]
     public function index(Request $request): Response
@@ -74,4 +79,26 @@ class ModController extends CrudController
     {
         return $this->crudDelete($rows);
     }
+
+    #[Route('/release/{id<\d+>}', name:'release', methods: ['POST', 'GET'])]
+    public function viewRelease(Mod $rows, ModRepository $r): Response
+    {
+        return $this->render('admin/mods/manager/release.html.twig', [
+            'mods' =>     $r->queryModApprouveByUser($rows->getAuthor())->setMaxResults(10)->getResult(),
+            'rows' => $rows,
+            'menu' => 'mods'
+        ]);
+    }
+
+    #[Route('/release/{id<\d+>}/accept', name: 'released_accept', methods:['POST'])]
+    public function acceptMod(Mod $data, Request $request, ManagerService $service):Response
+    {
+        //$this->denyAccessUnlessGranted(ModVoter::EDIT, $data);
+        $user = $this->getUser();
+        $service->approuveModManager($data);
+        $this->em->persist($data);
+        $this->addFlash('success', 'Votre mod a ete mis a jours');
+        $this->redirectToRoute('admin_home');
+    }
+
 }

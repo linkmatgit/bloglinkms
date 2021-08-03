@@ -7,18 +7,20 @@ namespace App\Domain\Manager\Dto;
 use App\Domain\Auth\User;
 use App\Domain\Mods\Entity\Mod;
 
-class ManageableDto {
+class ManageableDto
+{
 
     /* if approuve*/
-    private int $statut = 0;
-    private int $approuve = 0;
-    private ?\DateTimeInterface $approuveAt;
-    private ?User $approuveBy = null;
-    private ?string $urlOfMod = null;
+    public int $statut = 0;
+    public int $approuve = 0;
+    public ?\DateTimeInterface $approuveAt;
+    public ?User $approuveBy = null;
+    public ?string $urlOfMod = null;
+    public ?Mod $mod;
 
     /* if reject*/
-    private ?int $rejetTime = null;
-    private ?string $detail = null;
+    public ?int $rejetTime = null;
+    public ?string $detail = null;
 
     public function __construct(Mod $mod)
     {
@@ -29,6 +31,11 @@ class ManageableDto {
         $this->urlOfMod = $mod->getUrlOfMod();
         $this->rejetTime = $mod->getRejetTime();
         $this->detail = $mod->getDetail();
+        $this->mod = $mod;
     }
 
+    public function getId(): int
+    {
+        return $this->mod->getId() ?: 0;
+    }
 }
