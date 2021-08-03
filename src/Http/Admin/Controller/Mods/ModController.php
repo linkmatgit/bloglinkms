@@ -3,7 +3,6 @@
 
 namespace App\Http\Admin\Controller\Mods;
 
-use App\Domain\Manager\Dto\ManageableDto;
 use App\Domain\Manager\Service\ManagerService;
 use App\Domain\Mods\Helper\ModCloner;
 use App\Domain\Mods\Entity\Mod;
@@ -11,11 +10,8 @@ use App\Domain\Mods\Event\ModAcceptedEvent;
 use App\Domain\Mods\Event\ModCreatedEvent;
 use App\Domain\Mods\Event\ModUpdatedEvent;
 use App\Domain\Mods\Repository\ModRepository;
-use App\Domain\Profile\Dto\ModDto;
 use App\Http\Admin\Controller\CrudController;
 use App\Http\Admin\Data\Mods\ModCrudData;
-use App\Http\Form\ModPublicFormType;
-use App\Http\Security\ModVoter;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
