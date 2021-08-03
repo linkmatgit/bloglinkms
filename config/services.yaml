@@ -45,3 +45,5 @@ services:
             $env: '%kernel.environment%'
     App\Infrastructure\Queue\FailedJobsService:
         arguments: ['@messenger.transport.failed']
+
+
