@@ -67,8 +67,8 @@ class NotificationService
             ->setTarget($entity ? $this->getHashForEntity($entity) : null)
             ->setCreatedAt(new \DateTime())
            ->setChannel($channel);
-        $this->em->flush();
         $this->em->persist($notification);
+        $this->em->flush();
         $this->dispatcher->dispatch(new NotificationCreatedEvent($notification));
 
         return $notification;
