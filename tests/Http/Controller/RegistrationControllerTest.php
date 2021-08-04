@@ -33,7 +33,6 @@ class RegistrationControllerTest extends WebTestCase
         $this->assertResponseStatusCodeSame(Response::HTTP_OK);
         $this->expectH1('Inscription');
         $this->expectTitle('Inscription');
-
     }
 
     public function testRegisterEmail(): void
@@ -85,6 +84,4 @@ class RegistrationControllerTest extends WebTestCase
         $this->expectFormErrors(2);
         $this->assertEmailCount(0);
     }
-
-
 }

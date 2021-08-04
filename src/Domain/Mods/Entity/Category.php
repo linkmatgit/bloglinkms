@@ -273,6 +273,4 @@ class Category
     {
         $this->modsCount = $modsCount;
     }
-
-
 }

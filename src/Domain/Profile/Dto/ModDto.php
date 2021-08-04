@@ -39,6 +39,4 @@ class ModDto
     {
         return $this->mod->getId() ?: 0;
     }
-
-
 }

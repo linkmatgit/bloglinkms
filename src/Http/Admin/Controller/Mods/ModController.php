@@ -87,14 +87,14 @@ class ModController extends CrudController
     }
 
     #[Route('/release/{id<\d+>}/accept', name: 'released_accept', methods:['POST'])]
-    public function acceptMod(Mod $data, Request $request, ManagerService $service):Response
+    public function acceptMod(Mod $data, ManagerService $service):Response
     {
         //$this->denyAccessUnlessGranted(ModVoter::EDIT, $data);
         $user = $this->getUser();
         $service->approuveModManager($data);
+        $data->setApprouveBy($user);
         $this->em->persist($data);
         $this->addFlash('success', 'Votre mod a ete mis a jours');
         return $this->redirectToRoute('admin_home');
     }
-
 }

@@ -206,7 +206,4 @@ class Mod
         $this->brand = $brand;
         return $this;
     }
-
-
-
 }

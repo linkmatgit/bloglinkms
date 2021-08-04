@@ -31,7 +31,7 @@ class Notification
     private \DateTimeInterface $createdAt;
 
     #[ORM\Column(type: Types::STRING, nullable: true)]
-    private ?string $chanel = 'public';
+    private ?string $channel = 'public';
 
     #[ORM\Column(type: Types::STRING, nullable: true)]
     private ?string $target = null;
@@ -129,20 +129,20 @@ class Notification
     /**
      * @return string|null
      */
-    public function getChanel(): ?string
+    public function getChannel(): ?string
     {
-        return $this->chanel;
+        return $this->channel;
     }
 
     /**
-     * @param string|null $chanel
-     * @return Notification
+     * @param string|null $channel
      */
-    public function setChanel(?string $chanel): self
+    public function setChannel(?string $channel): void
     {
-        $this->chanel = $chanel;
-        return $this;
+        $this->channel = $channel;
     }
+
+
 
     /**
      * @return string|null

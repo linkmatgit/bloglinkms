@@ -20,7 +20,6 @@ class PageControllerTest extends WebTestCase
 
         $this->client->request('GET', '/admin');
         $this->assertResponseRedirects();
-
     }
     public function testGetDashboardAdmin(): void
     {
@@ -28,7 +27,6 @@ class PageControllerTest extends WebTestCase
         $this->login($data['user_admin']);
         $this->client->request('GET', '/admin/');
         $this->expectTitle('Dashboard');
-
     }
     public function testGetWithUserLogin(): void
     {
@@ -37,5 +35,4 @@ class PageControllerTest extends WebTestCase
         $this->client->request('GET', '/admin/');
         $this->assertResponseStatusCodeSame(Response::HTTP_FORBIDDEN);
     }
-
 }

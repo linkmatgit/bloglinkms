@@ -3,9 +3,9 @@
 
 namespace App\Domain\Notification\Subscriber;
 
-
 use App\Domain\Mods\Entity\Mod;
 use App\Domain\Mods\Event\ModCreatedEvent;
+use App\Domain\Notification\Entity\Notification;
 use App\Domain\Notification\Service\NotificationService;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
@@ -24,16 +24,13 @@ class NotificationModSubscriber implements EventSubscriberInterface
     }
 
 
-    public function onCreate(ModCreatedEvent $e)
+    public function onCreate(Mod $mod):Notification
     {
-
-        $userName = htmlentities($e->getMod()->getAuthor()->getName());
+        $userName = htmlentities($mod->getAuthor()->getName());
         $name = htmlentities($e->getMod()->getName());
-         $this->notificationService->notifyChannel(
+        return   $this->notificationService->notifyChannel(
             'admin',
             $userName . " a poster un mod "  . $name,
         );
-
     }
-
 }

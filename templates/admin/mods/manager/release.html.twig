@@ -26,9 +26,12 @@
     <p>{{ rows.author.lastLoginAt | date('Y-M-d h:m:s') }}</p>
     <p>{{ rows.author.createdAt | ago }}</p></div>
     <div class="check">
-        {% if rows.approuve > 1 %}
+        {% if rows.approuve >= 1 %}
+
             {{ rows.approuve }}
-            {{ rows.approuveBy.name }}
+            {% if rows.approuveby %}
+                {{ rows.approuveBy.name }}
+                {% endif %}
             {{ rows.approuveAt | ago }}
             {{ rows.detail }}
             {{ rows.statut }}

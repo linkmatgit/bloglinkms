@@ -2,10 +2,12 @@
 
 namespace App\Infrastructure\Queue\Handler;
 
+use App\Domain\Notification\Service\NotificationService;
 use App\Infrastructure\Mailing\Mailer;
 use App\Infrastructure\Queue\Message\ServiceMethodMessage;
 use Psr\Container\ContainerInterface;
 use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mercure\HubInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use Symfony\Contracts\Service\ServiceSubscriberInterface;
 
@@ -34,6 +36,8 @@ class ServiceMethodMessageHandler implements MessageHandlerInterface, ServiceSub
         return [
             MailerInterface::class => MailerInterface::class,
             Mailer::class => Mailer::class,
+            HubInterface::class => HubInterface::class,
+            NotificationService::class => NotificationService::class
         ];
     }
 }

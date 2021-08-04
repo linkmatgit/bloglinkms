@@ -29,22 +29,22 @@ class EmailVerifier
 
     public function sendEmailConfirmation(string $verifyEmailRouteName, UserInterface $user, TemplatedEmail $email): void
     {
-        if($user instanceof UserInterface && $user instanceof  User) {
-        $signatureComponents = $this->verifyEmailHelper->generateSignature(
-            $verifyEmailRouteName,
-            (string) $user->getId(),
-            (string) $user->getEmail(),
-            ['id' => $user->getId()]
-        );
+        if ($user instanceof UserInterface && $user instanceof  User) {
+            $signatureComponents = $this->verifyEmailHelper->generateSignature(
+                $verifyEmailRouteName,
+                (string) $user->getId(),
+                (string) $user->getEmail(),
+                ['id' => $user->getId()]
+            );
 
-        $context = $email->getContext();
-        $context['signedUrl'] = $signatureComponents->getSignedUrl();
-        $context['expiresAtMessageKey'] = $signatureComponents->getExpirationMessageKey();
-        $context['expiresAtMessageData'] = $signatureComponents->getExpirationMessageData();
+            $context = $email->getContext();
+            $context['signedUrl'] = $signatureComponents->getSignedUrl();
+            $context['expiresAtMessageKey'] = $signatureComponents->getExpirationMessageKey();
+            $context['expiresAtMessageData'] = $signatureComponents->getExpirationMessageData();
 
-        $email->context($context);
+            $email->context($context);
 
-        $this->mailer->send($email);
+            $this->mailer->send($email);
         }
     }
 
@@ -53,16 +53,17 @@ class EmailVerifier
      */
     public function handleEmailConfirmation(Request $request, UserInterface $user): void
     {
-        if($user instanceof UserInterface && $user instanceof User) {
-        $this->verifyEmailHelper->validateEmailConfirmation(
-            $request->getUri(),
-            (string) $user->getId(),
-            $user->getEmail());
+        if ($user instanceof UserInterface && $user instanceof User) {
+            $this->verifyEmailHelper->validateEmailConfirmation(
+                $request->getUri(),
+                (string) $user->getId(),
+                $user->getEmail()
+            );
         /**@var $user User */
-        $user->setIsVerified(true);
+            $user->setIsVerified(true);
 
-        $this->entityManager->persist($user);
-        $this->entityManager->flush();
+            $this->entityManager->persist($user);
+            $this->entityManager->flush();
         }
     }
 }

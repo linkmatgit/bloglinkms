@@ -43,5 +43,4 @@ class OwnModControllerTest extends WebTestCase
 
         $this->assertResponseStatusCodeSame(Response::HTTP_OK);
     }
-
 }

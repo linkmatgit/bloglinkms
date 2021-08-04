@@ -4,17 +4,12 @@ declare(strict_types=1);
 
 namespace App\Domain\Manager\Service;
 
-use App\Domain\Auth\User;
 use App\Domain\Manager\Dto\ManageableDto;
 use App\Domain\Mods\Entity\Mod;
 use App\Domain\Mods\Event\ModAcceptedEvent;
-use App\Domain\Mods\Event\ModCreatedEvent;
 use App\Domain\Mods\Event\ModRejectedEvent;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
-use Symfony\Component\Security\Core\Security;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 class ManagerService
 {
@@ -24,16 +19,16 @@ class ManagerService
     ) {
     }
 
-    public function approuveModManager(Mod $data)
+    public function approuveModManager(Mod $data): void
     {
         $data->setApprouve(1);
         $data->setStatut(0);
         $data->setApprouveAt(new \DateTime());
-        $this->em->flush();
         $this->dispatcher->dispatch(new ModAcceptedEvent($data));
+        $this->em->flush();
     }
 
-    public function rejectModManage(ManageableDto $data)
+    public function rejectModManage(ManageableDto $data):void
     {
         $data->mod->setDetail($data->detail);
         $data->mod->setRejetTime($data->rejetTime);
@@ -44,5 +39,4 @@ class ManagerService
         $this->em->flush();
         $this->dispatcher->dispatch(new ModRejectedEvent($data->mod));
     }
-
 }

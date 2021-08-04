@@ -2,7 +2,6 @@
 
 namespace App\Domain\Notification\Service;
 
-
 use App\Domain\Auth\User;
 use App\Domain\Notification\Entity\Notification;
 use App\Domain\Notification\Event\NotificationCreatedEvent;
@@ -58,7 +57,7 @@ class NotificationService
         return $notification;
     }
 
-    public function notifyChannel(string $channel, string $message, mixed $entity = null): Notification
+    public function notifyChannel(string $channel, string $message, ?object $entity = null): Notification
     {
         /** @var string $url */
         $url = $entity ? $this->serializer->serialize($entity, PathEncoder::FORMAT) : null;
@@ -67,7 +66,7 @@ class NotificationService
             ->setUrl($url)
             ->setTarget($entity ? $this->getHashForEntity($entity) : null)
             ->setCreatedAt(new \DateTime())
-            ->setChanel($channel);
+            ->setChannel($channel);
         $this->em->persist($notification);
         $this->em->flush();
         $this->dispatcher->dispatch(new NotificationCreatedEvent($notification));
@@ -85,5 +84,4 @@ class NotificationService
 
         return $hash;
     }
-
 }
