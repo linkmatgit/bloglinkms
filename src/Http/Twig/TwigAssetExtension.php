@@ -88,8 +88,7 @@ class TwigAssetExtension extends AbstractExtension
 
         if (false === $this->polyfillLoaded && $request instanceof Request) {
             $userAgent = $request->headers->get('User-Agent') ?: '';
-            if (
-                strpos($userAgent, 'Safari') &&
+            if (strpos($userAgent, 'Safari') &&
                 !strpos($userAgent, 'Chrome')
             ) {
                 $this->polyfillLoaded = true;

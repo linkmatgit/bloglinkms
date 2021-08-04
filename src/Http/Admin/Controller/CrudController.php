@@ -164,5 +164,4 @@ abstract class CrudController extends BaseController
             ->where("LOWER(row.{$this->searchField}) LIKE :search")
             ->setParameter('search', '%' . strtolower($search) . '%');
     }
-
 }

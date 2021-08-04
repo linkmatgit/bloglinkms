@@ -16,9 +16,9 @@ use Symfony\Component\Routing\Annotation\Route;
 class UserController extends BaseController
 {
 
-public function __construct(private EntityManagerInterface $em)
-{
-}
+    public function __construct(private EntityManagerInterface $em)
+    {
+    }
 
     #[Route('/search', name: 'autocomplete')]
     public function search(Request $request): JsonResponse

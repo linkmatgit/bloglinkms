@@ -3,12 +3,12 @@
 
 namespace App\Domain\Manager;
 
-
 use App\Domain\Auth\User;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-class Reason {
+class Reason
+{
 
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: 'IDENTITY')]
@@ -68,5 +68,4 @@ class Reason {
     {
         $this->description = $description;
     }
-
 }

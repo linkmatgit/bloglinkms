@@ -45,13 +45,13 @@ class ModVoter extends Voter
     private function createMods(User $user): bool
     {
         return $user->banned == false;
-
     }
     private function editMods(User $user, Mod $mod): bool
     {
         return $mod->getAuthor()->getId() === $user->getId();
     }
-    private function approuvedMod(User $user, Mod $mod) {
+    private function approuvedMod(User $user, Mod $mod)
+    {
         return false;
     }
 }

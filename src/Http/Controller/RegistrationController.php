@@ -36,7 +36,7 @@ class RegistrationController extends AbstractController
     #[Route('/register', name: 'app_register')]
     public function register(Request $request, UserPasswordHasherInterface $passwordEncoder): Response
     {
-        if($this->getUser() !== null) {
+        if ($this->getUser() !== null) {
             return $this->redirectToRoute('app_profil');
         }
         $user = new User();
@@ -125,6 +125,4 @@ class RegistrationController extends AbstractController
 
         return $this->redirectToRoute('app_login');
     }
-
-
 }

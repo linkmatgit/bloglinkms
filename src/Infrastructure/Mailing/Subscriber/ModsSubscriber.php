@@ -3,7 +3,6 @@
 
 namespace App\Infrastructure\Mailing\Subscriber;
 
-
 use App\Domain\Mods\Event\ModCreatedEvent;
 use App\Infrastructure\Mailing\Mailer;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -22,7 +21,8 @@ class ModsSubscriber implements EventSubscriberInterface
         ];
     }
 
-    public function onCreate(ModCreatedEvent $event) {
+    public function onCreate(ModCreatedEvent $event)
+    {
 
         $email = $this->mailer->createEmail('mails/mods/create.twig', [
             'mods' => $event->getMod(),
@@ -32,5 +32,4 @@ class ModsSubscriber implements EventSubscriberInterface
         ;
         $this->mailer->send($email);
     }
-
 }

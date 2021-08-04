@@ -44,7 +44,7 @@ class CategoryController extends CrudController
         $entity->setPosition(1);
         $data = new CategoryCrudData($entity);
 
-       return $this->crudNew($data);
+        return $this->crudNew($data);
     }
 
 

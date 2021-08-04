@@ -47,5 +47,4 @@ class ModPublicFormType extends AbstractType
            // ->add('creator', UserChoiceType::class)
         ;
     }
-
 }

@@ -134,12 +134,11 @@ class Notification
         return $this->channel;
     }
 
-    /**
-     * @param string|null $channel
-     */
-    public function setChannel(?string $channel): void
+
+    public function setChannel(?string $channel): self
     {
         $this->channel = $channel;
+        return $this;
     }
 
 

@@ -44,6 +44,4 @@ class BlogSubcriber implements EventSubscriberInterface
         ;
         $this->mailer->send($email);
     }
-
-
 }

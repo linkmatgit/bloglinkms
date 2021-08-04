@@ -60,5 +60,4 @@ abstract class AbstractController extends \Symfony\Bundle\FrameworkBundle\Contro
 
         return $this->redirectToRoute($route, $params);
     }
-
 }

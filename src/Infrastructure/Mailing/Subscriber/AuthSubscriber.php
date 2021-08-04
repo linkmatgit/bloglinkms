@@ -12,7 +12,6 @@ use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Mime\Address;
 
-
 class AuthSubscriber implements EventSubscriberInterface
 {
 

@@ -32,7 +32,7 @@ class CategoryCrudData implements CrudDataInterface
     public function __construct(Category $row)
     {
         $this->entity = $row;
-       $this->name =  $row->getName();
+        $this->name =  $row->getName();
         $this->description = $row->getDescription();
         $this->online = $row->isOnline();
         $this->createdAt = $row->getCreatedAt();

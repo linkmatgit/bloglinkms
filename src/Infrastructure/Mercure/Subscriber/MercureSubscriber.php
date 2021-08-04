@@ -6,6 +6,7 @@ use App\Domain\Auth\User;
 use App\Domain\Notification\Event\NotificationCreatedEvent;
 use App\Domain\Notification\Event\NotificationReadEvent;
 use App\Infrastructure\Queue\EnqueueMethod;
+use App\Infrastructure\Queue\Handler\ServiceMethodMessageHandler;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Mercure\HubInterface;
 use Symfony\Component\Mercure\PublisherInterface;
@@ -35,6 +36,7 @@ class MercureSubscriber implements EventSubscriberInterface
 
     public function publishNotification(NotificationCreatedEvent $event): void
     {
+
         $notification = $event->getNotification();
         $channel = $notification->getChannel();
         if ('public' === $channel && $notification->getUser() instanceof User) {
@@ -47,7 +49,8 @@ class MercureSubscriber implements EventSubscriberInterface
             'groups' => ['read:notification'],
             'iri' => false,
         ]), true);
-        $this->enqueue->enqueue(HubInterface::class, '__invoke', [$update]);
+        $this->enqueue->enqueue(ServiceMethodMessageHandler::class, '__invoke', [$update]);
+
     }
 
     public function onNotificationRead(NotificationReadEvent $event): void
@@ -58,6 +61,6 @@ class MercureSubscriber implements EventSubscriberInterface
             '{"type": "markAsRead"}',
             true
         );
-        $this->enqueue->enqueue(HubInterface::class, '__invoke', [$update]);
+        $this->enqueue->enqueue(ServiceMethodMessageHandler::class, '__invoke', [$update]);
     }
 }

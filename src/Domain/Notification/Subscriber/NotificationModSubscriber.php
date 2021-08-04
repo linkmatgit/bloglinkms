@@ -24,9 +24,9 @@ class NotificationModSubscriber implements EventSubscriberInterface
     }
 
 
-    public function onCreate(Mod $mod):Notification
+    public function onCreate(ModCreatedEvent $e)
     {
-        $userName = htmlentities($mod->getAuthor()->getName());
+        $userName = htmlentities($e->getMod()->getAuthor()->getName());
         $name = htmlentities($e->getMod()->getName());
         return   $this->notificationService->notifyChannel(
             'admin',

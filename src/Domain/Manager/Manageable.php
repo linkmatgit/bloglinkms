@@ -177,7 +177,4 @@ trait Manageable
         $this->rejetTime = $rejetTime;
         return $this;
     }
-
-
-
 }

@@ -26,15 +26,13 @@ class CategoryCrudData implements CrudDataInterface
     public function __construct(Category $row)
     {
         $this->entity = $row;
-       $this->name = $row->getName();
-       $this->description = $row->getDescription();
+        $this->name = $row->getName();
+        $this->description = $row->getDescription();
          $this->online = $row->isOnline();
         $this->createdAt = $row->getCreatedAt();
         $this->slug = $row->getSlug();
         $this->position = $row->getPosition();
         $this->author = $row->getAuthor();
-
-
     }
     public function hydrate(): void
     {
@@ -46,7 +44,6 @@ class CategoryCrudData implements CrudDataInterface
         $this->entity->setUpdatedAt(new \DateTime());
         $this->entity->setPosition($this->position);
         $this->entity->setAuthor($this->author);
-
     }
 
     public function getFormClass(): string
