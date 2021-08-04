@@ -50,7 +50,6 @@ class MercureSubscriber implements EventSubscriberInterface
             'iri' => false,
         ]), true);
         $this->enqueue->enqueue(ServiceMethodMessageHandler::class, '__invoke', [$update]);
-
     }
 
     public function onNotificationRead(NotificationReadEvent $event): void
