@@ -3,16 +3,15 @@
 {% block title %}{{ icon('check') }} Dashboard
 {% endblock %}
 {% block body %}
-<div class="grid2" style="--gap: 4">
+    {% include 'admin/home/_jobs.html.twig' %}
+
+    <div class="grid2" style="--gap: 4">
     <div class="gridletf">
     <form action="{{ path('admin_cache_clean') }}" method="post">
         <button class="btn btn-small btn-danger">{{ icon('trash') }} Vider le cache</button>
     </form>
-    {% for job in jobs %}
-        <div class="failed__jobs">
-        {{ job.title }}
     </div>
-    {% endfor %}
+
     </div>
     <div class="gridright">
     <section class="stack" style="--gap: 1">

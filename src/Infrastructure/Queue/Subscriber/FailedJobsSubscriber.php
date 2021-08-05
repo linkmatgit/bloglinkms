@@ -2,19 +2,28 @@
 
 namespace App\Infrastructure\Queue\Subscriber;
 
+use App\Domain\Notification\Service\NotificationService;
+use App\Infrastructure\Queue\FailedJob;
+use App\Infrastructure\Queue\Message\ServiceMethodMessage;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mercure\HubInterface;
+use Symfony\Component\Messenger\Bridge\Doctrine\Transport\DoctrineReceivedStamp;
 use Symfony\Component\Messenger\Event\WorkerMessageFailedEvent;
+use Symfony\Component\Messenger\Stamp\RedeliveryStamp;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Mime\Message;
 
 class FailedJobsSubscriber implements EventSubscriberInterface
 {
-    const FROM = 'linkmat.com';
+    const FROM = 'linkmat@linkmat.com';
     const  TO = 'administrateur@beaugoss.com';
 
-    public function __construct(private MailerInterface $mailer)
-    {
+    public function __construct(
+        private MailerInterface $mailer,
+        private NotificationService $notificationService
+    ) {
     }
 
     public static function getSubscribedEvents()
@@ -26,27 +35,26 @@ class FailedJobsSubscriber implements EventSubscriberInterface
 
     /**
      * @param WorkerMessageFailedEvent $event
-     * @throws \Symfony\Component\Mailer\Exception\TransportExceptionInterface
+     * @throws TransportExceptionInterface
      */
     public function onMessageFailed(WorkerMessageFailedEvent $event): void
     {
+        $message = $event->getEnvelope()->getMessage();
+        // Si le message qui a échoué, est une notification, on ne demande pas une nouvelle notification (cela créerait une boucle infinie)
+        if ($message instanceof ServiceMethodMessage &&
+            HubInterface::class === $message->getServiceName()
+        ) {
+            return;
+        }
 
-        $message = get_class($event->getEnvelope()->getMessage());
-        $throw = $event->getThrowable()->getTraceAsString();
-            $this->mailer->send($this->email($message, $throw));
+        // On reçoit une enveloppe de tâche "classique" et on veut la faire passer pour une tâche en échec
+        // On lui passe un RedeliveryStamp (pour faire croire que la tâche a déjà été relancé)
+        $redeliveryStamp = new RedeliveryStamp(1, $event->getThrowable()->getMessage());
+        // On lui passe un DoctrineReceivedStamp (pour faire croire que la tâche provient de doctrine)
+        $doctrineStamp = new DoctrineReceivedStamp('1');
+        $enveloppe = $event->getEnvelope()->with($redeliveryStamp)->with($doctrineStamp);
+        $job = new FailedJob($enveloppe);
+        $this->notificationService->notifyChannel('admin', "Une tâche de la file d'attente a échoué", $job);
     }
 
-    private function email(string $error, string $trace): Email
-    {
-        $message =  <<<TEXT
-Une Erreur est survenue lors du traitement de la tache {$error}
-
-Voici la trace de l'erreur: 
-{$trace}
-TEXT;
-
-        return  (new Email())->from(self::FROM)
-            ->to(self::TO)
-            ->text("Une Erreur est survenue lors du traitement de la tache {$error}");
-    }
 }

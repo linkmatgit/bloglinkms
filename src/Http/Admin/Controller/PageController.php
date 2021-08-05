@@ -23,7 +23,7 @@ class PageController extends BaseController
 
         return $this->render('admin/pages/home.html.twig', [
         'menu' => $this->menuItem,
-            'jobs' => $this->failedJobs->getJobs()
+            'failed_jobs' => $this->failedJobs->getJobs()
         ]);
     }
 
