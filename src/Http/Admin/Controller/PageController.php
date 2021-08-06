@@ -4,6 +4,8 @@ namespace App\Http\Admin\Controller;
 
 use App\Infrastructure\Mailing\Mailer;
 use App\Infrastructure\Queue\FailedJobsService;
+
+use App\Infrastructure\Queue\ScheduledJobsService;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,8 +15,10 @@ class PageController extends BaseController
 {
     protected string $menuItem = 'home';
 
-    public function __construct(private FailedJobsService $failedJobs)
-    {
+    public function __construct(
+        private FailedJobsService $failedJobs,
+        private ScheduledJobsService $scheduledJobsService
+    ) {
     }
 
     #[Route("/", name: 'home')]
@@ -22,8 +26,9 @@ class PageController extends BaseController
     {
 
         return $this->render('admin/pages/home.html.twig', [
-        'menu' => $this->menuItem,
-            'failed_jobs' => $this->failedJobs->getJobs()
+            'menu' => $this->menuItem,
+            'failed_jobs' => $this->failedJobs->getJobs(),
+            'scheduled_jobs' => $this->scheduledJobsService->getJobs()
         ]);
     }
 

@@ -97,4 +97,16 @@ class ModController extends CrudController
         $this->addFlash('success', 'Votre mod a ete mis a jours');
         return $this->redirectToRoute('admin_home');
     }
+
+    #[Route('/release', name: 'release')]
+    public function release(): Response
+    {
+        $this->paginator->allowSort('row.id', 'row.name');
+        $query = $this->getRepository()
+            ->createQueryBuilder('row')
+            ->orderby('row.createdAt', 'DESC')->where('row.approuve = 0')
+        ;
+
+        return $this->crudRelease($query);
+    }
 }

@@ -12,8 +12,6 @@ use Symfony\Component\Mercure\HubInterface;
 use Symfony\Component\Messenger\Bridge\Doctrine\Transport\DoctrineReceivedStamp;
 use Symfony\Component\Messenger\Event\WorkerMessageFailedEvent;
 use Symfony\Component\Messenger\Stamp\RedeliveryStamp;
-use Symfony\Component\Mime\Email;
-use Symfony\Component\Mime\Message;
 
 class FailedJobsSubscriber implements EventSubscriberInterface
 {
@@ -56,5 +54,4 @@ class FailedJobsSubscriber implements EventSubscriberInterface
         $job = new FailedJob($enveloppe);
         $this->notificationService->notifyChannel('admin', "Une tâche de la file d'attente a échoué", $job);
     }
-
 }

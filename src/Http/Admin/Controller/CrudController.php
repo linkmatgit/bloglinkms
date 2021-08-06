@@ -148,6 +148,26 @@ abstract class CrudController extends BaseController
     }
 
 
+    public function crudRelease(QueryBuilder $query = null): Response
+    {
+        /** @var Request $request */
+        $request = $this->requestStack->getCurrentRequest();
+        $query = $query ?: $this->getRepository()
+            ->createQueryBuilder('row')
+            ->orderBy('row.createdAt', 'DESC');
+        if ($request->get('q')) {
+            $query = $this->applySearch(trim($request->get('q')), $query);
+        }
+        $this->paginator->allowSort('row.id', 'row.title');
+        $rows = $this->paginator->paginate($query->getQuery());
+
+        return $this->render("admin/{$this->templatePath}/release.html.twig", [
+            'rows' => $rows,
+            'searchable' => true,
+            'menu' => 'mod_release',
+            'prefix' => $this->routePrefix,
+        ]);
+    }
 
 
     public function getRepository(): EntityRepository
