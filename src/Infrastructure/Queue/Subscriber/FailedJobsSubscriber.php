@@ -11,7 +11,7 @@ use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mercure\HubInterface;
 use Symfony\Component\Messenger\Bridge\Doctrine\Transport\DoctrineReceivedStamp;
 use Symfony\Component\Messenger\Event\WorkerMessageFailedEvent;
-use Symfony\Component\Messenger\Stamp\RedeliveryStamp;
+use Symfony\Component\Messenger\Stamp\ErrorDetailsStamp;
 
 class FailedJobsSubscriber implements EventSubscriberInterface
 {
@@ -47,7 +47,11 @@ class FailedJobsSubscriber implements EventSubscriberInterface
 
         // On reçoit une enveloppe de tâche "classique" et on veut la faire passer pour une tâche en échec
         // On lui passe un RedeliveryStamp (pour faire croire que la tâche a déjà été relancé)
-        $redeliveryStamp = new RedeliveryStamp(1, $event->getThrowable()->getMessage());
+        $redeliveryStamp = new ErrorDetailsStamp(
+            1,
+            $event->getThrowable()->getCode(),
+            $event->getThrowable()->getMessage()
+        );
         // On lui passe un DoctrineReceivedStamp (pour faire croire que la tâche provient de doctrine)
         $doctrineStamp = new DoctrineReceivedStamp('1');
         $enveloppe = $event->getEnvelope()->with($redeliveryStamp)->with($doctrineStamp);
