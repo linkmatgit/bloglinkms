@@ -4,6 +4,8 @@
 namespace App\Http\Admin\Controller\Mods;
 
 use App\Domain\Manager\Service\ManagerService;
+use App\Domain\Mods\Event\ModDeletedEvent;
+use App\Domain\Mods\Event\ModRejectedEvent;
 use App\Domain\Mods\Helper\ModCloner;
 use App\Domain\Mods\Entity\Mod;
 use App\Domain\Mods\Event\ModAcceptedEvent;
