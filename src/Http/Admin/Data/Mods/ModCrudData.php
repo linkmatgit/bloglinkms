@@ -19,12 +19,12 @@ class ModCrudData implements CrudDataInterface
 
     private ?EntityManagerInterface $em = null;
     private Mod $entity;
-    public ?string $name;
+    public ?string $title;
 
     #[Assert\Url]
     public ?string $url;
     public ?Category $category = null;
-    public ?string $description;
+    public ?string $content;
     public ?\DateTimeInterface $createdAt;
     public User $author;
     public ?User $creator;
@@ -35,9 +35,9 @@ class ModCrudData implements CrudDataInterface
     public function __construct(Mod $row)
     {
         $this->entity = $row;
-        $this->name = $row->getName();
+        $this->title = $row->getTitle();
         $this->category = $row->getCategory();
-        $this->description = $row->getDescription();
+        $this->content = $row->getContent();
         $this->createdAt = $row->getCreatedAt();
         $this->author = $row->getAuthor();
         $this->url = $row->getUrl();
@@ -47,8 +47,8 @@ class ModCrudData implements CrudDataInterface
     public function hydrate(): void
     {
         $this->entity->setAuthor($this->author);
-        $this->entity->setName($this->name);
-        $this->entity->setDescription($this->description);
+        $this->entity->setTitle($this->title);
+        $this->entity->setContent($this->content);
         $this->entity->setCategory($this->category);
         $this->entity->setCreatedAt($this->createdAt);
         $this->entity->setUrl($this->url);

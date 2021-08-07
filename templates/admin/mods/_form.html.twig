@@ -1,16 +1,17 @@
 
 {{ form_start(form, {attr: {class: 'stacked'}}) }}
 <div class="dashboard-grid">
-  {{ form_row(form.name) }}
+  {{ form_row(form.title) }}
   {{ form_row(form.author) }}
   {{ form_row(form.version) }}
   {{ form_row(form.category) }}
+  {{ form_row(form.brand) }}
   {{ form_row(form.createdAt) }}
   {{ form_row(form.url) }}
   {{ form_row(form.console) }}
 </div>
 <div class="full">
-  {{ form_row(form.description) }}
+  {{ form_row(form.content) }}
 
 </div>
   <div class="full mt2">

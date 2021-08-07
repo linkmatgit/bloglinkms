@@ -34,7 +34,7 @@ class ModController extends CrudController
     #[Route('/', name: 'index')]
     public function index(Request $request): Response
     {
-        $this->paginator->allowSort('row.id', 'row.name');
+        $this->paginator->allowSort('row.id', 'row.title');
         $query = $this->getRepository()
             ->createQueryBuilder('row')
             ->orderby('row.createdAt', 'DESC')->where('row.approuve = 1')
