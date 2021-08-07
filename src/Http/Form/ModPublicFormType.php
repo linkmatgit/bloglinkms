@@ -29,9 +29,9 @@ class ModPublicFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('name', TextType::class)
+            ->add('title', TextType::class)
             ->add('url', TextType::class)
-            ->add('description', EditorType::class)
+            ->add('content', EditorType::class)
             ->add('version', TextType::class)
             ->add('console', SwitchType::class)
            ->add('brand', EntityType::class, [

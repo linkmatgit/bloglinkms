@@ -2,7 +2,7 @@
     <div class="card p3">
         <h1 class="section-title">Information General</h1>
 {{ form_start(form, {attr: {class: 'stack'}}) }}
-        <div class="grid2">{{ form_row(form.name) }}</div>
+        <div class="grid2">{{ form_row(form.title) }}</div>
 <div class="grid3 stack">
 
     {{ form_row(form.version) }}
@@ -26,7 +26,7 @@
         </div>
         <div class="full stack">
             <h3 class="section-title">Description de votre mod</h3>
-            {{ form_row(form.description) }}
+            {{ form_row(form.content) }}
         </div>
 <div class="full mt2">
     <button type="submit" class="btn-primary">Sauvegarder</button>
