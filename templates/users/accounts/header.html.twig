@@ -19,9 +19,9 @@
                 <li><a href="#"> {{ icon('edit') }} Edition</a></li>
                 <li><a href="#"> {{ icon('cog') }} Vos WIP</a></li>
                 <li><a href="{{ path('mod_own') }}"  {{ menu_active('mods') }}> {{ icon('cloud') }} Vos Mods</a></li>
-                <li><a href="{{ path('admin_home') }}" class="mla"> {{ icon('locka') }} Administration</a></li>
+              {% if is_granted('ROLE_ADMIN') %}  <li><a href="{{ path('admin_home') }}" class="mla"> {{ icon('locka') }} Administration</a></li>
                 <li><a href="{{ path('admin_home') }}" class="mla"> {{ icon('team') }} Manager</a></li>
-
+{% endif %}
             </ul>
         </div>
     </div>

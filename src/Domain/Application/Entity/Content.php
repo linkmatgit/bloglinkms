@@ -30,9 +30,7 @@ abstract class Content
     #[Assert\NotBlank]
     private ?string $title = null;
 
-    #[ORM\Column(type: Types::STRING, nullable: true)]
-    #[Assert\NotBlank]
-    private ?string $slug = null;
+
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     #[Assert\NotBlank]
@@ -87,24 +85,6 @@ abstract class Content
     public function setTitle(?string $title): self
     {
         $this->title = $title;
-        return $this;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getSlug(): ?string
-    {
-        return $this->slug;
-    }
-
-    /**
-     * @param string|null $slug
-     * @return Content
-     */
-    public function setSlug(?string $slug): self
-    {
-        $this->slug = $slug;
         return $this;
     }
 

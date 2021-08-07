@@ -5,10 +5,8 @@ namespace App\Domain\Profile;
 use App\Domain\Mods\Entity\Mod;
 use App\Domain\Mods\Event\ModCreatedEvent;
 use App\Domain\Mods\Event\ModUpdatedEvent;
-use App\Domain\Profile\Dto\ModDto;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Symfony\Component\Security\Core\Security;
 
 class ModsCreateService
 {
@@ -19,18 +17,18 @@ class ModsCreateService
     ) {
     }
 
-    public function createMod(ModDto $data): void
+    public function createMod(Mod $data): void
     {
-        $data->mod->setTitle($data->title);
-        $data->mod->setAuthor($data->author);
-        $data->mod->setUrl($data->url);
-        $data->mod->setVersion($data->version);
-        $data->mod->setBrand($data->brand);
-        $data->mod->setCategory($data->category);
-        $data->mod->setConsole($data->console);
-        $data->mod->setContent($data->content);
+        $data->setTitle($data->getTitle());
+        $data->setAuthor($data->getAuthor());
+        $data->setUrl($data->getUrl());
+        $data->setVersion($data->getVersion());
+        $data->setBrand($data->getBrand());
+        $data->setCategory($data->getCategory());
+        $data->setConsole($data->isConsole());
+        $data->setContent($data->getContent());
         $this->em->flush();
-        $this->dispatcher->dispatch(new ModCreatedEvent($data->mod));
+        $this->dispatcher->dispatch(new ModCreatedEvent($data));
     }
     public function updateMod(Mod $mod)
     {

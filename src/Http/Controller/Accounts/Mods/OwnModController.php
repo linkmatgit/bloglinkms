@@ -79,16 +79,17 @@ class OwnModController extends AbstractController
     #[Route('/profil/mods/new', name: 'mod_new')]
     public function createMod(Request $request):Response
     {
-        $this->denyAccessUnlessGranted(ModVoter::CREATE);
-            $user = $this->getUserOrThrow();
-            $mod = (new Mod())->setAuthor($user)->setCreatedAt(new \DateTime());
-            $form = $this->createForm(ModPublicFormType::class, new ModDto($mod));
+        $user = $this->getUserOrThrow();
+            $mod = new Mod();
+            $form = $this->createForm(ModPublicFormType::class, $mod);
             $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
-            $this->createService->createMod($data);
+            $mod->setAuthor($user);
+            $mod->setCreatedAt(new \DateTime());
+            $this->em->flush();
             $this->em->persist($data);
-            $this->addFlash('success', 'Votre profil a bien été mis à jour');
+            $this->addFlash('success', 'Votre Mod a bien ete Poster');
             return $this->redirectToRoute('app_home');
         }
         return $this->render('users/accounts/create.html.twig', [

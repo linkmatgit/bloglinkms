@@ -16,7 +16,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[Route('mods', name: 'mods_')]
-class ModController extends BaseController
+class ModController extends AbstractController
 {
 
     private string $menu = 'mods';

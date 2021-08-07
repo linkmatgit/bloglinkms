@@ -44,7 +44,15 @@ class ModPublicFormType extends AbstractType
                'placeholder' => 'Choisir une Marque'
             ])
             ->add('category', CategoryModType::class)
-           // ->add('creator', UserChoiceType::class)
         ;
+    }
+    /**
+     * @param OptionsResolver $resolver
+     */
+    public function configureOptions(OptionsResolver $resolver): void
+    {
+        $resolver->setDefaults([
+            'data_class' => Mod::class,
+        ]);
     }
 }

@@ -48,7 +48,7 @@ trait Manageable
     private ?int $rejetTime = null;
 
     #[ORM\ManyToOne(targetEntity: Reason::class)]
-    #[ORM\JoinColumn(name: 'reason_key', referencedColumnName: 'key')]
+    #[ORM\JoinColumn(name: 'reason_id', referencedColumnName: 'id')]
     private ?Reason $reason = null;
 
     public static array $status = [
@@ -193,14 +193,26 @@ trait Manageable
         return $this->acceptAdmin;
     }
 
-    /**
-     * @param bool $acceptAdmin
-     * @return Manageable
-     */
     public function setAcceptAdmin(bool $acceptAdmin): self
     {
         $this->acceptAdmin = $acceptAdmin;
         return $this;
     }
+
+    /**
+     * @return Reason|null
+     */
+    public function getReason(): ?Reason
+    {
+        return $this->reason;
+    }
+
+
+    public function setReason(?Reason $reason): self
+    {
+        $this->reason = $reason;
+        return $this;
+    }
+
 
 }
