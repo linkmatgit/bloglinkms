@@ -11,13 +11,13 @@
 {% endblock %}
 
 {% block content %}
-    <h2 class="section-title">{{ rows.name }}</h2>
+    <h2 class="section-title">{{ rows.title }}</h2>
 
     <p>Posté: {{ rows.createdAt | ago  }}</p>
     <p>Version:{{ rows.version }}</p>
     <p> Marque: {{ rows.brand.name }}</p>
     <p>Category: {{ rows.category.name }}</p>
-    <p class="formatted">{{ rows.description }}</p>
+    <p class="formatted">{{ rows.content }}</p>
 <div class="grid2">
  <div class="about__author stack-large">
      <h2 class="section-title">A propos de l'auteur</h2>
@@ -39,6 +39,6 @@
     </div>
 </div>
     {% for mod in mods %}
-    {{ mod.name }}
+    {{ mod.title }}
     {% endfor %}
 {% endblock %}

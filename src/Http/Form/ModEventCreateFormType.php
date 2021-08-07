@@ -24,7 +24,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
-class ModsFormType extends AbstractType
+class ModEventCreateFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -37,7 +37,7 @@ class ModsFormType extends AbstractType
             ->add('author', UserChoiceType::class)
             ->add('console', SwitchType::class)
             ->add('brand', EntityType::class, [
-              'class' => Brand::class,
+                'class' => Brand::class,
                 'query_builder' =>  function (EntityRepository $er) {
                     return $er->createQueryBuilder('b')
                         ->orderBy('b.name', 'ASC');
@@ -45,7 +45,7 @@ class ModsFormType extends AbstractType
                 'choice_label' => 'name',
             ])
             ->add('category', CategoryModType::class)
-           // ->add('creator', UserChoiceType::class)
+            // ->add('creator', UserChoiceType::class)
         ;
     }
 

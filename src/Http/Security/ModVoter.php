@@ -34,7 +34,7 @@ class ModVoter extends Voter
             case self::CREATE:
                 return $this->createMods($user);
             case self::EDIT:
-                return $this->editMods($user, $subject);
+                return $this->editMods($subject, $user);
             case self::APPROUVED:
                 return $this->approuvedMod($user, $subject);
         }
@@ -46,12 +46,15 @@ class ModVoter extends Voter
     {
         return $user->banned == false;
     }
-    private function editMods(User $user, Mod $mod): bool
+    private function editMods(Mod $mod, User $user): bool
     {
-        return $mod->getAuthor()->getId() === $user->getId();
+      return $this->checkIfApprouve($mod);
     }
-    private function approuvedMod(User $user, Mod $mod)
+    private function approuvedMod(User $user, Mod $mod): bool
     {
         return false;
+    }
+    private function checkIfApprouve(Mod $mod):bool {
+        return null !== $mod->getApprouveBy();
     }
 }

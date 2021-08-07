@@ -12,9 +12,9 @@ class ModCloner
     public static function clone(Mod $rows): Mod
     {
         $clone = new Mod();
-        $clone->setName($rows->getName());
+        $clone->setTitle($rows->getTitle());
         $clone->setAuthor($rows->getAuthor());
-        $clone->setDescription($rows->getDescription());
+        $clone->setContent($rows->getContent());
         $clone->setCategory($rows->getCategory());
         $clone->setBrand($rows->getBrand());
         $clone->setCreatedAt(new \DateTime());

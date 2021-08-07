@@ -8,6 +8,7 @@ use App\Domain\Manager\Dto\ManageableDto;
 use App\Domain\Mods\Entity\Mod;
 use App\Domain\Mods\Event\ModAcceptedEvent;
 use App\Domain\Mods\Event\ModRejectedEvent;
+use App\Domain\Profile\Dto\ModDto;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
@@ -21,11 +22,13 @@ class ManagerService
 
     public function approuveModManager(Mod $data): void
     {
-        $data->setApprouve(1);
+
+            $data->setApprouve(1);
         $data->setStatut(0);
         $data->setApprouveAt(new \DateTime());
-        $this->dispatcher->dispatch(new ModAcceptedEvent($data));
-        $this->em->flush();
+            $this->dispatcher->dispatch(new ModAcceptedEvent($data));
+            $this->em->flush();
+
     }
 
     public function rejectModManage(ManageableDto $data):void

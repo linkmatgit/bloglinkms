@@ -6,7 +6,12 @@ namespace App\Domain\Manager;
 use App\Domain\Auth\User;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints\Unique;
 
+#[UniqueEntity(fields: "key", message: 'Un autre persone utilise deja cette Email')]
+#[ORM\Entity()]
+#[ORM\Table('manager_reason')]
 class Reason
 {
 
@@ -20,6 +25,10 @@ class Reason
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
+
+    #[ORM\Column(type: Types::STRING, unique: true)]
+    private string $key = '';
+
 
     /**
      * @return int|null
@@ -68,4 +77,23 @@ class Reason
     {
         $this->description = $description;
     }
+
+    /**
+     * @return string
+     */
+    public function getKey(): string
+    {
+        return $this->key;
+    }
+
+    /**
+     * @param string $key
+     * @return Reason
+     */
+    public function setKey(string $key): Reason
+    {
+        $this->key = $key;
+        return $this;
+    }
+
 }

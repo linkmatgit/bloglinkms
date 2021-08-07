@@ -10,7 +10,7 @@ use App\Domain\Manager\Manageable;
 use App\Domain\Mods\Repository\ModRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints\Regex;
+use Symfony\Component\Validator\Constraints\Unique;
 
 #[ORM\Entity(repositoryClass: ModRepository::class)]
 class Mod extends Content
@@ -21,6 +21,7 @@ class Mod extends Content
     private ?string $version = null;
 
     #[ORM\Column(type: Types::STRING, nullable: true)]
+    #[Unique]
     private ?string $url = null;
 
     #[ORM\ManyToOne(targetEntity: User::class)]

@@ -19,17 +19,22 @@ class ModCrudData implements CrudDataInterface
 
     private ?EntityManagerInterface $em = null;
     private Mod $entity;
+    #[Assert\NotBlank]
     public ?string $title;
 
     #[Assert\Url]
+    #[Assert\NotBlank]
     public ?string $url;
+    #[Assert\NotBlank]
     public ?Category $category = null;
     public ?string $content;
     public ?\DateTimeInterface $createdAt;
     public User $author;
     public ?User $creator;
+    #[Assert\NotBlank]
     public ?string $version;
     public bool $console = false;
+    #[Assert\NotBlank]
     public ?Brand $brand ;
 
     public function __construct(Mod $row)

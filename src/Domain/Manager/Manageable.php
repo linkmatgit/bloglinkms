@@ -26,6 +26,9 @@ trait Manageable
     #[ORM\Column(type: Types::SMALLINT, options: ['default' => 0])]
     private int $approuve = 0;
 
+    #[ORM\Column(type: Types::BOOLEAN, options: ['default' => false])]
+    private bool $acceptAdmin = false;
+
     #[ORM\Column(type: 'datetime', nullable: true)]
     private ?\DateTimeInterface $approuveAt = null;
 
@@ -43,6 +46,10 @@ trait Manageable
 
     #[ORM\Column(type: Types::INTEGER, nullable: true)]
     private ?int $rejetTime = null;
+
+    #[ORM\ManyToOne(targetEntity: Reason::class)]
+    #[ORM\JoinColumn(name: 'reason_key', referencedColumnName: 'key')]
+    private ?Reason $reason = null;
 
     public static array $status = [
         OUVERT => 'Ouvert',
@@ -177,4 +184,23 @@ trait Manageable
         $this->rejetTime = $rejetTime;
         return $this;
     }
+
+    /**
+     * @return bool
+     */
+    public function isAcceptAdmin(): bool
+    {
+        return $this->acceptAdmin;
+    }
+
+    /**
+     * @param bool $acceptAdmin
+     * @return Manageable
+     */
+    public function setAcceptAdmin(bool $acceptAdmin): self
+    {
+        $this->acceptAdmin = $acceptAdmin;
+        return $this;
+    }
+
 }

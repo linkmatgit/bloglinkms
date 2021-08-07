@@ -49,8 +49,8 @@ abstract class Content
     private bool $online = false;
 
     #[ORM\ManyToOne(targetEntity: User::class)]
-    #[ORM\JoinColumn(name: 'user_id', referencedColumnName: 'id')]
-    private User $author;
+    #[ORM\JoinColumn(name: 'user_id', referencedColumnName: 'id', nullable: true)]
+    private ?User $author = null;
 
     private string $type = '';
 
@@ -181,20 +181,22 @@ abstract class Content
     }
 
     /**
-     * @return User
+     * @return User|null
      */
-    public function getAuthor(): User
+    public function getAuthor(): ?User
     {
         return $this->author;
     }
 
     /**
-     * @param User $author
+     * @param User|null $author
      * @return Content
      */
-    public function setAuthor(User $author): self
+    public function setAuthor(?User $author): Content
     {
         $this->author = $author;
         return $this;
     }
+
+
 }

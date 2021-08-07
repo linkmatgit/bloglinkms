@@ -12,6 +12,7 @@ use App\Http\Form\ModPublicFormType;
 use App\Http\Security\ModVoter;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -121,4 +122,26 @@ class OwnModController extends AbstractController
             'menu' => 'mods',
         ]);
     }
+    #[Route('/profil/mods/event/new', name: 'mod_event_new')]
+    public function eventMod(Request $request): RedirectResponse|Response
+    {
+        $this->denyAccessUnlessGranted(ModVoter::CREATE);
+        $user = $this->getUserOrThrow();
+        $mod = (new Mod())->setAuthor($user)->setCreatedAt(new \DateTime());
+        $form = $this->createForm(ModPublicFormType::class, new ModDto($mod));
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+            $this->createService->createMod($data);
+            $this->em->persist($data);
+            $this->addFlash('success', 'Votre profil a bien été mis à jour');
+            return $this->redirectToRoute('app_home');
+        }
+        return $this->render('users/accounts/create.html.twig', [
+            'form' => $form->createView(),
+            'user' => $user,
+            'menu' => 'mods',
+        ]);
+    }
+
 }

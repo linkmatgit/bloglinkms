@@ -17,13 +17,13 @@
     </thead>
     <tbody>
     {% for row in rows %}
-      {% set link = path('admin_mod_edit', {id: row.id}) %}
+      {% set link = path('admin_mod_release_mods', {id: row.id}) %}
       <tr>
         <td class="dashboard-id">
           <a href="{{ link }}">{{ row.id }}</a>
         </td>
         <td>
-          <a href="{{ link }}">{{ row.name }}</a>
+          <a href="{{ link }}">{{ row.title }}</a>
         </td>
         <td><span class="bullet {% if row.approuve == false %}bullet--danger{% endif %}"></span></td>
         <td>

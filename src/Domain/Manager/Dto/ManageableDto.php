@@ -18,9 +18,11 @@ class ManageableDto
     public ?string $urlOfMod = null;
     public ?Mod $mod;
 
+    public ?User $author = null;
     /* if reject*/
     public ?int $rejetTime = null;
     public ?string $detail = null;
+    public bool $acceptAdmin;
 
     public function __construct(Mod $mod)
     {
@@ -31,6 +33,8 @@ class ManageableDto
         $this->urlOfMod = $mod->getUrlOfMod();
         $this->rejetTime = $mod->getRejetTime();
         $this->detail = $mod->getDetail();
+        $this->acceptAdmin = $mod->isAcceptAdmin();
+        $this->author = $mod->getAuthor();
         $this->mod = $mod;
     }
 

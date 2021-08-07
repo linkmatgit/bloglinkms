@@ -21,14 +21,14 @@ class ModsCreateService
 
     public function createMod(ModDto $data): void
     {
-        $data->mod->setName($data->name);
+        $data->mod->setTitle($data->title);
         $data->mod->setAuthor($data->author);
         $data->mod->setUrl($data->url);
         $data->mod->setVersion($data->version);
         $data->mod->setBrand($data->brand);
         $data->mod->setCategory($data->category);
         $data->mod->setConsole($data->console);
-        $data->mod->setDescription($data->description);
+        $data->mod->setContent($data->content);
         $this->em->flush();
         $this->dispatcher->dispatch(new ModCreatedEvent($data->mod));
     }
@@ -38,4 +38,6 @@ class ModsCreateService
         $this->em->flush();
         $this->dispatcher->dispatch(new ModUpdatedEvent($mod));
     }
+
+
 }
