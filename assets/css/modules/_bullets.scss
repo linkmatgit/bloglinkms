@@ -1,9 +1,15 @@
-.accepted{
 
+// Bullets
+// ==================
+.bullet {
+  display: block;
+  width: 6px;
+  border-radius: 6px;
+  height: 6px;
+  margin-left: auto;
+  margin-right: auto;
+  background: #23db72;
 }
-.close {
-
-}
-.refused {
-  background: red;
+.bullet--danger {
+  background: #fb4635;
 }

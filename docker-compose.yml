@@ -75,7 +75,7 @@ services:
     depends_on:
       - db
     restart: unless-stopped
-    command: ['php', 'bin/console', 'messenger:consume', 'async', '--limit=10', '-vv']
+    #command: ['php', 'bin/console', 'messenger:consume', 'async', '--limit=10', '-vv']
     environment:
       MESSENGER_TRANSPORT_DSN: redis://redis:6379/messages
       MESSENGER_TRANSPORT_FAILED_DSN: redis://redis:6379/messages_failed
