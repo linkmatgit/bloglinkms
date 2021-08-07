@@ -39,7 +39,7 @@ class ModController extends CrudController
         $this->paginator->allowSort('row.id', 'row.title');
         $query = $this->getRepository()
             ->createQueryBuilder('row')
-            ->orderby('row.createdAt', 'DESC')->where('row.approuve = 1')
+            ->orderby('row.createdAt', 'DESC')
         ;
 
         return $this->crudIndex($query);
@@ -51,6 +51,7 @@ class ModController extends CrudController
         $entity = (new Mod());
         $entity->setCreatedAt(new \DateTime());
         $entity->setAuthor($this->getUser());
+
         $data = new ModCrudData($entity);
 
         return $this->crudNew($data);

@@ -3,11 +3,19 @@
 {% block title %}{{ icon('brand') }} Gestion des Mods
 {% endblock %}
 {% block actions %}
-    <form action="{{ path('admin_mod_released_accept', {id: rows.id}) }}" method="post">
+ {% if  rows.approuve == 0%}   <form action="{{ path('admin_mod_released_accept', {id: rows.id}) }}" method="post">
         <button class="btn-primary  btn-block" type="submit">{{ icon('check') }} Approuvé</button>
     </form>
-    <a href="#" class="btn-danger">Danger</a>
-    <a href="#" class="btn-danger">Revision</a>
+    {% endif %}
+   {% if rows.rejettime < 4 %} <a href="{{ path('admin_mod_release_decline', {id: rows.id}) }}" class="btn-danger">Danger</a>
+  {% if rows.reason is not empty%}  <a href="#" class="btn-danger">Revision</a> {% endif %}{% endif %}
+    {% if is_granted('ROLE_ADMIN') %}
+        {% if rows.rejettime > 3 %}
+            <form action="{{ path('admin_mod_release_decline_reset', {id: rows.id}) }}" method="post">
+            <button class="btn-primary  btn-block" type="submit">{{ icon('check') }} Reset</button>
+        </form>
+    {% endif %}
+    {% endif %}
 {% endblock %}
 
 {% block content %}
@@ -24,7 +32,7 @@
     <p>{{ rows.author.name }}</p>
     <p>{{ rows.author.lastLoginIP }}</p>
     <p>{{ rows.author.lastLoginAt | date('Y-M-d h:m:s') }}</p>
-    <p>{{ rows.author.createdAt | ago }}</p></div>
+    <p>{{ rows.author.createdAt |  ago }}</p></div>
     <div class="check">
         {% if rows.approuve >= 1 %}
 
@@ -32,7 +40,7 @@
             {% if rows.approuveby %}
                 {{ rows.approuveBy.name }}
                 {% endif %}
-            {{ rows.approuveAt | ago }}
+            {{ rows.approuveAt |  ago }}
             {{ rows.detail }}
             {{ rows.statut }}
         {% endif %}

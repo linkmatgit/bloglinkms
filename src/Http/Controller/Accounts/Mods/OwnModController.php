@@ -87,8 +87,8 @@ class OwnModController extends AbstractController
             $data = $form->getData();
             $mod->setAuthor($user);
             $mod->setCreatedAt(new \DateTime());
-            $this->em->flush();
             $this->em->persist($data);
+            $this->em->flush();
             $this->addFlash('success', 'Votre Mod a bien ete Poster');
             return $this->redirectToRoute('app_home');
         }

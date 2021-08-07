@@ -1,0 +1,28 @@
+{% extends 'admin/layout/card.html.twig' %}
+
+{% block title %}{{ icon('delete') }} Refusée un Mod
+{% endblock %}
+{% block actions %}
+{% endblock %}
+{% block content %}
+
+{{ form_start(form, {attr: {class: 'stacked'}}) }}
+<div class="grid">
+    {{ form_row(form.urlofmod) }}
+    {{ form_row(form.reason) }}
+    {{ form_row(form.statut) }}
+    {{ form_row(form.approuve) }}
+    {{ form_row(form.approuveby) }}
+    {{ form_row(form.approuveat) }}
+
+</div>
+    <div class="full mt2">
+        {{ form_row(form.detail) }}
+    </div>
+<div class="full mt2">
+    <button type="submit" class="btn-primary">Sauvegarder</button>
+</div>
+
+{{ form_end(form) }}
+
+{% endblock %}

@@ -26,7 +26,19 @@
         <td>
           <a href="{{ link }}">{{ row.title }}</a>
         </td>
-        <td><span class="bullet {% if row.approuve == false %}bullet--danger{% endif %}"></span></td>
+        <td><span class="pill
+{% if row.approuve == 2  %} pill-danger
+{% elseif row.approuve == 1 %} pill-accepted
+{% elseif row.approuve == 0%} pill-waiting
+{% endif%} ">
+            {% if row.approuve == 0 %}
+            En Attente
+            {% elseif row.approuve == 1 %}
+              Approuvée
+              {% elseif row.approuve == 2 %}
+                Refusée
+                {% endif %}
+          </span></td>
         <td>
           <div class="dashboard-actions">
 

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Domain\Mods\Entity;
 
 use App\Domain\Application\Entity\Content;
+use App\Domain\Application\Entity\Sluggeable;
 use App\Domain\Auth\User;
 use App\Domain\Manager\Manageable;
 use App\Domain\Mods\Repository\ModRepository;
@@ -17,6 +18,7 @@ use Symfony\Component\Validator\Constraints\Unique;
 class Mod extends Content
 {
     use Manageable;
+    use Sluggeable;
 
     #[ORM\Column(type: Types::STRING, nullable: true)]
     private ?string $version = null;

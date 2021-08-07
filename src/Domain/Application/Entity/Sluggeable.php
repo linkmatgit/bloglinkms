@@ -30,4 +30,5 @@ trait Sluggeable
         return $this;
     }
 
+
 }

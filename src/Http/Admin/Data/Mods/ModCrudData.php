@@ -21,7 +21,7 @@ class ModCrudData implements CrudDataInterface
     private Mod $entity;
     #[Assert\NotBlank]
     public ?string $title;
-
+    public ?string $slug;
     #[Assert\Url]
     #[Assert\NotBlank]
     public ?string $url;
@@ -35,7 +35,8 @@ class ModCrudData implements CrudDataInterface
     public ?string $version;
     public bool $console = false;
     #[Assert\NotBlank]
-    public ?Brand $brand ;
+    public ?Brand $brand;
+    public int $approuve;
 
     public function __construct(Mod $row)
     {
@@ -48,6 +49,9 @@ class ModCrudData implements CrudDataInterface
         $this->url = $row->getUrl();
         $this->version = $row->getVersion();
         $this->brand = $row->getBrand();
+        $this->slug = $row->getSlug();
+        $this->approuve = $row->getApprouve();
+        $this->creator = $row->getCreator();
     }
     public function hydrate(): void
     {
@@ -59,8 +63,15 @@ class ModCrudData implements CrudDataInterface
         $this->entity->setUrl($this->url);
         $this->entity->setVersion($this->version);
         $this->entity->setBrand($this->brand);
-    }
+        $this->entity->setSlug($this->slugify());
+        $this->entity->setApprouve($this->approuve);
+        $this->entity->setCreator($this->creator);
 
+    }
+    public function slugify():string {
+        return strtolower(preg_replace('/[^a-zA-Z0-9\-]/', '',preg_replace('/\s+/', '-', $this->title) ));
+
+    }
     public function getFormClass(): string
     {
         return ModsFormType::class;

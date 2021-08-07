@@ -24,8 +24,8 @@ class ManagerService
     {
 
             $data->setApprouve(1);
-        $data->setStatut(0);
-        $data->setApprouveAt(new \DateTime());
+            $data->setStatut(0);
+            $data->setApprouveAt(new \DateTime());
             $this->dispatcher->dispatch(new ModAcceptedEvent($data));
             $this->em->flush();
 

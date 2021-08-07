@@ -1,0 +1,17 @@
+.pill {
+  padding: var(--space);
+  border-radius: var(--space);
+
+}
+.pill-danger {
+  background: var(--red);
+  color: var(--background-light);
+  font-weight: 700;
+}
+.pill-accepted  {
+  background: var(--green);
+  color: var(--background-light)
+}
+.pill-waiting  {
+  background: var(--yellow);
+}
