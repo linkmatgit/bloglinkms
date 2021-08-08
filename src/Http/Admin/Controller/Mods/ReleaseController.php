@@ -13,7 +13,6 @@ use App\Domain\Mods\Event\ModUpdatedEvent;
 use App\Domain\Mods\Repository\ModRepository;
 use App\Http\Admin\Controller\CrudController;
 use App\Http\Admin\Form\DeclineModFormType;
-use App\Infrastructure\Mercure\Service\CookieGenerator;
 use App\Infrastructure\Security\TokenGeneratorService;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;

@@ -5,6 +5,7 @@ namespace App\Http\Admin\Type;
 use App\Domain\Auth\User;
 use App\Domain\Mods\Entity\Mod;
 use Doctrine\ORM\EntityManagerInterface;
+use JetBrains\PhpStorm\Pure;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\ChoiceList\View\ChoiceView;
 use Symfony\Component\Form\DataTransformerInterface;
@@ -35,7 +36,7 @@ class ModChoiceType extends AbstractType implements DataTransformerInterface
         $choices = [];
         $mods = $form->getData();
         if ($mods instanceof Mod) {
-            $choices = [new ChoiceView($mods, (string)$mods->getId(), $mods->getName())];
+            $choices = [new ChoiceView($mods, (string)$mods->getId(), $mods->getTitle())];
         }
         $view->vars['choice_translation_domain'] = false;
         $view->vars['expanded'] = false;

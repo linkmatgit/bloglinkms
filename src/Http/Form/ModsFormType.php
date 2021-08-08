@@ -47,7 +47,6 @@ class ModsFormType extends AbstractType
                 'choice_label' => 'name',
             ])
             ->add('category', CategoryModType::class)
-           ->add('creator', UserChoiceType::class)
             ->add('approuve', ChoiceType::class, [
                 'required' => true,
                 'choices' => array_flip(Mod::$confirm),

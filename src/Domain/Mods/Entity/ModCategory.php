@@ -12,7 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity]
 #[ORM\Table("mods_category")]
-class Category
+class ModCategory
 {
 
     #[ORM\Id]
@@ -184,23 +184,7 @@ class Category
         $this->updatedAt = $updatedAt;
     }
 
-    /**
-     * @return Category|null
-     */
-    public function getParent(): ?Category
-    {
-        return $this->parent;
-    }
 
-    /**
-     * @param Category|null $parent
-     * @return Category
-     */
-    public function setParent(?Category $parent): Category
-    {
-        $this->parent = $parent;
-        return $this;
-    }
 
     /**
      * @return bool

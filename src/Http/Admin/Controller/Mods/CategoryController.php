@@ -3,6 +3,7 @@
 namespace App\Http\Admin\Controller\Mods;
 
 use App\Domain\Mods\Entity\Category;
+use App\Domain\Mods\Entity\ModCategory;
 use App\Http\Admin\Controller\CrudController;
 use App\Http\Admin\Data\Mods\CategoryCrudData;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,7 +15,7 @@ class CategoryController extends CrudController
 {
     protected string $templatePath = 'mods/category';
     protected string $menuItem = 'mod_category';
-    protected string $entity = Category::class;
+    protected string $entity = ModCategory::class;
     protected string $routePrefix = 'admin_mod_category';
     protected array $events = [
         'update' => null,
@@ -38,7 +39,7 @@ class CategoryController extends CrudController
     #[Route('/new', name: 'new')]
     public function new(): Response
     {
-        $entity = new Category();
+        $entity = new ModCategory();
         $entity->setCreatedAt(new \DateTime());
         $entity->setAuthor($this->getUser());
         $entity->setPosition(1);
@@ -49,7 +50,7 @@ class CategoryController extends CrudController
 
 
     #[Route('/{id<\d+>}', name: 'edit', methods: ['POST', 'GET'])]
-    public function edit(Category $row): Response
+    public function edit(ModCategory $row): Response
     {
         $data = (new CategoryCrudData($row))->setEntityManager($this->em);
 
@@ -59,7 +60,7 @@ class CategoryController extends CrudController
 
 
     #[Route('/{id<\d+>}', methods: ['DELETE'])]
-    public function delete(Category $rows): Response
+    public function delete(ModCategory $rows): Response
     {
         return $this->crudDelete($rows);
     }

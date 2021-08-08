@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace App\Http\Controller;
 
 use App\Domain\Mods\Entity\Brand;
-use App\Domain\Mods\Entity\Category;
 use App\Domain\Mods\Entity\Mod;
 use App\Domain\Mods\Repository\CategoryRepository;
 use App\Domain\Mods\Repository\ModRepository;

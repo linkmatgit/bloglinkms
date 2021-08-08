@@ -6,8 +6,8 @@ namespace App\Http\Admin\Data\Mods;
 
 use App\Domain\Auth\User;
 use App\Domain\Mods\Entity\Brand;
-use App\Domain\Mods\Entity\Category;
 use App\Domain\Mods\Entity\Mod;
+use App\Domain\Mods\Entity\ModCategory;
 use App\Http\Admin\Data\CrudDataInterface;
 use App\Http\Form\AutomaticForm;
 use App\Http\Form\ModsFormType;
@@ -26,11 +26,10 @@ class ModCrudData implements CrudDataInterface
     #[Assert\NotBlank]
     public ?string $url;
     #[Assert\NotBlank]
-    public ?Category $category = null;
+    public ?ModCategory $category = null;
     public ?string $content;
     public ?\DateTimeInterface $createdAt;
     public User $author;
-    public ?User $creator;
     #[Assert\NotBlank]
     public ?string $version;
     public bool $console = false;
@@ -52,7 +51,6 @@ class ModCrudData implements CrudDataInterface
         $this->brand = $row->getBrand();
         $this->slug = $row->getSlug();
         $this->approuve = $row->getApprouve();
-        $this->creator = $row->getCreator();
         $this->noErrors = $row->isNoErrors();
         $this->console = $row->isConsole();
     }
@@ -68,7 +66,6 @@ class ModCrudData implements CrudDataInterface
         $this->entity->setBrand($this->brand);
         $this->entity->setSlug($this->slugify());
         $this->entity->setApprouve($this->approuve);
-        $this->entity->setCreator($this->creator);
         $this->entity->setNoErrors($this->noErrors);
         $this->entity->setConsole($this->console);
 

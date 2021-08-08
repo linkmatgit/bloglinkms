@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Admin\Data\Mods;
 
 use App\Domain\Auth\User;
-use App\Domain\Mods\Entity\Category;
+use App\Domain\Mods\Entity\ModCategory;
 use App\Http\Admin\Data\CrudDataInterface;
 use App\Http\Form\AutomaticForm;
 use Doctrine\ORM\EntityManagerInterface;
@@ -14,7 +14,7 @@ class CategoryCrudData implements CrudDataInterface
 {
 
     private ?EntityManagerInterface $em = null;
-    private Category $entity;
+    private ModCategory $entity;
     public ?string $name;
     public ?string $description;
     public bool $online;
@@ -23,7 +23,7 @@ class CategoryCrudData implements CrudDataInterface
     public ?int $position;
     public User $author;
 
-    public function __construct(Category $row)
+    public function __construct(ModCategory $row)
     {
         $this->entity = $row;
         $this->name = $row->getName();
@@ -59,7 +59,7 @@ class CategoryCrudData implements CrudDataInterface
         return $this;
     }
 
-    public function getEntity(): Category
+    public function getEntity(): ModCategory
     {
         return $this->entity;
     }

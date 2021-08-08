@@ -3,7 +3,6 @@
 
 namespace App\Http\Admin\Controller\Mods;
 
-use App\Domain\Manager\Service\ManagerService;
 use App\Domain\Mods\Event\ModDeletedEvent;
 use App\Domain\Mods\Event\ModRejectedEvent;
 use App\Domain\Mods\Helper\ModCloner;
@@ -11,7 +10,6 @@ use App\Domain\Mods\Entity\Mod;
 use App\Domain\Mods\Event\ModAcceptedEvent;
 use App\Domain\Mods\Event\ModCreatedEvent;
 use App\Domain\Mods\Event\ModUpdatedEvent;
-use App\Domain\Mods\Repository\ModRepository;
 use App\Http\Admin\Controller\CrudController;
 use App\Http\Admin\Data\Mods\ModCrudData;
 use Symfony\Component\HttpFoundation\Request;

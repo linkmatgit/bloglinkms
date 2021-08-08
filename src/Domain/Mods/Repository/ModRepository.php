@@ -4,8 +4,8 @@
 namespace App\Domain\Mods\Repository;
 
 use App\Domain\Auth\User;
-use App\Domain\Mods\Entity\Category;
 use App\Domain\Mods\Entity\Mod;
+use App\Domain\Mods\Entity\ModCategory;
 use App\Infrastructure\Orm\AbstractRepository;
 use Doctrine\ORM\Query;
 use Doctrine\Persistence\ManagerRegistry;
@@ -58,7 +58,7 @@ class ModRepository extends AbstractRepository
         return $query;
     }
 
-    public function findForCategory(?Category $category = null):Query
+    public function findForCategory(?ModCategory $category = null):Query
     {
 
         $query = $this->createQueryBuilder('m')
@@ -78,7 +78,7 @@ class ModRepository extends AbstractRepository
 
         return $query->getQuery();
     }
-    public function findForBrand(?Category $category = null):Query
+    public function findForBrand(?ModCategory $category = null):Query
     {
 
         $query = $this->createQueryBuilder('m')

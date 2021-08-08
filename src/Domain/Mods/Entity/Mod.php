@@ -11,8 +11,6 @@ use App\Domain\Manager\Manageable;
 use App\Domain\Mods\Repository\ModRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-use Symfony\Component\Validator\Constraints\Unique;
 
 #[ORM\Entity(repositoryClass: ModRepository::class)]
 class Mod extends Content
@@ -33,9 +31,9 @@ class Mod extends Content
     #[ORM\Column(type: Types::BOOLEAN, options: ['default' => false])]
     private bool $console = false;
 
-    #[ORM\ManyToOne(targetEntity: Category::class, inversedBy: 'mods')]
+    #[ORM\ManyToOne(targetEntity: ModCategory::class, inversedBy: 'mods')]
     #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')]
-    private ?Category $category = null;
+    private ?ModCategory $category = null;
 
     #[ORM\ManyToOne(targetEntity: Brand::class, inversedBy: 'target')]
     #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')]
@@ -77,13 +75,13 @@ class Mod extends Content
     }
 
 
-    public function getCategory(): ?Category
+    public function getCategory(): ?ModCategory
     {
         return $this->category;
     }
 
 
-    public function setCategory(?Category $category): self
+    public function setCategory(?ModCategory $category): self
     {
         $this->category = $category;
         return $this;
