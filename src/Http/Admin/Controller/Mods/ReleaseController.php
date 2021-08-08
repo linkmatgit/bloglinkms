@@ -35,6 +35,19 @@ class ReleaseController extends CrudController
         'rejected' => ModRejectedEvent::class
     ];
 
+    #[Route('/release', name: 'release')]
+    public function release(): Response
+    {
+        $this->paginator->allowSort('row.id', 'row.name');
+        $query = $this->getRepository()
+            ->createQueryBuilder('row')
+            ->orderby('row.createdAt', 'DESC')
+            ->where('row.approuve = 0')
+            ->andWhere('row.statut = 0' )
+        ;
+
+        return $this->crudRelease($query);
+    }
     #[Route('/release/{id<\d+>}', name:'release_mods', methods: ['POST', 'GET'])]
     public function viewRelease(Mod $rows, ModRepository $r, ManagerService $service, Request $request): Response
     {
@@ -58,17 +71,7 @@ class ReleaseController extends CrudController
         return $this->redirectToRoute('admin_home');
     }
 
-    #[Route('/release', name: 'release')]
-    public function release(): Response
-    {
-        $this->paginator->allowSort('row.id', 'row.name');
-        $query = $this->getRepository()
-            ->createQueryBuilder('row')
-            ->orderby('row.createdAt', 'DESC')->where('row.approuve = 0')
-        ;
 
-        return $this->crudRelease($query);
-    }
     #[Route('/release/decline/{id<\d+>}', name: 'release_decline')]
     public function decline(Mod $rows, Request $request, TokenGeneratorService $generator): RedirectResponse|Response
     {
@@ -115,7 +118,9 @@ class ReleaseController extends CrudController
         $this->paginator->allowSort('row.id', 'row.name');
         $query = $this->getRepository()
             ->createQueryBuilder('row')
-            ->orderby('row.createdAt', 'DESC')->where('row.approuve = 2')
+            ->orderby('row.createdAt', 'DESC')
+            ->where('row.approuve = 2')
+            ->andWhere('row.statut = 0' )
         ;
         return $this->crudDecline($query);
     }

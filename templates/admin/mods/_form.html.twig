@@ -8,7 +8,10 @@
   {{ form_row(form.brand) }}
   {{ form_row(form.createdAt) }}
   {{ form_row(form.url) }}
+  {{ form_row(form.creator) }}
+  {{ form_row(form.approuve) }}
   {{ form_row(form.console) }}
+  {{ form_row(form.noErrors) }}
 </div>
 <div class="full">
   {{ form_row(form.content) }}
@@ -16,7 +19,6 @@
 </div>
   <div class="full mt2">
     <button type="submit" class="btn-primary">Sauvegarder</button>
-    <a href="{{ path('mods_index') }}" class="btn-primary-outlined">Voir le Mod</a>
   </div>
 
 {{ form_end(form) }}

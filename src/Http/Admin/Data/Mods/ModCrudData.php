@@ -37,6 +37,7 @@ class ModCrudData implements CrudDataInterface
     #[Assert\NotBlank]
     public ?Brand $brand;
     public int $approuve;
+    public bool $noErrors;
 
     public function __construct(Mod $row)
     {
@@ -52,6 +53,8 @@ class ModCrudData implements CrudDataInterface
         $this->slug = $row->getSlug();
         $this->approuve = $row->getApprouve();
         $this->creator = $row->getCreator();
+        $this->noErrors = $row->isNoErrors();
+        $this->console = $row->isConsole();
     }
     public function hydrate(): void
     {
@@ -66,6 +69,8 @@ class ModCrudData implements CrudDataInterface
         $this->entity->setSlug($this->slugify());
         $this->entity->setApprouve($this->approuve);
         $this->entity->setCreator($this->creator);
+        $this->entity->setNoErrors($this->noErrors);
+        $this->entity->setConsole($this->console);
 
     }
     public function slugify():string {

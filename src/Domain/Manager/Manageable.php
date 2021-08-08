@@ -51,6 +51,9 @@ trait Manageable
     #[ORM\JoinColumn(name: 'reason_id', referencedColumnName: 'id')]
     private ?Reason $reason = null;
 
+    #[ORM\Column(type: Types::BOOLEAN, options: ['default'=> false])]
+    private bool $noErrors = false;
+
     public static array $status = [
         OUVERT => 'Ouvert',
         FERMER => 'Fermé',
@@ -211,6 +214,24 @@ trait Manageable
     public function setReason(?Reason $reason): self
     {
         $this->reason = $reason;
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isNoErrors(): bool
+    {
+        return $this->noErrors;
+    }
+
+    /**
+     * @param bool $noErrors
+     * @return Manageable
+     */
+    public function setNoErrors(bool $noErrors): self
+    {
+        $this->noErrors = $noErrors;
         return $this;
     }
 

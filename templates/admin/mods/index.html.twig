@@ -19,26 +19,30 @@
     <tbody>
     {% for row in rows %}
       {% set link = path('admin_mod_edit', {id: row.id}) %}
-      <tr>
+      <tr style=" {% if row.statut == 1 %} opacity: 0.5; pointer-events: none{% endif %}" >
         <td class="dashboard-id">
           <a href="{{ link }}">{{ row.id }}</a>
         </td>
         <td>
           <a href="{{ link }}">{{ row.title }}</a>
         </td>
-        <td><span class="pill
+        {% if row.statut == 0 %}
+          <td><span class="pill
 {% if row.approuve == 2  %} pill-danger
 {% elseif row.approuve == 1 %} pill-accepted
 {% elseif row.approuve == 0%} pill-waiting
 {% endif%} ">
             {% if row.approuve == 0 %}
-            En Attente
+              En Attente
             {% elseif row.approuve == 1 %}
               Approuvée
-              {% elseif row.approuve == 2 %}
-                Refusée
-                {% endif %}
+            {% elseif row.approuve == 2 %}
+              Refusée
+            {% endif %}
           </span></td>
+        {% elseif row.statut == 1 %}
+          <td> <span class="pill pill-danger">CLOSE</span>  </td>
+        {% endif %}
         <td>
           <div class="dashboard-actions">
 

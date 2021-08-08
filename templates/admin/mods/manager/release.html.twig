@@ -3,7 +3,7 @@
 {% block title %}{{ icon('brand') }} Gestion des Mods
 {% endblock %}
 {% block actions %}
- {% if  rows.approuve == 0%}   <form action="{{ path('admin_mod_released_accept', {id: rows.id}) }}" method="post">
+ {% if  rows.approuve == 0  and rows.statut == 0%}   <form action="{{ path('admin_mod_released_accept', {id: rows.id}) }}" method="post">
         <button class="btn-primary  btn-block" type="submit">{{ icon('check') }} Approuvé</button>
     </form>
     {% endif %}

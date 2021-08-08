@@ -5,6 +5,7 @@ namespace App\Http\Controller;
 
 use App\Domain\Mods\Entity\Brand;
 use App\Domain\Mods\Entity\Category;
+use App\Domain\Mods\Entity\Mod;
 use App\Domain\Mods\Repository\CategoryRepository;
 use App\Domain\Mods\Repository\ModRepository;
 use App\Http\Admin\Controller\BaseController;
@@ -35,7 +36,13 @@ class ModController extends AbstractController
         return $this->renderListing($title, $query, $request);
     }
 
+    #[Route('/{slug}-{id<\d+>}', name: 'show')]
+    public function show(Mod $mod) {
+        return $this->render('mods/show.html.twig', [
+            'mod' =>$mod
+        ]);
 
+    }
     #[Route('/category/{slug}', name: 'category')]
     public function category(Category $category, Request $request): Response
     {

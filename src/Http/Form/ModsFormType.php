@@ -37,6 +37,7 @@ class ModsFormType extends AbstractType
             ->add('createdAt', DateTimeType::class)
             ->add('author', UserChoiceType::class)
             ->add('console', SwitchType::class)
+            ->add('noErrors', SwitchType::class)
             ->add('brand', EntityType::class, [
               'class' => Brand::class,
                 'query_builder' =>  function (EntityRepository $er) {

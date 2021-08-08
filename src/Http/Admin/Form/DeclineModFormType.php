@@ -33,7 +33,9 @@ class DeclineModFormType extends AbstractType {
                 ])
                 ->add('approuveby', UserChoiceType::class)
                 ->add('approuveat', DateTimeType::class)
-                ->add("detail", EditorType::class)
+                ->add("detail", EditorType::class, [
+                    'required' => false
+                ])
             ;
     }
     public function configureOptions(OptionsResolver $resolver): void
