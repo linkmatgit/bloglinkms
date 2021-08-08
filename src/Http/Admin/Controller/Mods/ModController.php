@@ -3,6 +3,8 @@
 
 namespace App\Http\Admin\Controller\Mods;
 
+use App\Domain\Auth\Repository\UserRepository;
+use App\Domain\Auth\User;
 use App\Domain\Mods\Event\ModDeletedEvent;
 use App\Domain\Mods\Event\ModRejectedEvent;
 use App\Domain\Mods\Helper\ModCloner;
@@ -12,7 +14,12 @@ use App\Domain\Mods\Event\ModCreatedEvent;
 use App\Domain\Mods\Event\ModUpdatedEvent;
 use App\Http\Admin\Controller\CrudController;
 use App\Http\Admin\Data\Mods\ModCrudData;
+use App\Http\Helper\Paginator\PaginatorInterface;
+use Doctrine\ORM\EntityManagerInterface;
+use Psr\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -30,6 +37,7 @@ class ModController extends CrudController
         'accepted' => ModAcceptedEvent::class,
         'rejected' => ModRejectedEvent::class
     ];
+
 
     #[Route('/', name: 'index')]
     public function index(Request $request): Response
@@ -77,5 +85,22 @@ class ModController extends CrudController
         return $this->crudDelete($rows);
     }
 
+    #[Route('/search', name: 'autocomplete')]
+    public function search(Request $request): JsonResponse
+    {
+        /** @var UserRepository $repository */
+        $repository = $this->em->getRepository(Mod::class);
+        $q = strtolower($request->query->get('q') ?: '');
 
+        $users = $repository
+            ->createQueryBuilder('m')
+            ->select('m.id', 't.title')
+            ->where('LOWER(m.title) LIKE :title')
+            ->setParameter('title', "%$q%")
+            ->setMaxResults(25)
+            ->getQuery()
+            ->getResult();
+
+        return new JsonResponse($users);
+    }
 }

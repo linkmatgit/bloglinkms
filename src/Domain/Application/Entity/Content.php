@@ -30,8 +30,6 @@ abstract class Content
     #[Assert\NotBlank]
     private ?string $title = null;
 
-
-
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     #[Assert\NotBlank]
     #[Assert\Length(min: 5)]

@@ -1,23 +1,44 @@
 
 {{ form_start(form, {attr: {class: 'stacked'}}) }}
+<div class="section-title mt1">
+  Information General
+</div>
 <div class="dashboard-grid">
+
   {{ form_row(form.title) }}
   {{ form_row(form.author) }}
+  {{ form_row(form.createdAt) }}
+</div>
+
+  <div class="section-title mt4">Information Sur le Mods</div>
+<div class="dashboard-grid">
   {{ form_row(form.version) }}
   {{ form_row(form.category) }}
   {{ form_row(form.brand) }}
-  {{ form_row(form.createdAt) }}
-  {{ form_row(form.url) }}
-  {{ form_row(form.approuve) }}
-  {{ form_row(form.console) }}
-  {{ form_row(form.noErrors) }}
 </div>
 <div class="full">
-  {{ form_row(form.content) }}
-
+  <div class="section-title mt4">Lien du Mod</div>
+  {{ form_row(form.url) }}
 </div>
-  <div class="full mt2">
-    <button type="submit" class="btn-primary">Sauvegarder</button>
-  </div>
 
+<div class="section-title mt4">Principal Information</div>
+<div class="dashboard-grid mt5">
+  {{ form_row(form.console) }}
+  {{ form_row(form.noErrors) }}
+  {{ form_row(form.server) }}
+</div>
+<div class="mt5">
+  <div class="section-title mt4">Description du Mod</div>
+  {{ form_row(form.content) }}
+</div>
+
+
+<div class="section-title mt5">Moderation du Mod</div>
+<div class="grid">
+  {{ form_row(form.approuve) }}</div>
+
+
+<div class="full mt4">
+  <button type="submit" class="btn-primary">Sauvegarder</button>
+</div>
 {{ form_end(form) }}

@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controller;
 
-use App\Domain\Mods\Entity\Category;
+use App\Domain\Blog\Entity\Category;
 use App\Domain\Mods\Entity\Mod;
 use App\Domain\Mods\Repository\CategoryRepository;
 use App\Domain\Mods\Repository\ModRepository;
@@ -33,8 +33,20 @@ class ModController extends AbstractController
         return $this->renderListing($title, $query, $request);
     }
 
+    #[Route('/{slug<[a-z0-9A-Z\-]+>}-{id<\d+>}', name: 'show')]
+    public function show(Mod $mod)
+    {
 
-    #[Route('/{slug}', name: 'category')]
+        if ($mod->getApprouve() != 1 || $mod->getStatut() === 1 )
+        {
+            return $this->redirectToRoute('app_home');
+        }
+        return $this->render('mods/show.html.twig', [
+            'mod' => $mod
+        ]);
+    }
+
+    #[Route('/{slug<[a-z0-9A-Z\-]+>}', name: 'category')]
     public function category(Category $category, Request $request): Response
     {
         $title = $category->getName();
@@ -42,14 +54,11 @@ class ModController extends AbstractController
 
         return $this->renderListing($title, $query, $request, ['category' => $category]);
     }
-
-
-
     private function renderListing(string $title, Query $query, Request $request, array $params = []): Response
     {
         $page = $request->query->getInt('page', 1);
 
-        $mods = $this->paginator->paginate($query, $page, 10);
+        $mods = $this->paginator->paginate($query, $page, 12);
 
         if ($page > 1) {
             $title .= ", page $page";

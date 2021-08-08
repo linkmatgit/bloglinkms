@@ -274,3 +274,10 @@
   display: block;
   width: 100%!important;
 }
+.btn-download {
+  @extend %btn;
+  font-size: 18px;
+  background: var(--green);
+  width: 100%;
+  padding-left: 40%;
+}

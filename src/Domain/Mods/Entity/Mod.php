@@ -15,18 +15,12 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: ModRepository::class)]
 class Mod extends Content
 {
-    use Manageable;
-    use Sluggeable;
 
     #[ORM\Column(type: Types::STRING, nullable: true)]
     private ?string $version = null;
 
     #[ORM\Column(type: Types::STRING, nullable: true)]
     private ?string $url = null;
-
-    #[ORM\ManyToOne(targetEntity: User::class)]
-    #[ORM\JoinColumn(name: 'creator_id', referencedColumnName: 'id')]
-    private ?User $creator;
 
     #[ORM\Column(type: Types::BOOLEAN, options: ['default' => false])]
     private bool $console = false;
@@ -39,6 +33,19 @@ class Mod extends Content
     #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')]
     private ?Brand $brand = null;
 
+    #[ORM\Column(type: Types::BOOLEAN, options: ['default' => false])]
+    private bool $server = false;
+
+    #[ORM\Column(type: Types::BOOLEAN, options: ['default' => false])]
+    private bool $cgu = false;
+
+    #[ORM\ManyToOne(targetEntity: User::class)]
+    #[ORM\JoinColumn(name: 'credit_id', referencedColumnName: 'id', nullable: true)]
+    private ?User $credit;
+
+    use Manageable;
+    use Sluggeable;
+    use Informable;
 
     public function getVersion(): ?string
     {
@@ -48,18 +55,6 @@ class Mod extends Content
     public function setVersion(?string $version): self
     {
         $this->version = $version;
-        return $this;
-    }
-
-    public function getCreator(): ?User
-    {
-        return $this->creator;
-    }
-
-
-    public function setCreator(?User $creator): self
-    {
-        $this->creator = $creator;
         return $this;
     }
 
@@ -87,37 +82,65 @@ class Mod extends Content
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
+
     public function getUrl(): ?string
     {
         return $this->url;
     }
 
-    /**
-     * @param string|null $url
-     */
+
     public function setUrl(?string $url): void
     {
         $this->url = $url;
     }
 
-    /**
-     * @return Brand|null
-     */
+
     public function getBrand(): ?Brand
     {
         return $this->brand;
     }
 
-    /**
-     * @param Brand|null $brand
-     * @return Mod
-     */
-    public function setBrand(?Brand $brand): Mod
+    public function setBrand(?Brand $brand): self
     {
         $this->brand = $brand;
         return $this;
     }
+
+
+    public function isServer(): bool
+    {
+        return $this->server;
+    }
+
+
+    public function setServer(bool $server): self
+    {
+        $this->server = $server;
+        return $this;
+    }
+
+    public function isCgu(): bool
+    {
+        return $this->cgu;
+    }
+
+    public function setCgu(bool $cgu): self
+    {
+        $this->cgu = $cgu;
+        return $this;
+    }
+
+    public function getCredit(): ?User
+    {
+        return $this->credit;
+    }
+
+    public function setCredit(?User $credit): Mod
+    {
+        $this->credit = $credit;
+        return $this;
+    }
+
+
+
 }

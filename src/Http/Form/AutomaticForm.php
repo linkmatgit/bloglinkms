@@ -4,8 +4,10 @@ namespace App\Http\Form;
 
 use App\Domain\Auth\User;
 use App\Domain\Blog\Entity\Category;
+use App\Domain\Mods\Entity\Mod;
 use App\Http\Admin\Type\CategoryModType;
 use App\Http\Admin\Type\CategoryType;
+use App\Http\Admin\Type\ModChoiceType;
 use App\Http\Admin\Type\UserChoiceType;
 use App\Http\Type\DateTimeType;
 use App\Http\Type\EditorType;
@@ -33,7 +35,8 @@ class AutomaticForm extends AbstractType
       User::class => UserChoiceType::class,
       Category::class => CategoryType::class,
       DateTimeInterface::class => DateTimeType::class,
-      ModCategory::class => CategoryModType::class
+      ModCategory::class => CategoryModType::class,
+        Mod::class => ModChoiceType::class
     ];
 
     const NAMES = [

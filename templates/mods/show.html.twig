@@ -1,5 +1,41 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+    <div class="container mt5">
+        <div class="card__mod">
+     <main>
+         <div class="hero-title"><h2>{{ mod.title }}</h2></div>
+         <div class="image__container my5 card">
+             <img src="https://picsum.photos/id/{{ mod.id}}/800/400" alt="">
+         </div>
+         <h3 class="section-title">Description</h3>
+         <article class="formatted ">
+             {{ mod.content | markdown_untrusted }}
+         </article>
+
+         <section class="meta__mods hr">
+             <ul class="mods__meta__list">
+                 <li><span>Version: </span>{{ mod.version }}</li>
+                 <li><span>Date D'ajouts:</span> {{ mod.createdAt | date("d M Y", "Europe/Paris")}}</li>
+                 {% if mod.console == true %}  <li><span>Compatible console </span>{{ icon('check') }}</li>{% endif %}
+                 {% if mod.server == true %}  <li ><span>Compatible serveur:</span>  {{ icon('check') }}</li>{% endif %}
+             </ul>
+         </section>
+         <section class="links__mods my5">
+                  <a class="btn-download" href="{{ mod.url }}"  target="_blank" rel="noopener noreferrer">{{ icon('cloud') }} Telecharger</a>
+                 <a href="https://www.facebook.com/sharer/sharer.php?u={{ url(mod) | url_encode }}" target="_blank" class=""><img src="/images/social/facebook.svg" alt=""></a>
+                 <a class="btn-primary" href="#">s</a>
+         </section>
+     </main>
+            <aside>
+            <section>
+                <div class="publish__modBy mt6 card">
+                    <span>Mis en ligne par: </span>
+                    <div class="mod__publish" >{{ mod.author.name }}</div>
+                </div>
+            </section>
+            </aside>
+        </div>
+    </div>
 
 {% endblock %}

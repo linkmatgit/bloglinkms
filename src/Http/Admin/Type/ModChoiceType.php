@@ -17,13 +17,13 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class ModChoiceType extends AbstractType implements DataTransformerInterface
 {
-    private EntityManagerInterface $em;
-    private UrlGeneratorInterface $url;
 
-    public function __construct(EntityManagerInterface $em, UrlGeneratorInterface $url)
+
+    public function __construct(
+        private EntityManagerInterface $em,
+        private UrlGeneratorInterface $url)
     {
-        $this->em = $em;
-        $this->url = $url;
+
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
@@ -54,7 +54,7 @@ class ModChoiceType extends AbstractType implements DataTransformerInterface
         'compound' => false,
         'attr' => [
         'is' => 'select-choices',
-        'data-remote' => $this->url->generate('admin_mods_autocomplete'),
+        'data-remote' => $this->url->generate('api_mod_autocomplete'),
         'data-value' => 'id',
         'data-label' => 'name',
         ],

@@ -67,7 +67,7 @@ class ReleaseController extends CrudController
         $data->setApprouveBy($user);
         $this->em->persist($data);
         $this->addFlash('success', 'Votre mod a ete mis a jours');
-        return $this->redirectToRoute('admin_home');
+        return $this->redirectToRoute('admin_mod_release');
     }
 
 
