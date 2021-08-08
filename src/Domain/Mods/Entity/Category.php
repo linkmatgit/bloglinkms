@@ -279,9 +279,6 @@ class Category
         return $this;
     }
 
-    /**
-     * @return Collection|self[]
-     */
     public function getChildren(): Collection
     {
         return $this->children;

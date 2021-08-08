@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<div class="container mt5">
+    <div class="title_page mt1"  style="text-align: center">
+        <h1 class="hero-title">Catégories</h1>
+    </div>
+    <div class="grid3 mt5">
+        {% for category in categories %}
+        {% if category.parent == null %}
+           <div class="card mt3">
+               <div class="card__body">
+              <div class="card-title">
+                  <h2 style="text-align: center">{{ category.name }}</h2>
+              </div>
+               {% if category.children|length > 0 %}
+                    <ul>
+                        {% for category in category.children %}
+                            <li>
+                                <a href="{{ path('mods_category', {slug: category.slug}) }}" >{{ category.name }}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
+           </div>
+        {% endif %}
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+
+{% block title  'Page d\'accueil'%}
+

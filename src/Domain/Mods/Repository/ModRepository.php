@@ -53,6 +53,7 @@ class ModRepository extends AbstractRepository
             ->leftJoin('m.brand', 'brand')
             ->select('m', 'category', 'author', 'brand')
             ->orderBy('m.createdAt', 'DESC')
+            ->where('m.approuve = 1 AND m.createdAt < NOW() AND m.statut = 0')
             ->getQuery();
 
         return $query;
@@ -66,7 +67,7 @@ class ModRepository extends AbstractRepository
             ->leftJoin('m.author', 'author')
             ->leftJoin('m.brand', 'brand')
             ->select('m', 'category', 'author', 'brand')
-            ->where('m.approuve = 1 AND m.createdAt < NOW()')
+            ->where('m.approuve = 1 AND m.createdAt < NOW() AND m.statut = 0')
             ->orderBy('m.createdAt', 'DESC');
 
         if ($category) {
@@ -86,7 +87,7 @@ class ModRepository extends AbstractRepository
             ->leftJoin('m.author', 'author')
             ->leftJoin('m.brand', 'brand')
             ->select('m', 'category', 'author', 'brand')
-            ->where('m.approuve = 0 AND m.createdAt < NOW()')
+            ->where('m.approuve = 0 AND m.createdAt < NOW() AND m.statut = 1')
             ->orderBy('m.createdAt', 'DESC');
 
         if ($category) {

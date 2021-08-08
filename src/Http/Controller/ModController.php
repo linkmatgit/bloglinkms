@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controller;
 
-use App\Domain\Blog\Entity\Category;
+use App\Domain\Mods\Entity\Category;
 use App\Domain\Mods\Entity\Mod;
 use App\Domain\Mods\Repository\CategoryRepository;
 use App\Domain\Mods\Repository\ModRepository;
@@ -11,6 +11,7 @@ use Doctrine\ORM\Query;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[Route('mods', name: 'mods_')]
@@ -27,7 +28,7 @@ class ModController extends AbstractController
     #[Route('/', name: 'index')]
     public function index(Request $request): Response
     {
-        $title = 'Page de mode';
+        $title = 'Les Mod Recents';
             $query = $this->repository->findForCategory();
 
         return $this->renderListing($title, $query, $request);
@@ -46,7 +47,7 @@ class ModController extends AbstractController
         ]);
     }
 
-    #[Route('/{slug<[a-z0-9A-Z\-]+>}', name: 'category')]
+    #[Route('/category/{slug<[a-z0-9A-Z\-]+>}', name: 'category')]
     public function category(Category $category, Request $request): Response
     {
         $title = $category->getName();
@@ -64,6 +65,9 @@ class ModController extends AbstractController
             $title .= ", page $page";
         }
 
+        if (0 === $mods->count()) {
+            throw new NotFoundHttpException('Aucun articles ne correspond à cette page');
+        }
 
         $categories = $this->categoryRepository->findWithCount();
 
@@ -75,4 +79,6 @@ class ModController extends AbstractController
             'menu' => 'mods',
         ], $params));
     }
+
+
 }

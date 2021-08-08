@@ -3,11 +3,15 @@
 namespace App\Http\Admin\Controller\Mods;
 
 use App\Domain\Mods\Entity\Category;
+use App\Domain\Mods\Repository\CategoryRepository;
 use App\Http\Admin\Controller\CrudController;
 use App\Http\Admin\Data\Mods\CategoryCrudData;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\SerializerInterface;
 
 #[Route('/mods/category', name: 'mod_category_')]
 class CategoryController extends CrudController
@@ -16,6 +20,7 @@ class CategoryController extends CrudController
     protected string $menuItem = 'mod_category';
     protected string $entity = Category::class;
     protected string $routePrefix = 'admin_mod_category';
+    protected string $searchField = 'name';
     protected array $events = [
         'update' => null,
         'delete' =>  null,
@@ -24,15 +29,13 @@ class CategoryController extends CrudController
 
 
     #[Route('/', name: 'index')]
-    public function index(Request $request): Response
+    public function index(SerializerInterface $serializer, CategoryRepository $repository, Request $request): Response
     {
-        $this->paginator->allowSort('row.id', 'row.name');
-        $query = $this->getRepository()
-            ->createQueryBuilder('row')
-            ->orderby('row.createdAt', 'DESC')
-        ;
-
-        return $this->crudIndex($query);
+        return $this->render("admin/{$this->templatePath}/index.html.twig", [
+            'rows' => $serializer->serialize($repository->findTree(), 'json'),
+            'menu' => $this->menuItem,
+            'prefix' => $this->routePrefix,
+        ]);
     }
 
     #[Route('/new', name: 'new')]
@@ -59,8 +62,40 @@ class CategoryController extends CrudController
 
 
     #[Route('/{id<\d+>}', methods: ['DELETE'])]
-    public function delete(Category $rows): Response
+    public function delete(Request $request, Category $post): Response
     {
-        return $this->crudDelete($rows);
+        $response = $this->crudDelete($post);
+        if (in_array('application/json', $request->getAcceptableContentTypes())) {
+            return new JsonResponse([]);
+        }
+
+        return $response;
+    }
+
+
+    #[Route('/positions', name: 'positions')]
+    public function sort(Request $request, CategoryRepository $tagRepository, EntityManagerInterface $em): Response
+    {
+        ['positions' => $positions] = json_decode((string) $request->getContent(), true);
+        $positionById = array_reduce($positions, function ($acc, $position) {
+            $acc[$position['id']] = $position;
+
+            return $acc;
+        }, []);
+        $tags = $tagRepository->findBy(['id' => array_keys($positionById)]);
+        foreach ($tags as $tag) {
+            $position = $positionById[$tag->getId()];
+            $parent = null;
+            if ($position['parent'] > 0) {
+                /** @var CategoryRepository $parent */
+                $parent = $this->em->getReference(Category::class, (int) $position['parent']);
+            }
+            $tag
+                ->setParent($parent)
+                ->setPosition($position['position'] + 1);
+        }
+        $em->flush();
+
+        return new JsonResponse([], 200);
     }
 }

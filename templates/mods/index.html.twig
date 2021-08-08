@@ -1,28 +1,35 @@
 
 {% extends 'base.html.twig' %}
+{% block title title %}
 
 {% block body %}
     <div class="container my5">
-<div class="grid3 stack-large">
-        {% for mod in mods %}
-    <a href="{{ path(mod) }}"><div class="card mod__list">
-            <img src="https://picsum.photos/id/{{ mod.id}}/800/400" alt="">
-        <div class="card__body">
-      <div class="card__title">{{ mod.title }}</div>
-
-
+        <div class="title" style="text-align: center">
+            <h1 class="hero-title">Les <strong>Mods</strong> Recent</h1>
         </div>
-            <div class=" card__mod__meta" >
-                <div class="p1 grid15 card_footer">
+<div class="grid3 stack-large mt5">
 
-                <div class="strong">
-                    {{ mod.author.name }}
-                </div>
-                <div class="text-right mr2"> {{ mod.createdat | ago }}</div>
+        {% for mod in mods %}
+            <article class="stack-large mt3">
+                <a href="{{ path(mod) }}"><div class="card mod__list">
+                        <img src="https://picsum.photos/id/{{ mod.id}}/800/400" alt="">
+                        <div class="card__body">
+                            <div class="card__title">{{ mod.title }}</div>
 
-                </div>
-            </div>
-    </div></a>
+
+                        </div>
+                        <div class=" card__mod__meta" >
+                            <div class="p1 grid15 card_footer">
+
+                                <div class="strong">
+                                    {{ mod.author.name }}
+                                </div>
+                                <div class="text-right mr2"> {{ mod.createdat | ago }}</div>
+
+                            </div>
+                        </div>
+                    </div></a>
+            </article>
         {% endfor %}
 
 </div>
@@ -31,5 +38,4 @@
 
 {% endblock %}
 
-{% block title  'Page d\'accueil'%}
 

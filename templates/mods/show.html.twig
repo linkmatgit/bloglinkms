@@ -1,5 +1,5 @@
 {% extends 'base.html.twig' %}
-
+{% block title mod.title %}
 {% block body %}
     <div class="container mt5">
         <div class="card__mod">
@@ -32,6 +32,15 @@
                 <div class="publish__modBy mt6 card">
                     <span>Mis en ligne par: </span>
                     <div class="mod__publish" >{{ mod.author.name }}</div>
+                </div>
+                <div class="card mt5">
+                    <div class="card__body mod__section__body stack">
+<h2 class="section-title">Information Utiles</h2>
+                      <span>Publié dans:</span>    <a href="{{ path('mods_category', {slug: mod.category.slug}) }}">{{ mod.category.name }}</a>
+
+                        <span>Marque: </span>{{ mod.brand.name }}
+                    </div>
+
                 </div>
             </section>
             </aside>

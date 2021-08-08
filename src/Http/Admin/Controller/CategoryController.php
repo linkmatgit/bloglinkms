@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace App\Http\Admin\Controller;
 
 use App\Domain\Blog\Entity\Category;
+use App\Domain\Mods\Repository\CategoryRepository;
 use App\Http\Admin\Data\CategoryCrudData;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -18,6 +20,7 @@ class CategoryController extends CrudController
     protected string $menuItem = 'category';
     protected string $entity = Category::class;
     protected string $routePrefix = 'admin_category';
+    protected string $searchField = 'name';
     protected array $events = [
     'update' => null,
     'delete' => null,
@@ -61,4 +64,5 @@ class CategoryController extends CrudController
     {
         return $this->crudDelete($rows);
     }
+
 }

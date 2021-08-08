@@ -5,6 +5,7 @@ namespace App\Domain\Mods\Repository;
 
 use App\Domain\Mods\Entity\Category;
 use App\Infrastructure\Orm\AbstractRepository;
+use Doctrine\ORM\Query;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -17,6 +18,16 @@ class CategoryRepository extends AbstractRepository
         parent::__construct($registry, Category::class);
     }
 
+    public function findCategory():Query {
+
+        $query =  $this->createQueryBuilder('c')
+            ->where('c.online =  true')
+            ->orderBy('c.name', 'ASC')
+            ->groupBy('c.parent')
+            ->getQuery();
+
+        return $query;
+    }
     public function findWithCount(): array
     {
         $data = $this->createQueryBuilder('c')
@@ -30,5 +41,33 @@ class CategoryRepository extends AbstractRepository
 
             return $d[0];
         }, $data);
+    }
+
+    public function findTree(): array
+    {
+        $query = $this->createQueryBuilder('t')
+            ->andWhere('t.online = true')
+            ->leftJoin('t.children', 'p')
+            ->addSelect('p')
+            ->orderBy('t.position', 'ASC');
+
+        return array_values(array_filter(
+            $query->getQuery()->getResult(),
+            fn (Category $tag) => null === $tag->getParent()
+        ));
+    }
+
+    public function findAllOrdered(): array
+    {
+        $parents = $this->findTree();
+        $tags = [];
+        foreach ($parents as $parent) {
+            $tags[] = $parent;
+            foreach ($parent->getChildren() as $child) {
+                $tags[] = $child;
+            }
+        }
+
+        return $tags;
     }
 }
