@@ -1,4 +1,4 @@
-App\Domain\Blog\Post:
+App\Domain\Blog\Entity\Post:
   post (template):
     title: <sentence(5, true)>
     slug: <slug()>
@@ -8,7 +8,7 @@ App\Domain\Blog\Post:
     online: true
     author: '@user*'
 
-App\Domain\Blog\Category:
+App\Domain\Blog\Entity\Category:
   category (template):
     name: <sentence(5, true)>
     slug: <slug()>
@@ -23,3 +23,33 @@ App\Domain\Auth\User:
     password: <password('0000')>
     createdAt: <dateTimeThisYear()>
     isverified: true
+
+App\Domain\Mods\Entity\Mod:
+  mods (template):
+    title: Mon Mod <current()>
+    slug: mon-mod-<current()>
+    created_at: <dateTimeThisYear()>
+    updated_at: <dateTimeThisYear()>
+    author: '@user*'
+    content: <text(1500)>
+    url: https://sharemods.com/
+    version: 1.0.<current()>
+
+App\Domain\Mods\Entity\Category:
+  modcategory (template):
+    name: category-<current()>
+    slug: category-<current()>
+    created_at: <dateTimeThisYear()>
+    updated_at: <dateTimeThisYear()>
+    author: '@user*'
+    description: <text(50)>
+    online: true
+
+App\Domain\Mods\Entity\Brand:
+  modbrand (template):
+    name: marque-<current()>
+    slug: marque-<current()>
+    created_at: <dateTimeThisYear()>
+    updated_at: <dateTimeThisYear()>
+    author: '@user*'
+    online: true

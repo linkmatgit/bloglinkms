@@ -12,7 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity]
 #[ORM\Table("mods_category")]
-class ModCategory
+class Category
 {
 
     #[ORM\Id]
@@ -51,9 +51,18 @@ class ModCategory
     #[ORM\Column(type: Types::INTEGER, options: ['unsigned' => true, 'default'=> 0])]
     private int $modsCount = 0;
 
+    #[ORM\ManyToOne(targetEntity: Category::class, inversedBy: 'children')]
+
+    private ?Category $parent = null;
+
+    #[ORM\OneToMany(mappedBy: 'parent', targetEntity: Category::class)]
+    #[ORM\OrderBy(['position' => 'ASC'])]
+    private Collection $children;
+
     public function __construct()
     {
         $this->mods = new ArrayCollection();
+        $this->children = new ArrayCollection();
     }
 
     /**
@@ -257,4 +266,48 @@ class ModCategory
     {
         $this->modsCount = $modsCount;
     }
+
+    public function getParent(): ?self
+    {
+        return $this->parent;
+    }
+
+    public function setParent(?self $parent): self
+    {
+        $this->parent = $parent;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|self[]
+     */
+    public function getChildren(): Collection
+    {
+        return $this->children;
+    }
+
+    public function addChild(self $child): self
+    {
+        if (!$this->children->contains($child)) {
+            $this->children[] = $child;
+            $child->setParent($this);
+        }
+
+        return $this;
+    }
+
+    public function removeChild(self $child): self
+    {
+        if ($this->children->contains($child)) {
+            $this->children->removeElement($child);
+            // set the owning side to null (unless already changed)
+            if ($child->getParent() === $this) {
+                $child->setParent(null);
+            }
+        }
+
+        return $this;
+    }
+
 }

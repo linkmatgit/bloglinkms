@@ -37,8 +37,8 @@ services:
     App\Http\Api\Controller\:
         resource: '../src/Http/Api/Controller'
         tags: ['controller.service_arguments']
-    # add more service definitions when explicit configuration is needed
-    # please note that last definitions always *replace* previous ones
+
+
     App\Http\Admin\Firewall\AdminRequestListener:
         arguments: ['%admin_prefix%']
 
@@ -51,6 +51,7 @@ services:
         arguments:
             $assetPath: '%kernel.project_dir%/public/assets'
             $env: '%kernel.environment%'
+
     App\Infrastructure\Queue\FailedJobsService:
         arguments: ['@messenger.transport.failed']
 

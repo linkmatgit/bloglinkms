@@ -3,16 +3,14 @@ declare(strict_types=1);
 
 namespace App\Http\Controller;
 
-use App\Domain\Mods\Entity\Brand;
+use App\Domain\Mods\Entity\Category;
 use App\Domain\Mods\Entity\Mod;
 use App\Domain\Mods\Repository\CategoryRepository;
 use App\Domain\Mods\Repository\ModRepository;
-use App\Http\Admin\Controller\BaseController;
 use Doctrine\ORM\Query;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[Route('mods', name: 'mods_')]
@@ -35,14 +33,8 @@ class ModController extends AbstractController
         return $this->renderListing($title, $query, $request);
     }
 
-    #[Route('/{slug}-{id<\d+>}', name: 'show')]
-    public function show(Mod $mod) {
-        return $this->render('mods/show.html.twig', [
-            'mod' =>$mod
-        ]);
 
-    }
-    #[Route('/category/{slug}', name: 'category')]
+    #[Route('/{slug}', name: 'category')]
     public function category(Category $category, Request $request): Response
     {
         $title = $category->getName();

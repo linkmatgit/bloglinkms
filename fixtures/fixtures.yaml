@@ -1,15 +1,26 @@
 include:
   - templates.yaml
-  -
+
 App\Domain\Auth\User:
   user{1..5} (extends user):
   admin (extends user):
     name: Linkmat
     email: linkmat@doe.fr
 
-App\Domain\Blog\Category:
+App\Domain\Blog\Entity\Category:
   category{1..5} (extends category):
 
-App\Domain\Blog\Post:
+App\Domain\Blog\Entity\Post:
   post{1..50} (extends post):
     category: '@category*'
+
+App\Domain\Mods\Entity\Mod:
+  mods{1..50} (extends mods):
+    category: '@modcategory*'
+    brand: '@modbrand*'
+
+App\Domain\Mods\Entity\Category:
+  modcategory{1..50} (extends modcategory):
+
+App\Domain\Mods\Entity\Brand:
+  modbrand{1..50} (extends modbrand):

@@ -31,9 +31,9 @@ class Mod extends Content
     #[ORM\Column(type: Types::BOOLEAN, options: ['default' => false])]
     private bool $console = false;
 
-    #[ORM\ManyToOne(targetEntity: ModCategory::class, inversedBy: 'mods')]
+    #[ORM\ManyToOne(targetEntity: Category::class, inversedBy: 'mods')]
     #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')]
-    private ?ModCategory $category = null;
+    private ?Category $category = null;
 
     #[ORM\ManyToOne(targetEntity: Brand::class, inversedBy: 'target')]
     #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')]
@@ -75,13 +75,13 @@ class Mod extends Content
     }
 
 
-    public function getCategory(): ?ModCategory
+    public function getCategory(): ?Category
     {
         return $this->category;
     }
 
 
-    public function setCategory(?ModCategory $category): self
+    public function setCategory(?Category $category): self
     {
         $this->category = $category;
         return $this;

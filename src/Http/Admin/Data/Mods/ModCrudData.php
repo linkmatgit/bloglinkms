@@ -7,7 +7,7 @@ namespace App\Http\Admin\Data\Mods;
 use App\Domain\Auth\User;
 use App\Domain\Mods\Entity\Brand;
 use App\Domain\Mods\Entity\Mod;
-use App\Domain\Mods\Entity\ModCategory;
+use App\Domain\Mods\Entity\Category;
 use App\Http\Admin\Data\CrudDataInterface;
 use App\Http\Form\AutomaticForm;
 use App\Http\Form\ModsFormType;
@@ -26,7 +26,7 @@ class ModCrudData implements CrudDataInterface
     #[Assert\NotBlank]
     public ?string $url;
     #[Assert\NotBlank]
-    public ?ModCategory $category = null;
+    public ?Category $category = null;
     public ?string $content;
     public ?\DateTimeInterface $createdAt;
     public User $author;

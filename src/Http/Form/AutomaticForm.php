@@ -4,7 +4,6 @@ namespace App\Http\Form;
 
 use App\Domain\Auth\User;
 use App\Domain\Blog\Entity\Category;
-use App\Http\Admin\Data\Mods\CategoryCrudData;
 use App\Http\Admin\Type\CategoryModType;
 use App\Http\Admin\Type\CategoryType;
 use App\Http\Admin\Type\UserChoiceType;
@@ -19,6 +18,7 @@ use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use App\Domain\Mods\Entity\Category as ModCategory;
 
 /**
  * Génère un formulaire de manière automatique en lisant les propriété d'un objet.
@@ -33,6 +33,7 @@ class AutomaticForm extends AbstractType
       User::class => UserChoiceType::class,
       Category::class => CategoryType::class,
       DateTimeInterface::class => DateTimeType::class,
+      ModCategory::class => CategoryModType::class
     ];
 
     const NAMES = [
@@ -40,7 +41,7 @@ class AutomaticForm extends AbstractType
         'color' => ColorType::class,
         'links' => TextareaType::class,
         'content' => EditorType::class,
-        'description' => EditorType::class
+        'description' => EditorType::class,
     ];
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {

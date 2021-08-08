@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Admin\Data\Mods;
 
 use App\Domain\Auth\User;
-use App\Domain\Mods\Entity\ModCategory;
+use App\Domain\Mods\Entity\Category;
 use App\Http\Admin\Data\CrudDataInterface;
 use App\Http\Form\AutomaticForm;
 use Doctrine\ORM\EntityManagerInterface;
@@ -14,7 +14,7 @@ class CategoryCrudData implements CrudDataInterface
 {
 
     private ?EntityManagerInterface $em = null;
-    private ModCategory $entity;
+    private Category $entity;
     public ?string $name;
     public ?string $description;
     public bool $online;
@@ -22,8 +22,9 @@ class CategoryCrudData implements CrudDataInterface
     public ?string $slug;
     public ?int $position;
     public User $author;
+    public ?Category $parent = null;
 
-    public function __construct(ModCategory $row)
+    public function __construct(Category $row)
     {
         $this->entity = $row;
         $this->name = $row->getName();
@@ -33,6 +34,7 @@ class CategoryCrudData implements CrudDataInterface
         $this->slug = $row->getSlug();
         $this->position = $row->getPosition();
         $this->author = $row->getAuthor();
+        $this->parent = $row->getParent();
     }
     public function hydrate(): void
     {
@@ -44,6 +46,7 @@ class CategoryCrudData implements CrudDataInterface
         $this->entity->setUpdatedAt(new \DateTime());
         $this->entity->setPosition($this->position);
         $this->entity->setAuthor($this->author);
+        $this->entity->setParent($this->parent);
     }
 
     public function getFormClass(): string
@@ -59,7 +62,7 @@ class CategoryCrudData implements CrudDataInterface
         return $this;
     }
 
-    public function getEntity(): ModCategory
+    public function getEntity(): Category
     {
         return $this->entity;
     }
