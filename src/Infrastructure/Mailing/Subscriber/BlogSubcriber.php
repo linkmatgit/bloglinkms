@@ -36,10 +36,14 @@ class BlogSubcriber implements EventSubscriberInterface
     }
     public function onCreate(PostCreatedEvent $event): void
     {
+        if ($event->getPost()->getAuthor() instanceof User && null !== $event->getPost()->getAuthor()) {
+            $emailuser =  $event->getPost()->getAuthor()->getEmail();
+        }
         $email = $this->mailer->createEmail('mails/auth/register.twig', [
             'user' => $event->getPost()->getAuthor(),
         ])
-            ->to($event->getPost()->getAuthor()->getEmail())
+
+            ->to($emailuser)
             ->subject('Linkmat | Votre Mod a ete soumis')
         ;
         $this->mailer->send($email);
