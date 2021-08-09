@@ -19,6 +19,11 @@ class ForumController extends CrudController
     protected string $entity = Tag::class;
     protected string $searchField = 'name';
     protected string $routePrefix = 'admin_forum-tag';
+    protected array $events = [
+        'update' => null,
+        'delete' =>  null,
+        'create' =>  null,
+    ];
 
 
     #[Route('forum-tag', name: 'forum-tag_index')]
@@ -53,7 +58,6 @@ class ForumController extends CrudController
 
         return $this->crudEdit($data);
     }
-
 
     #[Route('forum-tag/{id<\d+>}', methods: ['DELETE'])]
     public function delete(Request $request, Tag $post): Response

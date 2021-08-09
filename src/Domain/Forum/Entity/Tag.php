@@ -24,7 +24,7 @@ class Tag
     #[ORM\Column(type: Types::TEXT)]
     private string $description = "";
 
-    #[ORM\Column(type: Types::STRING, length: 6)]
+    #[ORM\Column(type: Types::STRING, length: 7)]
     private string $color = '000000';
 
     #[ORM\ManyToOne(targetEntity: Tag::class, inversedBy: 'children')]
