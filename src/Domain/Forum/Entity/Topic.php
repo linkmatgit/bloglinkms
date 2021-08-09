@@ -51,9 +51,19 @@ class Topic
     #[ORM\Column(type: Types::INTEGER, options: ['default' => 0])]
     private int $messageCount = 0;
 
+    #[ORM\OneToMany(mappedBy: 'topic', targetEntity: Message::class)]
+    #[ORM\OrderBy(['accepted' => 'DESC', 'createdAt' => 'ASC'])]
+    private Collection $messages;
+
+
+    #[ORM\ManyToOne(targetEntity: Message::class)]
+    #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')]
+    private ?Message $lastMessage = null;
+
     public function __construct()
     {
         $this->tags = new ArrayCollection();
+        $this->messages = new ArrayCollection();
     }
 
     /**
@@ -238,5 +248,50 @@ class Topic
         }
 
         return $this;
+    }
+    public function getLastMessage(): ?Message
+    {
+        return $this->lastMessage;
+    }
+
+    /**
+     * @return Collection|Message[]
+     */
+    public function getMessages(): Collection
+    {
+        return $this->messages;
+    }
+
+    public function addMessage(Message $message): self
+    {
+        if (!$this->messages->contains($message)) {
+            $this->messages->add($message);
+            $message->setTopic($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param Collection $messages
+     * @return Topic
+     */
+    public function setMessages(Collection $messages): self
+    {
+        $this->messages = $messages;
+
+        return $this;
+    }
+
+    public function setLastMessage(?Message $lastMessage): self
+    {
+        $this->lastMessage = $lastMessage;
+
+        return $this;
+    }
+
+    public function isLocked(): bool
+    {
+        return $this->getCreatedAt() < (new \DateTime('-6 month'));
     }
 }
