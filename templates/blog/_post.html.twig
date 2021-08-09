@@ -1,16 +1,20 @@
-<article>
- <a href="{{ path(post) }}"><div class="post_body stack mt5">
-   <div class="image__blog__container">
-    <img src="https://picsum.photos/id/{{ post.id}}/800/400" alt="{{ post.title }}">
+<article class="blog_listing  mt5">
+<section>
+ <div class="image__blog__container">
+     <a href="{{ path(post) }}"> <img src="https://picsum.photos/id/{{ post.id}}/800/400" alt="{{ post.title }}"></a>
 
-   </div>
- <h2 class="section-title" > {{ post.title }}</h2>
- <div class="meta__blog flex">
-  <div >{{ post.author.name }}  <span> {{ post.createdAt | ago }}</span></div>
-   <div >{{ post.category.name }}</div>
  </div>
-  <div class="formatted">
-    {{ post.content  | markdown_excerpt(350) }}
-  </div>
+</section>
+<section>
+<div class="post_body stack">
 
-</div></a></article>
+   <h2 class="blog__title" >  <a href="{{ path(post) }}">{{ post.title | excerpt(28)}}</a></h2>
+   <div class="meta__blog flex">
+    <div >{{ post.author.name }}</div>
+        <div>{{ post.createdAt | ago }} </div>
+   </div>
+   <div class="formatted">
+    {{ post.content  | markdown_excerpt(300) }}
+   </div></div>
+</section>
+</article>

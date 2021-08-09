@@ -1,7 +1,42 @@
 .blog__posts {
   @extend %container-narrow;
+  @include  down(890) {
+    margin: 0 calc(var(--space) * 2);
+  }
 }
 .image__blog__container img {
-  width: 100%;
+  width: 70%;
+  height: 175px;
   @extend %card;
+  @include down(890) {
+   display: block;
+    align-items: center;
+    width: 100%;
+  }
+}
+.blog_listing {
+  width: 100%;
+  display: grid !important;
+  --gap: 2;
+  grid-gap: calc(var(--gap) * var(--space));
+  grid-template-columns: 1fr;
+  margin-top: calc(var(--space) * 10);
+  margin-bottom: calc(var(--space) * 10);
+
+
+  @include up(890) {
+    grid-template-columns: 250px 1fr;
+  }
+}
+.meta__blog {
+  text-transform: uppercase;
+  opacity: 0.6;
+  font-weight: 300;
+  font-family: $font;
+  font-size: 0.9rem;
+}
+.blog__title {
+  font-family: $font-alt;
+  font-size: 2.0rem;
+  font-weight: 700;
 }
