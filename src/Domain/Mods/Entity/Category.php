@@ -52,7 +52,6 @@ class Category
     private int $modsCount = 0;
 
     #[ORM\ManyToOne(targetEntity: Category::class, inversedBy: 'children')]
-
     private ?Category $parent = null;
 
     #[ORM\OneToMany(mappedBy: 'parent', targetEntity: Category::class)]

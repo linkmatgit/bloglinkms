@@ -10,7 +10,13 @@
            <div class="card mt3">
                <div class="card__body">
               <div class="card-title">
+
                   <h2 style="text-align: center">{{ category.name }}</h2>
+                  <div class="rounded__category__img">
+
+                  <a href="{{ path(category) }}"> <img src="https://picsum.photos/id/{{ category.id}}/800/400" alt="{{ category.name }}"></a>
+
+                  </div>
               </div>
                {% if category.children|length > 0 %}
                     <ul>

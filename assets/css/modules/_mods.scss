@@ -58,3 +58,15 @@
 .mod__section__body  span{
   font-weight: 700;
 }
+
+.rounded__category__img img {
+  border-radius: 100%;
+  width: 100px;
+  margin-top: var(--space);
+  height: 100px;
+
+}
+.rounded__category__img {
+  margin: auto auto;
+  width: 100px;
+}

@@ -44,9 +44,6 @@ class PostRepository extends AbstractRepository
 
         if ($category) {
             $query = $query
-                ->leftJoin('p.category', 'c')
-                ->leftJoin('p.author', 'u')
-                ->addSelect('c', 'u')
                 ->andWhere('p.category = :category')
                 ->setParameter('category', $category);
         }

@@ -2,29 +2,28 @@
 
 namespace App\Domain\Mods\Entity;
 
-
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 trait Informable
 {
     #[ORM\Column(type: Types::BOOLEAN, options: ['default' => false])]
-    public bool $info;
+    public bool $info = false;
 
     #[ORM\Column(type: Types::STRING, nullable: true)]
-    public ?string $power;
+    public ?string $power = null;
 
     #[ORM\Column(type: Types::STRING, nullable: true)]
-    public ?string $price;
+    public ?string $price = null;
 
     #[ORM\Column(type: Types::STRING, nullable: true)]
-    public ?string $wheel;
+    public ?string $wheel = null;
 
     #[ORM\Column(type: Types::STRING, nullable: true)]
-    public ?string $grandeur;
+    public ?string $grandeur = null;
 
     #[ORM\Column(type: Types::STRING, nullable: true)]
-    public ?string $champs;
+    public ?string $champs = null;
 
     /**
      * @return bool
@@ -133,6 +132,4 @@ trait Informable
         $this->champs = $champs;
         return $this;
     }
-
-
 }
