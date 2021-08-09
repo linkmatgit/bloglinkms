@@ -10,9 +10,9 @@
   <table class="table">
     <thead>
     <tr>
-      <th>ID</th>
-      <th>Nom</th>
-      <th class="text-center">Statut</th>
+      <th>{{ sort_by(rows, 'ID', 'row.id') }}</th>
+      <th>{{ sort_by(rows, 'Nom', 'row.title') }}</th>
+      <th class="text-center">{{ sort_by(rows, 'Statut', 'row.approuve') }}</th>
       <th class="text-right">Actions</th>
     </tr>
     </thead>
@@ -48,7 +48,7 @@
 
             <a href="{{ path('admin_mod_clone', {id: row.id}) }}">{{ icon('clone') }}</a>
             <a href="{{ link }}">{{ icon('edit') }}</a>
-            <form action="{{ path('admin_mod_edit', {id: row.id}) }}" method="post" onsubmit="return confirm('Voulez-vous vraiment supprimer ce contenu')">
+            <form action="{{ path('admin_mod_app_http_admin_mods_mod_delete', {id: row.id}) }}" method="post" onsubmit="return confirm('Voulez-vous vraiment supprimer ce contenu')">
               <input type="hidden" name="_method" value="DELETE" />
               <button type="submit">
                 {{ icon('delete') }}

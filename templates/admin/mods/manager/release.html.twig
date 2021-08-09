@@ -3,18 +3,21 @@
 {% block title %}{{ icon('brand') }} Gestion des Mods
 {% endblock %}
 {% block actions %}
- {% if  rows.approuve == 0  and rows.statut == 0%}   <form action="{{ path('admin_mod_released_accept', {id: rows.id}) }}" method="post">
-        <button class="btn-primary  btn-block" type="submit">{{ icon('check') }} Approuvé</button>
-    </form>
-    {% endif %}
-   {% if rows.rejettime < 4 %} <a href="{{ path('admin_mod_release_decline', {id: rows.id}) }}" class="btn-danger">{{ icon('cross')}} Refusée</a>
-  {% if rows.reason is not empty%}  <a href="#" class="btn-danger">Revision</a> {% endif %}{% endif %}
-    {% if is_granted('ROLE_ADMIN') %}
-        {% if rows.rejettime > 3 %}
-            <form action="{{ path('admin_mod_release_decline_reset', {id: rows.id}) }}" method="post">
-            <button class="btn-primary  btn-block" type="submit">{{ icon('check') }} Reset</button>
+     {% if  rows.approuve == 0  and rows.statut == 0%}
+         <form action="{{ path('admin_mod_released_accept', {id: rows.id}) }}" method="post">
+            <button class="btn-primary  btn-block" type="submit">{{ icon('check') }} Approuvé</button>
         </form>
     {% endif %}
+   {% if rows.rejettime < 4 %}
+       <a href="{{ path('admin_mod_release_decline', {id: rows.id}) }}" class="btn-danger">{{ icon('cross')}} Refusée</a>
+    {% if rows.reason is not empty%}
+        <a href="#" class="btn-danger">Revision</a> {% endif %}{% endif %}
+    {% if is_granted('ROLE_ADMIN') %}
+        {% if rows.statut == 1 %}
+            <form action="{{ path('admin_mod_release_decline_reset', {id: rows.id}) }}" method="post">
+                <button class="btn-primary  btn-block" type="submit">{{ icon('check') }} Reset</button>
+            </form>
+        {% endif %}
     {% endif %}
 {% endblock %}
 

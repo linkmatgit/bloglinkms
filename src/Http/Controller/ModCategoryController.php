@@ -2,6 +2,7 @@
 
 namespace App\Http\Controller;
 
+use App\Domain\Mods\Entity\Category;
 use App\Domain\Mods\Repository\CategoryRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -22,5 +23,6 @@ class ModCategoryController extends AbstractController
             'menu' => 'category'
         ]);
     }
+
 
 }

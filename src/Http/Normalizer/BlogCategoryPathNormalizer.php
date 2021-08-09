@@ -2,18 +2,17 @@
 
 namespace App\Http\Normalizer;
 
-
-use App\Domain\Mods\Entity\Category;
+use App\Domain\Blog\Entity\Category;
 use App\Http\Encoder\PathEncoder;
 use App\Infrastructure\Normalizer\Normalizer;
 
-class CategoryPathNormalizer extends Normalizer
+class BlogCategoryPathNormalizer extends Normalizer
 {
     public function normalize($object, string $format = null, array $context = []): array
     {
         if ($object instanceof Category) {
             return [
-                'path' => 'mods_category',
+                'path' => 'blog_category',
                 'params' => ['slug' => $object->getSlug()],
             ];
         }

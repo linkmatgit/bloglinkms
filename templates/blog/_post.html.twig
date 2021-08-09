@@ -1,0 +1,16 @@
+<article>
+ <a href="{{ path(post) }}"><div class="post_body stack mt5">
+   <div class="image__blog__container">
+    <img src="https://picsum.photos/id/{{ post.id}}/800/400" alt="{{ post.title }}">
+
+   </div>
+ <h2 class="section-title" > {{ post.title }}</h2>
+ <div class="meta__blog flex">
+  <div >{{ post.author.name }}  <span> {{ post.createdAt | ago }}</span></div>
+   <div >{{ post.category.name }}</div>
+ </div>
+  <div class="formatted">
+    {{ post.content  | markdown_excerpt(350) }}
+  </div>
+
+</div></a></article>

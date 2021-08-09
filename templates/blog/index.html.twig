@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+{% set bodyClass = 'header-light' %}
+
+{% block body %}
+        <div class="container flex flex-end my4">
+
+            <drop-down class="dropdown" id="categories">
+                <button class="btn-secondary" aria-label="Sélectionner une catégorie">
+                    {{ category is defined ? category.name : "Toutes les catégories"}}
+                    {{ icon('arrow-down') }}
+                </button>
+                <ul hidden>
+                    {% for c in categories %}
+                        <li {{ category is defined and c.id == category.id ? "aria-selected=\"true\"" : "" }}>
+                            <a href="{{ path(c) }}">
+                                {{ c.name }}
+                                <span class="badge">{{ c.postsCount }}</span>
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </drop-down>
+        </div>
+
+            <div class="blog__posts mt4">
+            {% for post in posts %}
+                {% include 'blog/_post.html.twig' %}
+            {% endfor %}
+                {{ knp_pagination_render(posts) }}
+
+            </div>
+
+{% endblock %}

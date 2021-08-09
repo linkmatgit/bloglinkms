@@ -49,6 +49,9 @@ class Category
     #[ORM\OneToMany(mappedBy: 'category', targetEntity: Post::class)]
     private Collection $posts;
 
+    #[ORM\Column(type: Types::INTEGER, options: ['unsigned' => true, 'default'=> 0])]
+    private int $postsCount = 0;
+
     public function __construct()
     {
         $this->posts = new ArrayCollection();
@@ -215,8 +218,9 @@ class Category
         $this->updatedAt = $updatedAt;
         return $this;
     }
+
     /**
-     * @return Collection<int,Post>|Post[]
+     * @return Collection
      */
     public function getPosts(): Collection
     {
@@ -245,4 +249,24 @@ class Category
 
         return $this;
     }
+
+    /**
+     * @return int
+     */
+    public function getPostsCount(): int
+    {
+        return $this->postsCount;
+    }
+
+    /**
+     * @param int $postsCount
+     * @return Category
+     */
+    public function setPostsCount(int $postsCount): Category
+    {
+        $this->postsCount = $postsCount;
+        return $this;
+    }
+
+
 }

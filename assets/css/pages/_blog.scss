@@ -1,0 +1,7 @@
+.blog__posts {
+  @extend %container-narrow;
+}
+.image__blog__container img {
+  width: 100%;
+  @extend %card;
+}

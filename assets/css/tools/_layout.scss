@@ -42,9 +42,9 @@
   margin-right: auto;
   width: var(--container-width);
 }
-
+%container-narrow,
 .container-narrow {
-  max-width: 700px;
+  max-width: 900px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -283,4 +283,8 @@
 .text-right {
 
   text-align: right;
+}
+.text-center {
+  text-align: center;
+  justify-content: center;
 }
