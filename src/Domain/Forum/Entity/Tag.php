@@ -28,7 +28,7 @@ class Tag
     private string $color = '000000';
 
     #[ORM\ManyToOne(targetEntity: Tag::class, inversedBy: 'children')]
-    private ?Tag $parent;
+    private ?Tag $parent = null;
 
     #[ORM\OneToMany(mappedBy: 'parent', targetEntity: Tag::class)]
     #[ORM\OrderBy(['position' => 'ASC'])]
@@ -39,7 +39,7 @@ class Tag
 
     #[ORM\ManyToOne(targetEntity: User::class)]
     #[ORM\JoinColumn(nullable: true, onDelete: 'CASCADE')]
-    private User $authors;
+    private User $author;
 
     #[ORM\Column(type: 'datetime', nullable: true)]
     private ?\DateTimeInterface $createdAt = null;
@@ -135,20 +135,21 @@ class Tag
     /**
      * @return User
      */
-    public function getAuthors(): User
+    public function getAuthor(): User
     {
-        return $this->authors;
+        return $this->author;
     }
 
     /**
-     * @param User $authors
+     * @param User $author
      * @return Tag
      */
-    public function setAuthors(User $authors): self
+    public function setAuthor(User $author): Tag
     {
-        $this->authors = $authors;
+        $this->author = $author;
         return $this;
     }
+
 
     /**
      * @return \DateTimeInterface|null

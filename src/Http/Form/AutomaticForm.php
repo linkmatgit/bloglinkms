@@ -4,9 +4,11 @@ namespace App\Http\Form;
 
 use App\Domain\Auth\User;
 use App\Domain\Blog\Entity\Category;
+use App\Domain\Forum\Entity\Tag;
 use App\Domain\Mods\Entity\Mod;
 use App\Http\Admin\Type\CategoryModType;
 use App\Http\Admin\Type\CategoryType;
+use App\Http\Admin\Type\ForumTagChoiceType;
 use App\Http\Admin\Type\ModChoiceType;
 use App\Http\Admin\Type\UserChoiceType;
 use App\Http\Type\DateTimeType;
@@ -36,7 +38,8 @@ class AutomaticForm extends AbstractType
       Category::class => CategoryType::class,
       DateTimeInterface::class => DateTimeType::class,
       ModCategory::class => CategoryModType::class,
-        Mod::class => ModChoiceType::class
+        Mod::class => ModChoiceType::class,
+        Tag::class => ForumTagChoiceType::class
     ];
 
     const NAMES = [

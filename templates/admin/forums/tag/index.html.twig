@@ -1,0 +1,12 @@
+{% extends 'admin/layout/card.html.twig' %}
+
+{% block title %}{{ icon('pen') }} Gestion des TAG
+{% endblock %}
+{% block actions %}
+    <a href="{{ path('admin_forum-tag_new') }}" class="btn-primary">Ajouter un Article</a>
+{% endblock %}
+
+{% block content %}
+    <item-sorter items="{{ tags }}" endpoint="{{ path('admin_forum-tag-positions') }}"></item-sorter>
+
+{% endblock %}
