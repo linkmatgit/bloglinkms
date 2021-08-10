@@ -1,0 +1,14 @@
+<ul class="tag__list">
+    {% for tag in tags %}
+         {% if tag.parent == null %}
+     <li>{{ tag.name }}</li>
+         {% if tag.children | length > 0 %}
+              <ul class="tag__children">
+              {% for t in tag.children %}
+                  <li>{{ t.name }}</li>
+              {% endfor %}
+              </ul>
+         {% endif %}
+         {% endif %}
+    {% endfor %}
+</ul>
