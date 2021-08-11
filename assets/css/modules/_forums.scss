@@ -11,3 +11,25 @@
 .forum-tags ul {
   margin-left: calc(var(--space) * 2);
 }
+.topics__list {
+  width: 100%;
+}
+.topic_card {
+  width: 100% !important;
+  display: grid;
+  grid-template-columns: 100%;
+  gap: var(--gap);
+
+
+}
+.topics__body:hover {
+  background: var(--background-light);
+}
+.topic__body {
+  padding: var(--space);
+}
+.topic__title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  font-family: $font-alt;
+}

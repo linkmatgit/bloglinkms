@@ -1,0 +1,50 @@
+{% extends 'admin/layout/card.html.twig' %}
+
+{% block title %}{{ icon('user') }} Gestion des Utilisateurs
+{% endblock %}
+{% block actions %}
+    <a href="{{ path('admin_mod_new') }}" class="btn-primary">{{ icon('check') }}Ajouter un Mods</a>
+{% endblock %}
+
+{% block content %}
+    <table class="table">
+        <thead>
+        <tr>
+            <th>{{ sort_by(rows, 'ID', 'row.id') }}</th>
+            <th>{{ sort_by(rows, 'Nom', 'row.title') }}</th>
+            <th class="text-right">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for row in rows %}
+            {% set link = path('admin_mod_edit', {id: row.id}) %}
+            <tr >
+                <td class="dashboard-id">
+                    <a href="{{ link }}">{{ row.id }}</a>
+                </td>
+                <td>
+                    <a href="{{ link }}">{{ row.name }}</a>
+                </td>
+
+                <td>
+                    <div class="dashboard-actions">
+
+                        <a href="{{ path('admin_mod_clone', {id: row.id}) }}">{{ icon('clone') }}</a>
+                        <a href="{{ link }}">{{ icon('edit') }}</a>
+                        <form action="{{ path('admin_mod_app_http_admin_mods_mod_delete', {id: row.id}) }}" method="post" onsubmit="return confirm('Voulez-vous vraiment supprimer ce contenu')">
+                            <input type="hidden" name="_method" value="DELETE" />
+                            <button type="submit">
+                                {{ icon('delete') }}
+                            </button>
+                        </form>
+
+                    </div>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    {{ knp_pagination_render(rows) }}
+
+{% endblock %}

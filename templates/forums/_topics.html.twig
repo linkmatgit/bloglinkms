@@ -1,5 +1,16 @@
 
 
 {% for topic in topics %}
- {{ topic.name }}
+<div class="topic_card p1" style="--gap: 2">
+ <div class="topic__body">
+  <div class="topic__left">
+   <a href="#" class="topic__title">
+    {{ topic.name }}
+   </a>
+   <div class="topic__meta"><a href="{{ path(topic.author) }}">{{ topic.author.name }}</a>, {{ topic.createdAt | ago  }}</div>
+  </div>
+
+
+ </div>
+</div>
 {% endfor %}
