@@ -1,3 +1,13 @@
+.forum-pages {
+  @extend %container;
+  display: grid;
+  grid-gap: space(3);
+  grid-template-columns: 1fr;
+
+  @include up(800) {
+    grid-template-columns: 190px 1fr;
+  }
+}
 .forum-tags ul {
   margin-left: calc(var(--space) * 2);
 }
