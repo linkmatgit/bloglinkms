@@ -4,7 +4,9 @@ namespace App\Http\Form;
 
 use App\Domain\Auth\User;
 use App\Domain\Mods\Entity\Brand;
+use App\Domain\Mods\Entity\Category;
 use App\Domain\Mods\Entity\Mod;
+use App\Domain\Mods\Repository\CategoryRepository;
 use App\Domain\Profile\Dto\ModDto;
 use App\Http\Admin\Data\Mods\ModCrudData;
 use App\Http\Admin\Type\CategoryModType;
@@ -26,8 +28,13 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 
 class ModPublicFormType extends AbstractType
 {
+    public function __construct(private CategoryRepository $repository)
+    {
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        $tags = $this->repository->findAllOrdered();
         $builder
             ->add('title', TextType::class)
             ->add('url', TextType::class)
@@ -43,8 +50,21 @@ class ModPublicFormType extends AbstractType
                 'choice_label' => 'name',
                'placeholder' => 'Choisir une Marque'
             ])
-            ->add('category', CategoryModType::class)
-        ;
+            ->add('category', EntityType::class, [
+                'required' => false,
+                'multiple' => true,
+                'attr' => [
+        'data-limit' => 2,
+                ],
+                'class' => Category::class,
+                'choices' => $tags,
+                'query_builder' => null,
+                'choice_label' => function (Category $tag) {
+                    $prefix = $tag->getParent() ? '⠀⠀' : '';
+
+                    return $prefix.$tag->getName();
+                },
+            ]);
     }
     /**
      * @param OptionsResolver $resolver

@@ -17,15 +17,38 @@ import SpinningDots from '@grafikart/spinning-dots-element'
 import preactCustomElement from '/functions/preact.js'
 import {Comments} from "/Components/Comments";
 import '/Elements/works/index'
+import { $$, $ } from '/functions/dom.js'
+import TomSelect from 'tom-select'
 
+// Choices
+$$('select[multiple]:not([is])').forEach(
+    s =>
+        new TomSelect(s, {
+            plugins: {
+                remove_button: {
+                    title: 'Supprimer cet élément'
+                }
+            },
+            maxItems: s.dataset.limit || null
+        })
+)
 
+$$('form.js-preventMultiSubmit').forEach(form => {
+    form.addEventListener('submit', () => {
+        const button = form.querySelector('button[type="submit"]')
+        if (button) {
+            button.disabled = true
+            button.innerText = 'Chargement...'
+        }
+    })
+})
 customElements.define('alert-message', Alert)
 customElements.define('alert-floating', FloatingAlert)
 customElements.define('nav-tabs', NavTabs)
 customElements.define('time-ago', TimeAgo)
 customElements.define('input-choices', InputChoices, { extends: 'input' })
 customElements.define('select-choices', SelectChoices, { extends: 'select' })
-customElements.define('input-switch', Switch, { extends: 'input' })
+customElements.define('input-switch',  Switch , { extends: 'input' })
 customElements.define('date-picker', DatePicker, { extends: 'input' })
 customElements.define('textarea-autogrow', Autogrow,{ extends: 'textarea' })
 customElements.define('markdown-editor', MarkdownEditor, { extends: 'textarea' })
@@ -34,7 +57,5 @@ customElements.define('ajax-delete', AjaxDelete)
 customElements.define('loader-overlay', LoaderOverlay)
 customElements.define('spinning-dots', SpinningDots)
 preactCustomElement('comments-area', Comments, ['target'])
-
-
 
 Turbolinks.start()

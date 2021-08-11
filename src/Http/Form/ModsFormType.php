@@ -4,7 +4,9 @@ namespace App\Http\Form;
 
 use App\Domain\Auth\User;
 use App\Domain\Mods\Entity\Brand;
+use App\Domain\Mods\Entity\Category;
 use App\Domain\Mods\Entity\Mod;
+use App\Domain\Mods\Repository\CategoryRepository;
 use App\Http\Admin\Data\Mods\ModCrudData;
 use App\Http\Admin\Type\CategoryModType;
 use App\Http\Admin\Type\UserChoiceType;
@@ -27,8 +29,13 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 
 class ModsFormType extends AbstractType
 {
+    public function __construct(private CategoryRepository $repository)
+    {
+    }
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        $tags = $this->repository->findAllOrdered();
+
         $builder
             ->add('title', TextType::class)
             ->add('url', UrlType::class)
@@ -47,7 +54,21 @@ class ModsFormType extends AbstractType
                 },
                 'choice_label' => 'name',
             ])
-            ->add('category', CategoryModType::class)
+            ->add('category', EntityType::class, [
+                'required' => false,
+                'multiple' => true,
+                'attr' => [
+                    'data-limit' => 2,
+                ],
+                'class' => Category::class,
+                'choices' => $tags,
+                'query_builder' => null,
+                'choice_label' => function (Category $tag) {
+                    $prefix = $tag->getParent() ? '⠀⠀' : '';
+
+                    return $prefix.$tag->getName();
+                },
+            ])
             ->add('approuve', ChoiceType::class, [
                 'required' => true,
                 'choices' => array_flip(Mod::$confirm),

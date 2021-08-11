@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {{ form_start(form, {attr: {class: 'grid fit js-preventMultiSubmit', style: '--col:300px'}}) }}
+    {{ form_row(form.name, {label: 'Titre'}) }}
+    {{ form_row(form.tags, {label: 'Tags', attr: {placeholder: 'Sélectionner un ou plusieurs tags'}}) }}
+    {{ form_row(form.content, {label: false}) }}
+    <div class="full text-right">
+        <button type="submit" class="btn-primary">Créer le sujet</button>
+    </div>
+    {{ form_end(form) }}
+{% endblock %}
+
