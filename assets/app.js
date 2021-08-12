@@ -19,7 +19,7 @@ import {Comments} from "/Components/Comments";
 import '/Elements/works/index'
 import { $$, $ } from '/functions/dom.js'
 import TomSelect from 'tom-select'
-
+import './modules/highlight'
 // Choices
 $$('select[multiple]:not([is])').forEach(
     s =>

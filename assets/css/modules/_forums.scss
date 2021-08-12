@@ -33,3 +33,18 @@
   font-weight: 700;
   font-family: $font-alt;
 }
+
+.forum__meta__topic {
+  display: flex;
+  margin-top: var(--space);
+}
+
+.forum__meta__topic > * {
+  margin-left: var(--space);
+}
+
+.create__topic__grid {
+  display: grid;
+  grid-template-columns: 350px 1fr;
+  grid-template-areas: "info form";
+}

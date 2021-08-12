@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+{% set bodyClass = 'header-light' %}
+
+{% block body %}
+    <div class="page__light">
+        <div class="container my5">
+            <div class="flex">
+                <h2 class="hero-title">{{ topic.name }}</h2>
+
+            </div>
+            <div class="forum__meta__topic">
+               <div class="topic__author"> {{ topic.author.name }},</div>
+                <div class="topic__meta_time"> {{ topic.createdAt | ago }}</div>
+                {% include 'forums/_tagsShow.html.twig' with {tags: topic.tags} only %}
+            </div>
+        </div>
+    </div>
+
+    <div class="container my5">
+        <div class="formatted">
+            {{ topic.content | markdown_untrusted }}
+        </div>
+    </div>
+ {% endblock %}

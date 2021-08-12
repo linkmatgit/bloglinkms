@@ -53,7 +53,7 @@ class ForumController extends AbstractController
     {
         $user = $this->getUser();
 
-        return $this->render('forum/show.html.twig', [
+        return $this->render('forums/show.html.twig', [
             'topic' => $topic,
             'menu' => 'forum',
         ]);
@@ -65,7 +65,7 @@ class ForumController extends AbstractController
         //$this->denyAccessUnlessGranted(ForumVoter::CREATE);
         /** @var User $user */
         $user = $this->getUser();
-        $topic = (new Topic())->setContent($this->renderView('forum/template/placeholder.text.twig'));
+        $topic = (new Topic())->setContent($this->renderView('forums/template/placeholder.text.twig'));
         $topic->setAuthor($user);
         $form = $this->createForm(ForumTopicForm::class, $topic);
         $form->handleRequest($request);

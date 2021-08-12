@@ -54,21 +54,7 @@ class ModsFormType extends AbstractType
                 },
                 'choice_label' => 'name',
             ])
-            ->add('category', EntityType::class, [
-                'required' => false,
-                'multiple' => true,
-                'attr' => [
-                    'data-limit' => 2,
-                ],
-                'class' => Category::class,
-                'choices' => $tags,
-                'query_builder' => null,
-                'choice_label' => function (Category $tag) {
-                    $prefix = $tag->getParent() ? '⠀⠀' : '';
-
-                    return $prefix.$tag->getName();
-                },
-            ])
+            ->add('category', CategoryModType::class)
             ->add('approuve', ChoiceType::class, [
                 'required' => true,
                 'choices' => array_flip(Mod::$confirm),

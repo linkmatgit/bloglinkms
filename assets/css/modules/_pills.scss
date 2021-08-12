@@ -1,7 +1,7 @@
 .pill {
-  padding: var(--space);
-  border-radius: var(--space);
-
+  border-radius: 4px;
+  font-size: 0.8rem;
+  padding: 2px 5px
 }
 .pill-danger {
   background: var(--red);
@@ -15,3 +15,9 @@
 .pill-waiting  {
   background: var(--yellow);
 }
+.is-parent {
+  margin-right: -8px;
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+

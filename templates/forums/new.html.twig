@@ -1,13 +1,33 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    {{ form_start(form, {attr: {class: 'grid fit js-preventMultiSubmit', style: '--col:300px'}}) }}
-    {{ form_row(form.name, {label: 'Titre'}) }}
-    {{ form_row(form.tags, {label: 'Tags', attr: {placeholder: 'Sélectionner un ou plusieurs tags'}}) }}
-    {{ form_row(form.content, {label: false}) }}
-    <div class="full text-right">
-        <button type="submit" class="btn-primary">Créer le sujet</button>
+    <div class="container">
+    <div class="create__topic__grid my5">
+        <div class="create__info">
+            <h1 class="hero-title">Créer un  <br><strong>Sujet</strong></h1>
+            <p class="hero-text my4">N'oubliez pas cela n'est
+                que un jeu</p>
+        </div>
+        <div class="create__topic stack-large">
+            {{ form_start(form, {attr: {class: 'js-preventMultiSubmit', style: '--col:300px'}}) }}
+
+            <div class="grid2 stack-large mb2">
+                {{ form_row(form.name, {label: 'Titre'}) }}
+                {{ form_row(form.tags, {label: 'Tags', attr: {placeholder: 'Sélectionner un ou plusieurs tags'}}) }}
+
+            </div>
+            <div class="full">
+
+
+                {{ form_row(form.content, {label: false, attr: {style: "min-height:100vh -200px"}}) }}
+            </div>
+            <div class="full text-right mt2">
+                <button type="submit" class="btn-primary">Créer le sujet</button>
+            </div>
+            {{ form_end(form) }}
+        </div>
+
     </div>
-    {{ form_end(form) }}
+    </div>
 {% endblock %}
 
