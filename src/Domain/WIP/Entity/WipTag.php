@@ -4,6 +4,7 @@ namespace App\Domain\WIP\Entity;
 
 use App\Domain\Application\Entity\Sluggeable;
 use App\Domain\Auth\User;
+use App\Domain\Manager\Manageable;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints\Range;
@@ -13,17 +14,18 @@ use Symfony\Component\Validator\Constraints\Range;
 class WipTag
 {
     use Sluggeable;
+    use Manageable;
 
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: "IDENTITY")]
     #[ORM\Column(type: Types::INTEGER)]
     private ?int $id = null;
 
-    #[ORM\Column(type: Types::STRING)]
-    private string $name = '';
+    #[ORM\Column(type: Types::STRING, nullable: true)]
+    private ?string $name =  null;
 
-    #[ORM\Column(type: Types::STRING)]
-    private string $content = '';
+    #[ORM\Column(type: Types::STRING, nullable: true)]
+    private ?string $content = null;
 
     #[ORM\Column(type: 'datetime', nullable: true)]
     private \DateTimeInterface $createdAt;
