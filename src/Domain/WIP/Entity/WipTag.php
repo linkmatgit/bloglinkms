@@ -61,40 +61,44 @@ class WipTag
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getName(): string
+    public function getName(): ?string
     {
         return $this->name;
     }
 
     /**
-     * @param string $name
+     * @param string|null $name
      * @return WipTag
      */
-    public function setName(string $name): self
+    public function setName(?string $name): WipTag
     {
         $this->name = $name;
         return $this;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getContent(): string
+    public function getContent(): ?string
     {
         return $this->content;
     }
 
     /**
-     * @param string $content
+     * @param string|null $content
      * @return WipTag
      */
-    public function setContent(string $content): self
+    public function setContent(?string $content): WipTag
     {
         $this->content = $content;
         return $this;
     }
+
+
+
+
 
     /**
      * @return \DateTimeInterface
