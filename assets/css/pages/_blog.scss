@@ -40,3 +40,15 @@
   font-size: 2.0rem;
   font-weight: 700;
 }
+.blog__info {
+  display: flex;
+  width: 100%;
+}
+.blog__info > .category__info__blog {
+  justify-content: flex-end;
+  text-align: right;
+  margin-left: calc(var(--space) * 2);
+}
+.blog__info * > * {
+  margin-right: calc(var(--space) * 2);
+}

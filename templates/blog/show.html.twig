@@ -10,9 +10,10 @@
 
             </div>
     <div class="meta__blog blog__info">
-        <div class="post__author">  {{ post.author.name }}</div>
-      <div class="post__date"> {{ post.createdAt  | ago }}</div>
-        {% if post.category%} {{ post.category.name }} {% endif %}
+        <div class="post__author"> <a href="{{ path(post.author) }}">{{ post.author.name }}</a> </div>
+      <div class="post__date">Publiée {{ post.createdAt  | ago }}</div>
+        <div class="category__info__blog flex-end">
+        {% if post.category%}Dans <a href="{{ path(post.category) }}"> {{ post.category.name }} </a>{% endif %}</div>
     </div>
     <section class="formatted mt3">
         {{ post.content | markdown }}
