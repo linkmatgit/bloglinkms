@@ -4,6 +4,7 @@ namespace App\Domain\Auth;
 
 use App\Domain\Auth\Repository\UserRepository;
 use App\Domain\Auth\Security\BanTrait;
+use App\Domain\Group\Entity\Groupable;
 use App\Domain\Notification\Entity\Notifiable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\DBAL\Types\Types;
@@ -21,7 +22,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     use BanTrait;
     use Notifiable;
-
+    use Groupable;
+    
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: 'IDENTITY')]
     #[ORM\Column(type: Types::INTEGER)]

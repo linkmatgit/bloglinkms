@@ -37,7 +37,6 @@ class Comment {
     private ?self $parent = null;
 
     #[ORM\OneToMany(mappedBy: 'parent', targetEntity: Comment::class)]
-    #[ORM\OrderBy(['position' => 'ASC'])]
     private Collection $replies;
 
     #[ORM\ManyToOne(targetEntity: Content::class)]

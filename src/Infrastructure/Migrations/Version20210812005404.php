@@ -41,7 +41,6 @@ final class Version20210812005404 extends AbstractMigration
     public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->addSql('CREATE SCHEMA public');
         $this->addSql('ALTER TABLE wip_tag DROP CONSTRAINT FK_D2CFEE328EBBE9B');
         $this->addSql('ALTER TABLE wip_tag DROP CONSTRAINT FK_D2CFEE359BB1592');
         $this->addSql('DROP INDEX IDX_D2CFEE328EBBE9B');
