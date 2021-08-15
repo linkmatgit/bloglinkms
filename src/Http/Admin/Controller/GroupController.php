@@ -35,7 +35,7 @@ class GroupController extends CrudController
         $this->paginator->allowSort();
         $query = $this->getRepository()
         ->createQueryBuilder('row')
-        ->orderby('row.createdAt', 'DESC')
+        ->orderby('row.id', 'ASC')
         ;
 
         return $this->crudIndex($query);

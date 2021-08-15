@@ -30,6 +30,13 @@ class Group
     #[ORM\ManyToOne(targetEntity: User::class)]
     private User $author;
 
+    #[ORM\Column(type: Types::STRING, options: ['default' => '#000000'])]
+    private string $color = "#000000";
+
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $description = null;
+
+
     #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'groupe')]
     #[ORM\JoinColumn(name: 'groupe_user')]
     private Collection $members;
@@ -123,4 +130,60 @@ class Group
         $this->author = $author;
         return $this;
     }
+
+    /**
+     * @return string
+     */
+    public function getColor(): string
+    {
+        return $this->color;
+    }
+
+    /**
+     * @param string $color
+     * @return Group
+     */
+    public function setColor(string $color): Group
+    {
+        $this->color = $color;
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param string|null $description
+     * @return Group
+     */
+    public function setDescription(?string $description): Group
+    {
+        $this->description = $description;
+        return $this;
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getMembers(): Collection
+    {
+        return $this->members;
+    }
+
+    /**
+     * @param Collection $members
+     * @return Group
+     */
+    public function setMembers(Collection $members): Group
+    {
+        $this->members = $members;
+        return $this;
+    }
+
+
 }
