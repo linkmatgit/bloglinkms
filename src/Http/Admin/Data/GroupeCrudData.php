@@ -17,9 +17,8 @@ class GroupeCrudData implements CrudDataInterface
     private ?EntityManagerInterface $em = null;
     private Group $entity;
     public ?string $name;
-    public \DateTimeInterface $createdAt;
+    private \DateTimeInterface $createdAt;
     public User $author;
-    public ?User $members;
 
     public function __construct(Group $row)
     {

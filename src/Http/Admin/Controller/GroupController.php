@@ -35,7 +35,7 @@ class GroupController extends CrudController
         $this->paginator->allowSort();
         $query = $this->getRepository()
         ->createQueryBuilder('row')
-       ->orderby('row.createdAt', 'DESC')
+        ->orderby('row.createdAt', 'DESC')
         ;
 
         return $this->crudIndex($query);
@@ -44,7 +44,9 @@ class GroupController extends CrudController
     #[Route('/new', name: 'new', methods: ['POST', 'GET'])]
     public function new(): Response
     {
-        $entity = (new Group())->setCreatedAt(new \DateTime())->setAuthor($this->getUser());
+        $entity = (new Group())
+            ->setCreatedAt(new \DateTime())
+            ->setAuthor($this->getUser());
         $data = new GroupeCrudData($entity);
 
         return $this->crudNew($data);
@@ -54,7 +56,8 @@ class GroupController extends CrudController
     #[Route('/{id<\d+>}', name: 'edit', methods: ['POST', 'GET'])]
     public function edit(Group $row): Response
     {
-        $data = (new GroupeCrudData($row))->setEntityManager($this->em);
+        $data = (new GroupeCrudData($row))
+            ->setEntityManager($this->em);
 
         return $this->crudEdit($data);
     }
