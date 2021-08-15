@@ -3,14 +3,13 @@
 namespace App\Domain\Group\Entity;
 
 use App\Domain\Group\Entity\Group;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 trait Groupable
 {
 
-    #[ORM\ManyToMany(targetEntity: Group::class)]
-    #[ORM\JoinTable('group_user')]
-    #[ORM\JoinColumn(name: 'user_id', referencedColumnName: 'id')]
-    #[ORM\InverseJoinColumn(name: 'group_id', referencedColumnName: 'id')]
-    private ?Group $group = null;
+    #[ORM\ManyToMany(targetEntity: Group::class, mappedBy: 'members')]
+    private ?Collection $groupe = null;
+
 }

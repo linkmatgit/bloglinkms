@@ -9,6 +9,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: GroupRepository::class)]
+#[ORM\Table('groupe')]
 class Group
 {
 
@@ -29,7 +30,8 @@ class Group
     #[ORM\ManyToOne(targetEntity: User::class)]
     private User $author;
 
-    #[ORM\ManyToMany(targetEntity: User::class)]
+    #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'groupe')]
+    #[ORM\JoinColumn(name: 'groupe_user')]
     private Collection $members;
 
     /**

@@ -6,16 +6,18 @@ use App\Domain\Auth\Repository\UserRepository;
 use App\Domain\Auth\Security\BanTrait;
 use App\Domain\Group\Entity\Groupable;
 use App\Domain\Notification\Entity\Notifiable;
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[UniqueEntity(fields: "name", message: 'Un autre persone utilise deja ce pseudonyme')]
 #[UniqueEntity(fields: "email", message: 'Un autre persone utilise deja cette Email')]
+#[Vich\Uploadable]
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: "`user`")]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
@@ -23,7 +25,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     use BanTrait;
     use Notifiable;
     use Groupable;
-    
+
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: 'IDENTITY')]
     #[ORM\Column(type: Types::INTEGER)]
@@ -60,6 +62,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(type: Types::STRING, length: 250, nullable: true)]
     private ?string $confirmationToken = null;
+
+    //#[Vich\UploadableField()]
+    private ?File $avatarFile = null;
+
+    #[ORM\Column(type:  Types::STRING, nullable: true)]
+    private ?string $avatarName = null;
+
 
 
     public function getId(): ?int
@@ -270,4 +279,29 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->confirmationToken = $confirmationToken;
         return $this;
     }
+
+    public function getAvatarFile(): ?File
+    {
+        return $this->avatarFile;
+    }
+
+    public function setAvatarFile(?File $avatarFile): User
+    {
+        $this->avatarFile = $avatarFile;
+
+        return $this;
+    }
+
+    public function getAvatarName(): ?string
+    {
+        return $this->avatarName;
+    }
+
+    public function setAvatarName(?string $avatarName): User
+    {
+        $this->avatarName = $avatarName;
+
+        return $this;
+    }
+
 }
