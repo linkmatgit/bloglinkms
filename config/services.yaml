@@ -18,7 +18,7 @@ services:
         resource: '../src/*'
         exclude: '../src/{DependencyInjection,Entity,Infrastructure/Migrations,Tests,Kernel.php}'
     Redis:
-        class: \Predis\Client
+        class: Predis\Client
         arguments:
             - '%env(REDIS_URL)%'
 

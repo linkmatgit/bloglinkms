@@ -39,14 +39,13 @@
         </li>
 
         <li class="title">Work in Progess</li>
-        <li><a href="{{ path('admin_blog_index') }}" {{ menu_active('blogd') }}>{{ icon('cloud') }} Mods</a>
-        <li><a href="{{ path('admin_category_index') }}" {{ menu_active('catedgory') }}>{{ icon('apple') }} Marque</a>
-        <li><a href="{{ path('admin_category_index') }}" {{ menu_active('catedgory') }}>{{ icon('action') }} Action</a>
-
+        <li><a href="{{ path('admin_blog_index') }}" {{ menu_active('blogd') }}>{{ icon('cloud') }} WIP</a>
+        <li><a href="{{ path('admin_category_index') }}" {{ menu_active('catedgory') }}>{{ icon('apple') }} Action</a>
+        <li><a href="{{ path('admin_category_index') }}" {{ menu_active('catedgory') }}>{{ icon('action') }} Refusée</a>
         </li>
 
         <li class="title">Utilisateur</li>
-        <li><a href="{{ path('admin_blog_index') }}" {{ menu_active('blogd') }}>{{ icon('cloud') }} Utilisateur</a>
+        <li><a href="{{ path('admin_user_index') }}" {{ menu_active('user') }}>{{ icon('cloud') }} Utilisateur</a>
         <li><a href="{{ path('admin_category_index') }}" {{ menu_active('catedgory') }}>{{ icon('team') }} Equipe</a>
         <li><a href="{{ path('admin_category_index') }}" {{ menu_active('catedgory') }}>{{ icon('check') }} Groupe</a>
         <li><a href="{{ path('admin_category_index') }}" {{ menu_active('catedgory') }}>{{ icon('action') }} Role</a>
@@ -77,7 +76,7 @@
     {% block body ''  %}
   </main>
 </div>
-
+<spot-light></spot-light>
 
 
 <script>

@@ -6,6 +6,10 @@ namespace App\Http\Admin\Controller\Auth;
 
 use App\Domain\Auth\Repository\UserRepository;
 use App\Domain\Auth\User;
+use App\Domain\Blog\Entity\Post;
+use App\Domain\Blog\Event\PostCreatedEvent;
+use App\Domain\Blog\Event\PostDeletedEvent;
+use App\Domain\Blog\Event\PostUpdatedEvent;
 use App\Http\Admin\Controller\BaseController;
 use App\Http\Admin\Controller\CrudController;
 use App\Http\Helper\Paginator\PaginatorInterface;
@@ -18,32 +22,31 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[Route('/users', name: 'user_')]
-class UserController extends BaseController
+class UserController extends CrudController
 {
+    protected string $templatePath = 'users';
+    protected string $menuItem = 'user';
+    protected string $entity = User::class;
+    protected string $routePrefix = 'admin_user';
+    protected array $events = [
+        'update' => null,
+        'delete' => null,
+        'create' => null,
+    ];
 
-    public function __construct(
-        private EntityManagerInterface $em,
-        private RequestStack $requestStack,
-        private PaginatorInterface $paginator
-    ) {
-    }
+
 
     #[Route('/', name: 'index')]
     public function index(QueryBuilder $query = null): Response
     {
-        $request = $this->requestStack->getCurrentRequest();
-        $query = $query ?: $this->em->getRepository(User::class)
+
+        $this->paginator->allowSort('row.id');
+        $query = $this->getRepository()
             ->createQueryBuilder('row')
-            ->orderBy('row.createdAt', 'DESC');
-        if ($request->get('q')) {
-            $query = $this->applySearch(trim($request->get('q')), $query);
-        }
-        $this->paginator->allowSort('row.id', 'row.title');
-        $rows = $this->paginator->paginate($query->getQuery());
-        return $this->render('admin/users/index.html.twig', [
-            'rows' => $rows,
-            'searchable' => true,
-        ]);
+            ->orderby('row.createdAt', 'DESC')
+        ;
+
+        return $this->crudIndex($query);
     }
 
     #[Route('/search', name: 'autocomplete')]

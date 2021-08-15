@@ -18,6 +18,7 @@
     <section class="formatted mt3">
         {{ post.content | markdown }}
     </section>
+    {%  include 'partials/comments.html.twig' with {target: post} only %}
 </article>
 {% endblock %}
 
