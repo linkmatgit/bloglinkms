@@ -59,7 +59,7 @@ class BrandController extends CrudController
   /*  #[Route('/{id<\d+>}/clone', name: 'clone', methods: ['GET', 'POST'])]
     public function clone(Post $rows): Response
     {
-        $row = PostCloner::clone($rows);
+        $row = GroupCloner::clone($rows);
         $data = new PostCrudData($row);
         return $this->crudNew($data);
     }

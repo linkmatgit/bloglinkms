@@ -5,12 +5,10 @@ declare(strict_types=1);
 namespace App\Http\Admin\Controller;
 
 use App\Domain\Blog\Entity\Post;
-use App\Domain\Blog\Event\PostCreatedEvent;
-use App\Domain\Blog\Event\PostDeletedEvent;
-use App\Domain\Blog\Event\PostUpdatedEvent;
-use App\Domain\Blog\Helper\PostCloner;
+
 use App\Domain\Group\Entity\Group;
-use App\Http\Admin\Data\PostCrudData;
+use App\Domain\Group\Helper\GroupCloner;
+use App\Http\Admin\Data\GroupeCrudData;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -47,31 +45,31 @@ class GroupController extends CrudController
     public function new(): Response
     {
         $entity = (new Group())->setCreatedAt(new \DateTime())->setAuthor($this->getUser());
-        $data = new PostCrudData($entity);
+        $data = new GroupeCrudData($entity);
 
         return $this->crudNew($data);
     }
 
 
     #[Route('/{id<\d+>}', name: 'edit', methods: ['POST', 'GET'])]
-    public function edit(Post $row): Response
+    public function edit(Group $row): Response
     {
-        $data = (new PostCrudData($row))->setEntityManager($this->em);
+        $data = (new GroupeCrudData($row))->setEntityManager($this->em);
 
         return $this->crudEdit($data);
     }
 
     #[Route('/{id<\d+>}/clone', name: 'clone', methods: ['GET', 'POST'])]
-    public function clone(Post $rows): Response
+    public function clone(Group $rows): Response
     {
-        $row = PostCloner::clone($rows);
-        $data = new PostCrudData($row);
+        $row = GroupCloner::clone($rows);
+        $data = new GroupeCrudData($row);
         return $this->crudNew($data);
     }
 
 
     #[Route('/{id<\d+>}', methods: ['DELETE'])]
-    public function delete(Post $rows): Response
+    public function delete(Group $rows): Response
     {
         return $this->crudDelete($rows);
     }

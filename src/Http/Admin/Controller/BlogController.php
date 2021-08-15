@@ -8,7 +8,7 @@ use App\Domain\Blog\Entity\Post;
 use App\Domain\Blog\Event\PostCreatedEvent;
 use App\Domain\Blog\Event\PostDeletedEvent;
 use App\Domain\Blog\Event\PostUpdatedEvent;
-use App\Domain\Blog\Helper\PostCloner;
+use App\Domain\Blog\Helper\GroupCloner;
 use App\Http\Admin\Data\PostCrudData;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -63,7 +63,7 @@ class BlogController extends CrudController
     #[Route('/{id<\d+>}/clone', name: 'clone', methods: ['GET', 'POST'])]
     public function clone(Post $rows): Response
     {
-        $row = PostCloner::clone($rows);
+        $row = GroupCloner::clone($rows);
         $data = new PostCrudData($row);
         return $this->crudNew($data);
     }
