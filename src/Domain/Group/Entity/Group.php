@@ -29,7 +29,8 @@ class Group
     #[ORM\ManyToOne(targetEntity: User::class)]
     private User $author;
 
-    private Collection $member;
+    #[ORM\ManyToMany(targetEntity: User::class)]
+    private Collection $members;
 
     /**
      * @return int|null

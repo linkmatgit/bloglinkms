@@ -12,13 +12,17 @@
       {{ form_row(form.slug) }}
       {{ form_row(form.parent) }}
       {{ form_row(form.color) }}
+      {{ form_row(form.author) }}
       <div class="flex center">
         {{ form_row(form.online) }}
       </div>
-      <div class="full">
-        {{ form_row(form.description) }}
+
+    </div>
+    <div class="full">
+      <div class="section-title mt3">
+        Contenu
       </div>
-      {{ form_rest(form) }}
+      {{ form_row(form.description) }}
     </div>
   </section>
 
