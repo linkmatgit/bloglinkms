@@ -16,4 +16,9 @@ final class PageController extends AbstractController
         return $this->render('index.html.twig', [
             'menu' => 'home']);
     }
+
+    #[Route('/a-propos', name: 'app_about')]
+    public function about(): Response {
+           return $this->render('pages/about.html.twig');
+    }
 }

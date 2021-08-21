@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+
+    <div class="container my5">
+        <div class="my3">
+            <h2 class="hero-title text-center">Bonjour {% if app.user %}{{ app.user.name }} {% endif %}</h2>
+            <p class="hero-text text-center my2">
+                Ici le portail pour la creation de contenu
+            </p>
+        </div>
+        <div class="grid2">
+            <section class="card">
+                <div class="card__body">
+                    <div class="card-title"><h2 class="section-title">Crée un mods</h2></div>
+
+                        <div class="card__description stack">
+                                <p>Vous pouvez crée un Work In Progess</p>
+                            <a href="{{ path('mod_new') }}" class="btn-primary btn-block">Crée un WIP</a>
+                        </div>
+
+                </div>
+            </section>
+
+            <section class="card">
+                <div class="card__body">
+                    <div class="card-title"><h2 class="section-title">Uploader un Mods</h2></div>
+
+                    <div class="card__description stack">
+                        <p>Vous pouvez crée un Work In Progess</p>
+                        <a href="{{ path('mod_new') }}" class="btn-primary btn-block">Uploader un Mods</a>
+
+                    </div>
+
+                </div>
+            </section>
+
+        </div>
+    </div>
+{% endblock %}

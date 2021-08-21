@@ -4,7 +4,7 @@
             <li class="header__home"><a href="{{ path('app_home') }}" {{ menu_active('home') }}>{{ icon('home') }}</a> </li>
             <li><a href="{{ path('forum') }}" {{ menu_active('forum') }}>{{ icon('comments') }} Forum</a> </li>
             <li><a href="{{ path('blog_index') }}"{{ menu_active('blog') }}>{{ icon('pen') }} Blog</a> </li>
-            <li><a href="#">{{ icon('cog') }} WIP</a> </li>
+            <li><a href="{{ path('wip_index') }}" {{ menu_active('wip') }}>{{ icon('cog') }} WIP</a> </li>
             <li><a href="{{ path('category_index') }}" {{ menu_active('category') }}>{{ icon('brand') }} Category</a> </li>
             <li><a href="{{ path('mods_index') }}" {{ menu_active('mods') }}>{{ icon('cloud') }} Mods</a> </li>
             <li><a href="#">{{ icon('video') }} Tutoriel</a> </li>
@@ -12,6 +12,7 @@
         </ul>
         <ul class="header-side">
             {% if app.user %}
+                <li class="content_add"><a href="{{ path('content_add')}}">{{ icon('add') }}</a></li>
             <li class="header__account"><a href="{{ path('app_profil')}}">{{ icon('user') }}
                     <span>{{ app.user.name }}</span></a> </li>
 

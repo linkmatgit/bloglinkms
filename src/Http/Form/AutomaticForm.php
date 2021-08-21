@@ -18,11 +18,13 @@ use DateTimeInterface;
 use ReflectionClass;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ColorType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use App\Domain\Mods\Entity\Category as ModCategory;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * Génère un formulaire de manière automatique en lisant les propriété d'un objet.
@@ -39,7 +41,8 @@ class AutomaticForm extends AbstractType
       DateTimeInterface::class => DateTimeType::class,
       ModCategory::class => CategoryModType::class,
         Mod::class => ModChoiceType::class,
-        Tag::class => ForumTagChoiceType::class
+        Tag::class => ForumTagChoiceType::class,
+        UploadedFile::class => FileType::class,
     ];
 
     const NAMES = [

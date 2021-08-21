@@ -10,10 +10,11 @@ namespace App\Http\Controller;
 final class UserController extends AbstractController
 {
 
-       #[Route('/user', name: 'user_show')]
+    #[Route('/user', name: 'user_show')]
     public function home(): Response
     {
         return $this->render('index.html.twig', [
             'menu' => 'home']);
     }
+
 }

@@ -14,8 +14,16 @@ class ProfilController extends AbstractController
     #[Route('/profil', name: 'app_profil')]
     public function profil(): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_USER');
         $user =  $this->getUserOrThrow();
 
         return $this->render('users/accounts/profile.html.twig', ['user' => $user]);
+    }
+
+    #[Route('/user/content', name: 'content_add')]
+    public function addContent(): Response
+    {
+        $this->denyAccessUnlessGranted('ROLE_USER');
+        return $this->render('add/content/content_add.html.twig',);
     }
 }

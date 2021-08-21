@@ -149,4 +149,7 @@
     <symbol id="arrow-down" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
         <path fill="currentColor" d="M5 6l5 5 5-5 2 1-7 7-7-7 2-1z"/>
     </symbol>
+    <symbol fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22" id="add">
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M11 0C4.925 0 0 4.925 0 11s4.925 11 11 11 11-4.925 11-11S17.075 0 11 0zm1 15a1 1 0 01-2 0v-3H7a1 1 0 010-2h3V7a1 1 0 012 0v3h3a1 1 0 010 2h-3v3z" fill="currentColor" />
+    </symbol>
 </svg>
