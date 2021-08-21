@@ -1,0 +1,48 @@
+{% extends 'admin/layout/card.html.twig' %}
+
+{% block title %}{{ icon('pen') }} Gestion des Wip Tag
+{% endblock %}
+{% block actions %}
+  <a href="{{ path('admin_wip_new') }}" class="btn-primary">Ajouter un WIP</a>
+{% endblock %}
+
+{% block content %}
+  <table class="table">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nom</th>
+      <th class="text-right">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for row in rows %}
+      {% set link = path('admin_wip_edit', {id: row.id}) %}
+      <tr>
+        <td class="dashboard-id">
+          <a href="{{ link }}">{{ row.id }}</a>
+        </td>
+        <td>
+          <a href="{{ link }}">{{ row.name }}</a>
+        </td>
+        <td>
+          <div class="dashboard-actions">
+
+
+            <a href="{{ link }}">{{ icon('edit') }}</a>
+            <form action="{{ path('admin_wip_edit', {id: row.id}) }}" method="post" onsubmit="return confirm('Voulez-vous vraiment supprimer ce contenu')">
+              <input type="hidden" name="_method" value="DELETE" />
+              <button type="submit">
+                {{ icon('delete') }}
+              </button>
+            </form>
+          </div>
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+
+  {{ knp_pagination_render(rows) }}
+
+{% endblock %}

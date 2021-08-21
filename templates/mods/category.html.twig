@@ -19,7 +19,7 @@
                   </div>
               </div>
                {% if category.children|length > 0 %}
-                    <ul>
+                    <ul class="with_list_style">
                         {% for category in category.children %}
                             <li>
                                 <a href="{{ path('mods_category', {slug: category.slug}) }}" >{{ category.name }}</a>

@@ -1,0 +1,16 @@
+
+{{ form_start(form, {attr: {class: 'stacked'}}) }}
+<div class="dashboard-grid">
+  {{ form_row(form.name) }}
+  {{ form_row(form.author) }}
+
+  {{ form_row(form.createdAt) }}
+</div>
+  <div class="full">
+  {{ form_row(form.content) }}
+  </div>
+  <div class="full mt2">
+    <button type="submit" class="btn-primary">Sauvegarder</button>
+  </div>
+
+{{ form_end(form) }}
