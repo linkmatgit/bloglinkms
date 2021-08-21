@@ -7,6 +7,7 @@ use App\Domain\Group\Repository\GroupRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 #[ORM\Entity(repositoryClass: GroupRepository::class)]
 #[ORM\Table('groupe')]
@@ -36,6 +37,9 @@ class Group
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
 
+    #[ORM\Column(type: Types::STRING, nullable: true)]
+    #[NotBlank]
+    private ?string $imageFile = null;
 
     #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'groupe')]
     #[ORM\JoinColumn(name: 'groupe_user')]
@@ -182,6 +186,24 @@ class Group
     public function setMembers(Collection $members): Group
     {
         $this->members = $members;
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getImageFile(): ?string
+    {
+        return $this->imageFile;
+    }
+
+    /**
+     * @param string|null $imageFile
+     * @return Group
+     */
+    public function setImageFile(?string $imageFile): Group
+    {
+        $this->imageFile = $imageFile;
         return $this;
     }
 
