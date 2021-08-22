@@ -7,6 +7,7 @@ namespace App\Domain\Application\Entity;
 use App\Domain\Application\Repository\ContentRepository;
 use App\Domain\Auth\User;
 use App\Domain\Blog\Entity\Post;
+use App\Domain\Course\Course;
 use App\Domain\Mods\Entity\Mod;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -17,7 +18,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\DiscriminatorColumn(name: 'type', type: 'string')]
 #[ORM\DiscriminatorMap([
     'post' => Post::class,
-    'mods' => Mod::class
+    'mods' => Mod::class,
+    'course' => Course::class
 ])]
 abstract class Content
 {
