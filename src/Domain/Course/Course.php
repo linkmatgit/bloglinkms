@@ -6,10 +6,11 @@ use App\Domain\Application\Entity\Content;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
+#[ORM\Entity]
 class Course extends Content
 {
 
-    #[ORM\Column( type: Types::STRING, nullable: true)]
+    #[ORM\Column(type: Types::STRING, nullable: true)]
     private ?string $comics;
 
     /**
@@ -29,7 +30,4 @@ class Course extends Content
         $this->comics = $comics;
         return $this;
     }
-
-
-
 }
