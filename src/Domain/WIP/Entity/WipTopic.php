@@ -7,6 +7,7 @@ use App\Domain\Manager\Manageable;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Constraints\Range;
 
 #[ORM\Entity]
 #[ORM\Table('wip_topic')]
@@ -40,6 +41,10 @@ class WipTopic
     #[ORM\ManyToOne(targetEntity: User::class)]
     #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
     private User $author;
+
+    #[ORM\Column(type: Types::INTEGER, options: ['default' => 0])]
+    #[Range(min: 1, max: 100)]
+    private int $completed = 0;
 
     /**
      * @return int|null
