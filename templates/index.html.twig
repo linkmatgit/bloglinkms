@@ -1,17 +1,25 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="container mt4">
-        <div class="grid3">
-            <div  class="card">frrfr</div>
-            <div >frrfr</div>
+  <div class="page__light">
+<div class="container my5">
 
-            <div >frrfr</div>
+  <section class="grid2 ">
+    <div><h1 class="hero-title">
+       Decouvrer les <br />
+        dernier <strong>Mods</strong>,<br />
+           <strong>WIP</strong>, ou <strong>Astuce</strong></h1></div>
+    <div>ffgdf</div>
+  </section>
 
-        </div>
+</div>
+  </div>
+    <div class="container my4">
+    {% include 'partials/home/last3mods.html.twig' %}
     </div>
 
 {% endblock %}
 
 {% block title  'Page d\'accueil'%}
+{% set bodyClass = 'header-light' %}
 

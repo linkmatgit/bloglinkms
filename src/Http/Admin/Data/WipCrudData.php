@@ -7,7 +7,6 @@ namespace App\Http\Admin\Data;
 use App\Domain\Auth\User;
 use App\Domain\WIP\Entity\WipTag;
 use App\Http\Form\AutomaticForm;
-use App\Http\Form\ModsFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -39,7 +38,7 @@ class WipCrudData implements CrudDataInterface
         $this->entity->setContent($this->content);
     }
     public function slugify():string {
-        return strtolower(preg_replace('/[^a-zA-Z0-9\-]/', '',preg_replace('/\s+/', '-', $this->name) ));
+        return strtolower(preg_replace('/[^a-z0-9\-]/', '',preg_replace('/\s+/', '-', $this->name) ));
 
     }
     public function getFormClass(): string

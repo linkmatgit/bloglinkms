@@ -15,6 +15,7 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class ModRepository extends AbstractRepository
 {
+    const LIMIT = 4;
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Mod::class);
@@ -54,6 +55,21 @@ class ModRepository extends AbstractRepository
             ->select('m', 'category', 'author', 'brand')
             ->orderBy('m.createdAt', 'DESC')
             ->where('m.approuve = 1 AND m.createdAt < NOW() AND m.statut = 0')
+            ->getQuery();
+
+        return $query;
+    }
+
+    public function findRecentModWithLimit(): Query
+    {
+        $query = $this->createQueryBuilder('m')
+            ->leftJoin('m.category', 'category')
+            ->leftJoin('m.author', 'author')
+            ->leftJoin('m.brand', 'brand')
+            ->select('m', 'category', 'author', 'brand')
+            ->orderBy('m.createdAt', 'DESC')
+            ->where('m.approuve = 1 AND m.createdAt < NOW() AND m.statut = 0')
+            ->setMaxResults(self::LIMIT)
             ->getQuery();
 
         return $query;
