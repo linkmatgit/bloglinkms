@@ -5,6 +5,8 @@ namespace App\Domain\WIP\Entity;
 use App\Domain\Application\Entity\Sluggeable;
 use App\Domain\Auth\User;
 use App\Domain\Manager\Manageable;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints\Range;
@@ -41,6 +43,13 @@ class WipTag
     #[Range(min: 1, max: 100)]
     private int $completed = 0;
 
+    #[ORM\OneToMany(mappedBy: 'tags', targetEntity: WipTopic::class)]
+    private Collection $topics;
+
+    public function __construct()
+    {
+        $this->topics = new ArrayCollection();
+    }
 
     /**
      * @return int|null
@@ -171,5 +180,27 @@ class WipTag
         $this->completed = $completed;
         return $this;
     }
+    public function getTopics(): Collection
+    {
+        return $this->topics;
+    }
 
+    public function addTopics(WipTopic $topic): self
+    {
+
+        if (!$this->topics->contains($topic)) {
+            $this->topics[] = $topic;
+            $topic->setTags($this);
+        }
+        return $this;
+    }
+    public function removeTopic(WipTopic $topic):self
+    {
+        if ($this->topics->removeElement($topic)) {
+            if ($topic->getTags() === $this) {
+                $topic->setTags(null);
+            }
+        }
+        return $this;
+    }
 }
