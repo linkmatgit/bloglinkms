@@ -7,12 +7,13 @@
             <li><a href="{{ path('wip_index') }}" {{ menu_active('wip') }}>{{ icon('cog') }} WIP</a> </li>
             <li><a href="{{ path('category_index') }}" {{ menu_active('category') }}>{{ icon('brand') }} Category</a> </li>
             <li><a href="{{ path('mods_index') }}" {{ menu_active('mods') }}>{{ icon('cloud') }} Mods</a> </li>
-            <li><a href="#">{{ icon('video') }} Tutoriel</a> </li>
+            <li><a href="{{ path('course_index') }}" {{ menu_active('course') }}>{{ icon('video') }} Tutoriel</a> </li>
 
         </ul>
         <ul class="header-side">
             {% if app.user %}
                 <li class="content_add"><a href="{{ path('content_add')}}">{{ icon('add') }}</a></li>
+              {% if is_granted('ROLE_ADMIN') %}  <li class="content_add"><a href="{{ path('admin_home')}}">{{ icon('locka') }}</a></li> {% endif %}
             <li class="header__account"><a href="{{ path('app_profil')}}">{{ icon('user') }}
                     <span>{{ app.user.name }}</span></a> </li>
 

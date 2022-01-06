@@ -55,6 +55,8 @@ class ModRepository extends AbstractRepository
             ->select('m', 'category', 'author', 'brand')
             ->orderBy('m.createdAt', 'DESC')
             ->where('m.approuve = 1 AND m.createdAt < NOW() AND m.statut = 0')
+            ->setCacheable(true)
+            ->setLifetime(5000)
             ->getQuery();
 
         return $query;
